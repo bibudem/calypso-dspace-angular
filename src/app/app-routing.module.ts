@@ -40,6 +40,7 @@ import {
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
+import {PagesComponent} from "../themes/calypso/pages/pages.component";
 
 @NgModule({
   imports: [
@@ -53,6 +54,14 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
         resolve: [MenuResolver],
         children: [
           { path: '', redirectTo: '/home', pathMatch: 'full' },
+          //add UdeM | module Pages statiques
+          {
+            path: 'page/:page',
+            component: PagesComponent,
+            pathMatch: 'full',
+            canActivate: [EndUserAgreementCurrentUserGuard]
+          },
+          //fin add UdeM
           {
             path: 'reload/:rnd',
             component: ThemedPageNotFoundComponent,

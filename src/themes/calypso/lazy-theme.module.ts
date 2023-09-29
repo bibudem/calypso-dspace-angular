@@ -60,8 +60,14 @@ import { ResultsBackButtonModule } from '../../app/shared/results-back-button/re
 import { SharedBrowseByModule } from '../../app/shared/browse-by/shared-browse-by.module';
 import { ItemVersionsModule } from '../../app/item-page/versions/item-versions.module';
 import { ItemSharedModule } from 'src/app/item-page/item-shared.module';
+import {PagesComponent} from "./pages/pages.component";
+import {Page1Component} from "./pages/page1/page1.component";
+import {Page2Component} from "./pages/page2/page2.component";
 
 const DECLARATIONS = [
+  PagesComponent,
+  Page1Component,
+  Page2Component
 ];
 
 @NgModule({
