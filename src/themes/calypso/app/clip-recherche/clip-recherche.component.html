@@ -1,0 +1,10 @@
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchKeyword" placeholder="Saisir un mot-clé" />
+  <button (click)="search()">Rechercher</button>
+</div>
+
+<div class="image-list">
+  <div *ngFor="let image of imageList">
+    <img [src]="image.url" alt="{{ image.alt }}" />
+  </div>
+</div>

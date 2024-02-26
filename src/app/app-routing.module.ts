@@ -42,6 +42,7 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
 import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 import { ForgotPasswordCheckGuard } from './core/rest-property/forgot-password-check-guard.guard';
+import {ClipRechercheComponent} from "../themes/calypso/app/clip-recherche/clip-recherche.component";
 
 @NgModule({
   imports: [
@@ -55,6 +56,14 @@ import { ForgotPasswordCheckGuard } from './core/rest-property/forgot-password-c
         resolve: [MenuResolver],
         children: [
           { path: '', redirectTo: '/home', pathMatch: 'full' },
+          //add UdeM | module Pages statiques
+          {
+            path: 'clip-recherche',
+            component: ClipRechercheComponent,
+            pathMatch: 'full',
+            canActivate: [EndUserAgreementCurrentUserGuard]
+          },
+          //fin add UdeM
           {
             path: 'reload/:rnd',
             component: ThemedPageNotFoundComponent,
