@@ -1,0 +1,16 @@
+.export-button {
+  margin: 5px;
+}
+
+.calypso-img-ia {
+  width: 35px;
+  height: 35px;
+  float: right;
+  margin-left: 10px;
+  margin-top: -3px;
+  margin-right: 0.5em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

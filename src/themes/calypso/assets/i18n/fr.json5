@@ -3,6 +3,10 @@
   "repository.title.prefix": "Calypso :: ",
   "calypso.onglet-fichier": "Fichiers",
   "calypso.onglet-notice": "Notice complète",
-  "calypso.onglet-autre": "Autres"
+  "calypso.clip-titre": "Effectuer une recherche avec IA",
+  "calypso.clip-explication": "Explication ...",
+  "calypso.clip-annuler": "Annuler",
+  "calypso.clip-lien": "Commencer",
+
 
 }

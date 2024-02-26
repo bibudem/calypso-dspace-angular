@@ -74,6 +74,7 @@ import {RequestCopyModule} from "../../app/request-copy/request-copy.module";
 import {DsoPageModule} from "../../app/shared/dso-page/dso-page.module";
 import { BrowseByComponent } from './app/shared/browse-by/browse-by.component';
 import {ItemPageComponent} from "./app/item-page/simple/item-page.component";
+import {SearchResultsComponent} from "./app/shared/search/search-results/search-results.component";
 
 
 
@@ -86,7 +87,8 @@ const DECLARATIONS = [
   VedetteCollListeComponent,
   DsoEditMetadataComponent,
   BrowseByComponent,
-  ItemPageComponent
+  ItemPageComponent,
+  SearchResultsComponent
 ];
 
 @NgModule({

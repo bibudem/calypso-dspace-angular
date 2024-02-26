@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-between">
+  <h2 *ngIf="!disableHeader">{{ (configuration ? configuration + '.search.results.head' : 'search.results.head') | translate }}</h2>
+    <div class="align-items-end">
+      <img src="/assets/calypso/images/ia2.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia" (click)="openDialog(content)">
+      <ds-search-export-csv *ngIf="showCsvExport" [searchConfig]="searchConfig"></ds-search-export-csv>
+      <!-- Définissez le contenu de la modale -->
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">{{'calypso.clip-titre' | translate}}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{'calypso.clip-explication' | translate}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">{{'calypso.clip-annuler' | translate}}Annuler</button>
+          <button type="button" class="btn btn-success" (click)="redirectToClipSearch()">{{'calypso.clip-lien' | translate}}</button>
+        </div>
+      </ng-template>
+    </div>
+</div>
+<div *ngIf="searchResults && searchResults?.hasSucceeded && !searchResults?.isLoading && searchResults?.payload?.page.length > 0" @fadeIn>
+  <ds-viewable-collection
+    [config]="searchConfig.pagination"
+    [sortConfig]="searchConfig.sort"
+    [objects]="searchResults"
+    [hideGear]="true"
+    [selectable]="selectable"
+    [selectionConfig]="selectionConfig"
+    [linkType]="linkType"
+    [context]="context"
+    [hidePaginationDetail]="hidePaginationDetail"
+    [showThumbnails]="showThumbnails"
+    (contentChange)="contentChange.emit($event)"
+    (deselectObject)="deselectObject.emit($event)"
+    (selectObject)="selectObject.emit($event)">
+  </ds-viewable-collection>
+</div>
+<ds-themed-loading *ngIf="isLoading()" message="{{'loading.search-results' | translate}}"></ds-themed-loading>
+<ds-error *ngIf="showError()"
+          message="{{errorMessageLabel() | translate}}"></ds-error>
+<div *ngIf="searchResults?.payload?.page.length == 0 || searchResults?.statusCode == 400">
+  {{ 'search.results.no-results' | translate }}
+  <a [routerLink]="['/search']"
+     [queryParams]="{ query: surroundStringWithQuotes(searchConfig?.query) }"
+     queryParamsHandling="merge">
+    {{"search.results.no-results-link" | translate}}
+  </a>
+</div>
