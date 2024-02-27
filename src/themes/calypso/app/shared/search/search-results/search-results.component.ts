@@ -2,13 +2,11 @@ import { SearchResultsComponent as BaseComponent } from '../../../../../../app/s
 import { Component } from '@angular/core';
 import { fadeIn, fadeInOut } from '../../../../../../app/shared/animations/fade';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {ActivatedRoute, Router} from "@angular/router";
-
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'ds-search-results',
   templateUrl: './search-results.component.html',
-  //templateUrl: '../../../../../../app/shared/search/search-results/search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
   animations: [
     fadeIn,
@@ -17,6 +15,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class SearchResultsComponent extends BaseComponent {
   collectionId: string;
+  query: string;
 
   constructor(private modalService: NgbModal,
               private router: Router,
@@ -25,19 +24,14 @@ export class SearchResultsComponent extends BaseComponent {
   }
 
   ngOnInit() {
-    // Observer les changements d'URL et extraire l'ID de la collection
-    this.route.url.subscribe(segments => {
-      const url = segments.map(segment => segment.path).join('/');
+    // Récupérer l'ID de l'élément à partir de l'URL
+    this.collectionId = this.route.snapshot.paramMap.get('id')|| null;
 
-      // Vérifier si l'URL correspond à notre modèle
-      const regex = /^\/collections\/([a-f\d-]+)$/i;
-      const match = url.match(regex);
+    // Observer les changements d'URL et extraire les paramètres
+    this.route.queryParams.subscribe(params => {
+      // Extraire la variable 'query' de l'URL pour la recherche
+      this.query = params['query'] || null;
 
-      if (match) {
-        this.collectionId = match[1];
-      } else {
-        this.collectionId = null;
-      }
     });
   }
 
@@ -52,13 +46,14 @@ export class SearchResultsComponent extends BaseComponent {
   redirectToClipSearch() {
     this.closeModal();
 
-    // Rediriger l'utilisateur vers /clip-recherche en incluant l'ID de la collection s'il existe
+    const queryParams = {};
     if (this.collectionId) {
-      this.router.navigate(['/clip-recherche'], { queryParams: { collectionId: this.collectionId } });
-    } else {
-      this.router.navigate(['/clip-recherche']);
+      queryParams['scope'] = this.collectionId;
     }
+    if (this.query) {
+      queryParams['query'] = this.query;
+    }
+
+    this.router.navigate(['/clip-search'], { queryParams });
   }
-
-
 }

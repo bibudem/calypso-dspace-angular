@@ -1,0 +1,13 @@
+export interface Clip {
+  id: string;
+  url: string;
+  itemId: string;
+  uuid: string;
+  itemName: string;
+  itemHandle: string;
+  collectionId: string;
+  imageId: string;
+  score: string;
+  name: string;
+  scope: string;
+}

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClipRechercheComponent } from './clip-recherche.component';
+import { ClipSearchComponent } from './clip-search.component';
 
-describe('ClipRechercheComponent', () => {
-  let component: ClipRechercheComponent;
-  let fixture: ComponentFixture<ClipRechercheComponent>;
+describe('ClipSearchComponent', () => {
+  let component: ClipSearchComponent;
+  let fixture: ComponentFixture<ClipSearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClipRechercheComponent ]
+      declarations: [ ClipSearchComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ClipRechercheComponent);
+    fixture = TestBed.createComponent(ClipSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

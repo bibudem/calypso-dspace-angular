@@ -1,0 +1,7 @@
+<h1>Clip work</h1>
+
+<div *ngFor="let image of images$ | async">
+  <img [src]="image.url" alt="{{ image.name }}">
+  <h3>{{ image.itemName }}</h3>
+  <!-- Ajoutez ici d'autres champs que vous souhaitez afficher -->
+</div>
