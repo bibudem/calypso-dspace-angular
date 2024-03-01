@@ -1,20 +1,49 @@
-// clip.service.ts
-
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs';
-import { catchError, map, shareReplay } from 'rxjs/operators';
-import {Clip} from "../models/Clip";
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+import { Clip } from "../models/Clip";
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClipService {
   private urlApi = 'http://localhost:8000';
+  private cache$: Observable<Clip[]>;
+  private lastQuery: string;
+  private lastUrl: string;
+  private lastScope: string;
+  private lastSize: number;
 
   constructor(private http: HttpClient) {}
 
   getImages(query: string, url: string, scope: string, size: number): Observable<Clip[]> {
+    // Si le cache est vide ou expiré ou si le mot de recherche a changé, fetch les images depuis l'API
+    if (!this.cache$ || this.isNewSearch(query, url, scope, size)) {
+      this.cache$ = this.fetchImagesFromApi(query, url, scope, size).pipe(
+        // Cache la réponse et la re-joue pour les abonnés ultérieurs
+        shareReplay(1),
+        // Rafraîchit le cache toutes les heures
+        tap(() => setTimeout(() => this.cache$ = null, 60 * 60 * 1000))
+      );
+    }
+
+    // Retourne les données du cache
+    return this.cache$;
+  }
+
+  private isNewSearch(query: string, url: string, scope: string, size: number): boolean {
+    // Renvoie true si la recherche a changé, false sinon
+    return query !== this.lastQuery || url !== this.lastUrl || scope !== this.lastScope || size !== this.lastSize;
+  }
+
+  private fetchImagesFromApi(query: string, url: string, scope: string, size: number): Observable<Clip[]> {
+    // Mettez à jour les variables de suivi avec les paramètres actuels
+    this.lastQuery = query;
+    this.lastUrl = url;
+    this.lastScope = scope;
+    this.lastSize = size;
+
     const apiUrl = `${this.urlApi}/search`;
 
     let params = new HttpParams();
@@ -32,33 +61,27 @@ export class ClipService {
       params = params.set('size', size.toString());
     }
 
-    return this.fetchImages(apiUrl, params).pipe(shareReplay(1));
-  }
-
-  private fetchImages(apiUrl: string, params: any): Observable<any> {
+    // Effectue la requête HTTP vers l'API
     return this.http.get<any>(apiUrl, { params }).pipe(
-      map((response: any) => {
-        // Assurez-vous que la structure de la réponse correspond à vos besoins
-        const indexableObjects = response._embedded.searchResult._embedded._embedded.indexableObject;
-        return Array.isArray(indexableObjects) ?
-          indexableObjects.map((item: any) => ({
-            id: item.id,
-            url: item.url,
-            itemId: item.itemId,
-            uuid: item.uuid,
-            itemName: item.itemName,
-            itemHandle: item.itemHandle,
-            collectionId: item.collectionId,
-            imageId: item._embedded.image.id,
-            score: item._embedded.image.score,
-            name: item._embedded.image.name,
-            scope: item._embedded.scope,
-          })) : [];
-      }),
+      map(response => response),
       catchError((error) => {
-        console.error('Error fetching images', error);
+        this.handleHttpError(error);
         return throwError(error);
       })
     );
+  }
+
+  private handleHttpError(error: HttpErrorResponse): void {
+    // Gère l'erreur HTTP au besoin
+    if (
+      error.status === 0 &&
+      error.message.includes('Http failure response') &&
+      error.url.includes('http://localhost:8000/search')
+    ) {
+      // Supprime l'erreur spécifique
+      return;
+    }
+
+    console.error('Error fetching images', error);
   }
 }

@@ -1,0 +1,40 @@
+.clip-titre {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  // Styles pour h1 à l'intérieur de .clip-titre
+  h1 {
+    margin-top: 30px;
+    font-size: 3rem;
+  }
+}
+.filters-list {
+  margin-top: 10px;
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      display: none;
+      list-style: none;
+      margin: 0 10px 10px 0;
+      max-width: 100%;
+
+      a, button {
+        display: flex;
+        border: 1px solid #0a63ab;
+        color: #0a63ab !important;
+        border-radius: 3px;
+        background: rgba(229, 246, 246, 0.22);
+        font-size: 0.7em;
+        font-weight: 600;
+        padding: 0px 10px;
+        text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+  }
+}

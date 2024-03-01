@@ -1,7 +1,54 @@
-<h1>Clip work</h1>
+<section id="galerie">
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="clip-titre">
+          <h1>{{ 'calypso.titre-recherche-clip' | translate }}</h1>
+          <p>{{ 'calypso.description-recherche-clip' | translate }}</p>
+        </div>
+      <!-- Formulaire de recherche -->
+      <div class="col-md-12 mb-3">
+        <form (ngSubmit)="onSearch()">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Recherche..." [(ngModel)]="searchQuery">
+            <!-- Affiche le bouton d'effacement si searchQuery a une valeur -->
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+          </div>
+          <div class="filters-list" *ngIf="searchQuery">
+            <ul id="firstRowFilter">
+              <li  style="display: flex;">
+                <a>{{searchQuery}}</a>
+                <button class="toggle-filters-btn" (click)="clearSearchQuery()" ><i class="fa fa-times mt-1"></i></button>
+              </li>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <ng-container *ngIf="images$ | async as images; else loading">
+        <ng-container *ngFor="let clip of clips; let i = index;" >
+          <!-- Ajoutez une condition *ngIf pour vérifier la présence de collection?.vedette -->
+          <div *ngIf="clip.pathFile" class="col-md-4">
+            <div class="card-calypso" [ngStyle]="{ 'background-image': 'url(' + clip.pathFile + ')' }">
+              <div class="specifies">
+                <a  [routerLink]="['/items/', clip.itemId]"><h2>{{clip.itemName}}</h2></a>
+                <ul>
+                  <li>{{clip.description}}</li>
+                </ul>
+                <a class="calypso-card-lien"  [routerLink]="['/items/', clip.itemId]"> Voir plus</a>
+              </div>
+            </div>
+          </div>
+          <!-- Fin de la condition *ngIf -->
+        </ng-container>
+      </ng-container>
 
-<div *ngFor="let image of images$ | async">
-  <img [src]="image.url" alt="{{ image.name }}">
-  <h3>{{ image.itemName }}</h3>
-  <!-- Ajoutez ici d'autres champs que vous souhaitez afficher -->
-</div>
+      <ng-template #loading class="mt-3">
+        <!-- Indicateur de chargement ou tout autre contenu à afficher pendant le chargement des données -->
+        <div class="spinner-grow text-primary"></div>
+        <div class="spinner-grow text-primary"></div>
+        <div class="spinner-grow text-primary"></div>
+        <div class="spinner-grow text-primary"></div>
+        <div class="spinner-grow text-primary"></div>
+      </ng-template>
+    </div>
+  </div>
+</section>

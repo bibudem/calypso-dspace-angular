@@ -1,6 +1,7 @@
 export interface Clip {
   id: string;
   url: string;
+  pathFile: string;
   itemId: string;
   uuid: string;
   itemName: string;
