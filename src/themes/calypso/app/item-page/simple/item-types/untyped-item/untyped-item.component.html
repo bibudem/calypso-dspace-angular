@@ -1,4 +1,24 @@
 <ds-themed-results-back-button *ngIf="showBackButton | async" [back]="back"></ds-themed-results-back-button>
+<div class="align-items-end">
+  <img src="/assets/calypso/images/ia3.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia float-right ml-1" (click)="openDialog(content)">
+</div>
+<!-- Définissez le contenu de la modale -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{'calypso.clip-titre' | translate}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{'calypso.clip-explication' | translate}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">{{'calypso.clip-annuler' | translate}}Annuler</button>
+    <button type="button" class="btn btn-success" (click)="redirectToClipSearch()">{{'calypso.clip-lien' | translate}}</button>
+  </div>
+</ng-template>
+
 <div class="d-flex flex-row mt-2">
   <ds-themed-item-page-title-field [item]="object" class="mr-auto">
   </ds-themed-item-page-title-field>

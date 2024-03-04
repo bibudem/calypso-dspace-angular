@@ -3,8 +3,8 @@ import { ClipService } from '../../service/clip.service';
 import { Clip } from '../../models/Clip';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { switchMap, tap } from "rxjs/operators";
 import {config} from "../../config/config";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ds-clip-search',
@@ -22,7 +22,7 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  constructor(private clipService: ClipService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private clipService: ClipService, private route: ActivatedRoute, private router: Router, private location: Location) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -91,5 +91,10 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  // Fonction pour retourner à la page précédente
+  retour(): void {
+    this.location.back();
   }
 }

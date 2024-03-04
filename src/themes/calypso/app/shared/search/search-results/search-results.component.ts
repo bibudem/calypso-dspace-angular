@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class SearchResultsComponent extends BaseComponent {
   collectionId: string;
-  query: string;
+  query: string ;
 
   constructor(private modalService: NgbModal,
               private router: Router,
@@ -30,8 +30,7 @@ export class SearchResultsComponent extends BaseComponent {
     // Observer les changements d'URL et extraire les paramètres
     this.route.queryParams.subscribe(params => {
       // Extraire la variable 'query' de l'URL pour la recherche
-      this.query = params['query'] || null;
-
+      this.query = params['query'] || 'all';
     });
   }
 

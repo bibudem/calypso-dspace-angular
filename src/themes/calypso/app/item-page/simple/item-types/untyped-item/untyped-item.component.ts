@@ -11,6 +11,8 @@ import {
 import {ActivatedRoute, Router} from "@angular/router";
 import {RouteService} from "../../../../../../../app/core/services/route.service";
 import {ItemDataService} from "../../../../../../../app/core/data/item-data.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {config} from "../../../../../config/config";
 
 /**
  * Component that represents an untyped Item page
@@ -28,12 +30,15 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
   activeTab: number = 1;
   metadata: any[] = [];  // Tableau pour stocker les métadonnées de l'élément
   itemRD : any;
+  backendApiFile: string = config.backendApiFile;
+  idItem: string;
 
   constructor(
     protected routeService: RouteService,
     protected router: Router,
     protected route: ActivatedRoute,
-    private itemDataService: ItemDataService
+    private itemDataService: ItemDataService,
+    private modalService: NgbModal
   ) {
     super(routeService, router);
   }
@@ -42,10 +47,10 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
     super.ngOnInit();
 
     // Récupérer l'ID de l'élément à partir de l'URL
-    const itemId = this.route.snapshot.paramMap.get('id');
+    this.idItem = this.route.snapshot.paramMap.get('id');
 
     // Appeler le service pour récupérer l'élément avec les métadonnées
-    this.itemDataService.findById(itemId).subscribe(
+    this.itemDataService.findById(this.idItem).subscribe(
       (item) => {
         this.itemRD = item;
         // Accéder aux métadonnées de l'élément
@@ -91,4 +96,23 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
     }
   }
 
+  openDialog(content): void {
+    this.modalService.open(content, { centered: true });
+  }
+
+  closeModal() {
+    this.modalService.dismissAll();
+  }
+
+  redirectToClipSearch() {
+    this.closeModal();
+
+    const queryParams = {};
+
+    queryParams['query'] = 'all';
+    queryParams['url'] = this.backendApiFile+this.idItem+'/content';
+
+
+    this.router.navigate(['/clip-search'], { queryParams });
+  }
 }
