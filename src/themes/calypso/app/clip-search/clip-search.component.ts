@@ -4,6 +4,7 @@ import { Clip } from '../../models/Clip';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, tap } from "rxjs/operators";
+import {config} from "../../config/config";
 
 @Component({
   selector: 'ds-clip-search',
@@ -16,7 +17,7 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
   scope: string = null;
   size: number = 12;
   clips: Clip[] = [];
-  backendApiFile = 'http://localhost:8080/server/api/core/bitstreams/';
+  backendApiFile: string = config.backendApiFile;
   searchQuery: string = '';
 
   private subscription: Subscription;

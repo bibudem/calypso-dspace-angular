@@ -3,12 +3,13 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import { Clip } from "../models/Clip";
+import { config } from '../config/config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClipService {
-  private urlApi = 'http://localhost:8000';
+  urlApiClip: string = config.urlApiClip;
   private cache$: Observable<Clip[]>;
   private lastQuery: string;
   private lastUrl: string;
@@ -44,7 +45,7 @@ export class ClipService {
     this.lastScope = scope;
     this.lastSize = size;
 
-    const apiUrl = `${this.urlApi}/search`;
+    const apiUrl = `${this.urlApiClip}/search`;
 
     let params = new HttpParams();
 

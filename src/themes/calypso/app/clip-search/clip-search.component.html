@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row justify-content-center">
         <div class="clip-titre">
-          <h1>{{ 'calypso.titre-recherche-clip' | translate }}</h1>
-          <p>{{ 'calypso.description-recherche-clip' | translate }}</p>
+          <h1>{{ 'calypso.clip-search-title' | translate }}</h1>
+          <p>{{ 'calypso.clip-search-description' | translate }}</p>
         </div>
       <!-- Formulaire de recherche -->
       <div class="col-md-12 mb-3">
@@ -17,7 +17,7 @@
             <ul id="firstRowFilter">
               <li  style="display: flex;">
                 <a>{{searchQuery}}</a>
-                <button class="toggle-filters-btn" (click)="clearSearchQuery()" ><i class="fa fa-times mt-1"></i></button>
+                <button class="toggle-filters-btn" (click)="clearSearchQuery()" ><i class="fa fa-times fm-2"></i></button>
               </li>
             </ul>
           </div>
@@ -41,13 +41,13 @@
         </ng-container>
       </ng-container>
 
-      <ng-template #loading class="mt-3">
+      <ng-template #loading class="mt-5">
         <!-- Indicateur de chargement ou tout autre contenu à afficher pendant le chargement des données -->
-        <div class="spinner-grow text-primary"></div>
-        <div class="spinner-grow text-primary"></div>
-        <div class="spinner-grow text-primary"></div>
-        <div class="spinner-grow text-primary"></div>
-        <div class="spinner-grow text-primary"></div>
+        <div class="spinner-grow text-info"></div>
+        <div class="spinner-grow text-info"></div>
+        <div class="spinner-grow text-info"></div>
+        <div class="spinner-grow text-info"></div>
+        <div class="spinner-grow text-info"></div>
       </ng-template>
     </div>
   </div>
