@@ -130,3 +130,18 @@ a {
 .calypso-hide {
   display: none!important;
 }
+/* Style pour l'image de la recherche CLIP */
+.calypso-img-ia {
+  width: 35px;
+  height: 35px;
+  float: right;
+  margin-left: 10px;
+  margin-top: -3px;
+  margin-right: 0.5em;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+}

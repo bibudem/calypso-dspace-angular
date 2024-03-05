@@ -32,6 +32,7 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
   itemRD : any;
   backendApiFile: string = config.backendApiFile;
   idItem: string;
+  activeTabParam: string;
 
   constructor(
     protected routeService: RouteService,
@@ -48,6 +49,12 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
 
     // Récupérer l'ID de l'élément à partir de l'URL
     this.idItem = this.route.snapshot.paramMap.get('id');
+
+    // Récupérer le paramètre d'URL 'tab' (ou un autre nom que vous préférez)
+    this.activeTabParam = this.route.snapshot.queryParamMap.get('tab');
+
+    // Définir l'onglet actif en fonction du paramètre d'URL
+    this.activeTab = this.activeTabParam ? +this.activeTabParam : 1;
 
     // Appeler le service pour récupérer l'élément avec les métadonnées
     this.itemDataService.findById(this.idItem).subscribe(
