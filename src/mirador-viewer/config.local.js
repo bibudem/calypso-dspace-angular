@@ -18,6 +18,7 @@ import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
 import { miradorImageToolsPlugin } from 'mirador-image-tools';
 import textOverlayPlugin from 'mirador-textoverlay/es';
+import { MiradorOcrHelper   } from '@4eyes/mirador-ocr-helper';
 
 const params = new URLSearchParams(location.search);
 const manifest = params.get('manifest');
@@ -195,7 +196,8 @@ windowSettings.manifestId = manifest;
       miradorDownloadDialog,
       miradorDownloadPlugin,
 	    miradorImageToolsPlugin,
-	    textOverlayPlugin
+	    textOverlayPlugin,
+      MiradorOcrHelper
     ]
   )
 )(manifest);
