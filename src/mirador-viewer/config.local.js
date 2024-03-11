@@ -18,7 +18,7 @@ import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
 import { miradorImageToolsPlugin } from 'mirador-image-tools';
 import textOverlayPlugin from 'mirador-textoverlay/es';
-import { MiradorOcrHelper   } from '@4eyes/mirador-ocr-helper';
+import ocrHelperPlugin from '@4eyes/mirador-ocr-helper';
 
 const params = new URLSearchParams(location.search);
 const manifest = params.get('manifest');
@@ -153,12 +153,20 @@ windowSettings.manifestId = manifest;
         allowClose: false,
         imageToolsEnabled: true,
         imageToolsOpen: false,
-        // sideBarOpenByDefault: false,
-		textOverlay: {
+    		textOverlay: {
           enabled: true,
-          selectable: true,
-          visible: false,
+          visible: true,
+          skipEmptyLines: true,
+    		  opacity: 0.3,
+    		  color: #00FF7B,
+              correction: {
+                enabled: true,
+                emailUrlKeepParams: ['manifest'],
+                emailRecipient: null,
+              },
+          optionsRenderMode: 'complex',
         },
+        sideBarOpenByDefault: false,
         allowFullscreen: true,
         allowMaximize: false,
         defaultView: defaultView,
@@ -197,7 +205,7 @@ windowSettings.manifestId = manifest;
       miradorDownloadPlugin,
 	    miradorImageToolsPlugin,
 	    textOverlayPlugin,
-      MiradorOcrHelper
+      ocrHelperPlugin
     ]
   )
 )(manifest);
