@@ -30,7 +30,7 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
   activeTab: number = 1;
   metadata: any[] = [];  // Tableau pour stocker les métadonnées de l'élément
   itemRD : any;
-  backendApiFile: string = config.backendApiFile;
+  backendApi: string = config.backendApi;
   idItem: string;
   activeTabParam: string;
 
@@ -111,15 +111,38 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  redirectToClipSearch() {
+  async redirectToClipSearch() {
     this.closeModal();
 
-    const queryParams = {};
+    try {
+      // Récupérer les informations sur les bundles de l'élément
+      const response = await fetch(this.backendApi + 'items/' + this.idItem + '/bundles');
+      const infoUrlBundles = await response.json();
 
-    queryParams['query'] = 'all';
-    queryParams['url'] = this.backendApiFile+this.idItem+'/content';
+      // Rechercher le bundle "ORIGINAL"
+      const originalBundle = infoUrlBundles._embedded.bundles.find(bundle => bundle.name === 'ORIGINAL');
 
+      if (originalBundle) {
+        // Récupérer le lien vers le premier bitstream du bundle "ORIGINAL"
+        const bitstreamsResponse = await fetch(originalBundle._links.bitstreams.href);
+        const bitstreamsInfo = await bitstreamsResponse.json();
 
-    this.router.navigate(['/clip-search'], { queryParams });
+        // Extraire le lien du premier bitstream
+        const firstBitstreamUrl = bitstreamsInfo._embedded.bitstreams[0]._links.content.href;
+        //console.log(firstBitstreamUrl);
+        // Définissez les paramètres de requête
+        const queryParams = {
+          query: null,
+          url: firstBitstreamUrl
+        };
+
+        // Naviguez vers la page de recherche de clips avec les paramètres de requête
+        this.router.navigate(['/clip-search'], { queryParams });
+      } else {
+        console.error('Bundle "ORIGINAL" introuvable.');
+      }
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la récupération des bundles :', error);
+    }
   }
 }

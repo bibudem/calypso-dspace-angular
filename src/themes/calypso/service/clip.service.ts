@@ -10,18 +10,20 @@ import { config } from '../config/config';
 })
 export class ClipService {
   urlApiClip: string = config.urlApiClip;
+  size: number = config.sizeElementsClip;
   private cache$: Observable<Clip[]>;
   private lastQuery: string;
   private lastUrl: string;
   private lastScope: string;
   private lastSize: number;
 
+
   constructor(private http: HttpClient) {}
 
-  getImages(query: string, url: string, scope: string, size: number): Observable<Clip[]> {
+  getImages(query: string, url: string, scope: string): Observable<Clip[]> {
     // Si le cache est vide ou expiré ou si le mot de recherche a changé, fetch les images depuis l'API
-    if (!this.cache$ || this.isNewSearch(query, url, scope, size)) {
-      this.cache$ = this.fetchImagesFromApi(query, url, scope, size).pipe(
+    if (!this.cache$ || this.isNewSearch(query, url, scope, this.size)) {
+      this.cache$ = this.fetchImagesFromApi(query, url, scope, this.size).pipe(
         // Cache la réponse et la re-joue pour les abonnés ultérieurs
         shareReplay(1),
         // Rafraîchit le cache toutes les heures
@@ -77,7 +79,7 @@ export class ClipService {
     if (
       error.status === 0 &&
       error.message.includes('Http failure response') &&
-      error.url.includes('http://localhost:8000/search')
+      error.url.includes(`${this.urlApiClip}/search`)
     ) {
       // Supprime l'erreur spécifique
       return;

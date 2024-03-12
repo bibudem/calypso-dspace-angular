@@ -15,7 +15,9 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
   images$: Observable<Clip[]>;
   query: string = null;
   scope: string = null;
-  size: number = 12;
+  url: string = null;
+  size: number = config.sizeElementsClip;
+  defaultItemCount: number = 6;
   clips: Clip[] = [];
   backendApiFile: string = config.backendApiFile;
   searchQuery: string = '';
@@ -29,45 +31,53 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
       // Extraire les variables de l'URL pour la recherche
       if (params['query']) {
         this.query = params['query'];
+        if(this.query!= 'all'){
+          this.searchQuery = this.query;
+        }
       }
       if (params['scope']) {
         this.scope = params['scope'];
       }
 
-      // Récupérer les images en fonction des paramètres de recherche
-      this.images$ = this.clipService.getImages(this.query, null, this.scope, this.size);
+      if (params['url']) {
+        this.query = null;
+        this.url = params['url'];
+      }
 
-      this.subscription = this.images$.subscribe(
-        (data: any) => {
-          // Extraire et mapper les données pertinentes vers des objets Clip
-          this.clips = data?._embedded?.searchResult?._embedded?._embedded?.indexableObject?.map((indexableObject: any) => {
-            const image = indexableObject?._embedded?.image;
-            const scope = indexableObject?._embedded?.scope;
-            const pathFile = indexableObject.url ? indexableObject.url : `${this.backendApiFile}${indexableObject.id}/content`;
+      try {
+        // Récupérer les images en fonction des paramètres de recherche
+        this.images$ = this.clipService.getImages(this.query, this.url, this.scope);
 
-            // Mapper les données vers un objet Clip
-            return {
-              id: indexableObject.id,
-              url: indexableObject.url,
-              pathFile: pathFile,
-              itemId: indexableObject.itemId,
-              uuid: indexableObject.uuid,
-              itemName: indexableObject.itemName,
-              itemHandle: indexableObject.itemHandle,
-              collectionId: indexableObject.collectionId,
-              score: image?.score,
-              name: image?.name,
-              scope: scope
-            } as Clip;
-          }) || [];
+        this.subscription = this.images$.subscribe(
+          (data: any) => {
+            // Extraire et mapper les données pertinentes vers des objets Clip
+            this.clips = data?._embedded?.searchResult?._embedded?._embedded?.indexableObject?.map((indexableObject: any) => {
+              const image = indexableObject?._embedded?.image;
+              const scope = indexableObject?._embedded?.scope;
+              const pathFile = indexableObject.url ? indexableObject.url : `${this.backendApiFile}${indexableObject.id}/content`;
 
-          console.log(this.clips);
-        },
-        error => {
-          //console.error('Error fetching images', error);
-          // Handle the error as needed
-        }
-      );
+              // Mapper les données vers un objet Clip
+              return {
+                id: indexableObject.id,
+                url: indexableObject.url,
+                pathFile: pathFile,
+                itemId: indexableObject.itemId,
+                uuid: indexableObject.uuid,
+                itemName: indexableObject.itemName,
+                itemHandle: indexableObject.itemHandle,
+                collectionId: indexableObject.collectionId,
+                score: image?.score,
+                name: image?.name,
+                scope: scope
+              } as Clip;
+            }) || [];
+
+            //console.log(this.clips);
+          });
+      } catch (error) {
+        console.error('An error occurred:', error);
+        // Handle the error as needed
+      }
     });
   }
 
@@ -75,12 +85,12 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
     // Mettez à jour la valeur de l'URL avec la nouvelle recherche
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { query: this.searchQuery },
+      queryParams: { query: this.searchQuery, url:null },
       queryParamsHandling: 'merge',
     });
-
+    this.clips = [];
     // Récupérez les images en fonction de la nouvelle recherche
-    this.images$ = this.clipService.getImages(this.searchQuery, null, this.scope, this.size);
+    this.images$ = this.clipService.getImages(this.searchQuery, null, this.scope);
   }
 
   clearSearchQuery(): void {
@@ -97,4 +107,31 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
   retour(): void {
     this.location.back();
   }
+
+  // Fonction pour charger plus des elements sur la page
+  loadMore() {
+    this.defaultItemCount += 6; // ou ajustez selon vos besoins
+  }
+
+  // Ajouter une marque sur l'image pour la recherhe par url
+  selectedImageId(clipId: string): boolean {
+    // Extrait l'ID de l'URL
+    const url = decodeURIComponent(window.location.href);
+    // Recherche de la sous-chaîne "bitstreams/" dans l'URL
+    const startIndex = url.indexOf("bitstreams/") + "bitstreams/".length;
+    // Si startIndex est -1, cela signifie que la sous-chaîne n'a pas été trouvée
+    if (startIndex === -1) {
+      return false;
+    }
+    // Extrait l'ID après "bitstreams%2F"
+    let idFromUrl = url.substring(startIndex);
+    // Enlève la dernière partie de l'ID s'il y a "/content"
+    const contentIndex = idFromUrl.indexOf("/content");
+    if (contentIndex !== -1) {
+      idFromUrl = idFromUrl.substring(0, contentIndex);
+    }
+    // Compare les ID
+    return clipId === idFromUrl;
+  }
+
 }

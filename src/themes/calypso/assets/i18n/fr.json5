@@ -3,13 +3,16 @@
   "repository.title.prefix": "Calypso :: ",
   "calypso.onglet-fichier": "Fichiers",
   "calypso.onglet-notice": "Notice complète",
+  "calypso.return": "Retour",
+  "calypso.consulter": "Consulter",
   "calypso.clip-titre": "Effectuer une recherche avec IA",
   "calypso.clip-explication": "Explication ...",
   "calypso.clip-annuler": "Annuler",
   "calypso.clip-lien": "Commencer",
-  "calypso.return": "Retour",
   "calypso.clip-search-title": "",
-  "calypso.clip-search-description": ""
+  "calypso.clip-search-description": "",
+  "calypso.clip-charger": "Charger plus",
+  "calypso.clip-img-selection": "Image sélectionnée"
 
 
 }
