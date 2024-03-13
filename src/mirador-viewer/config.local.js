@@ -164,7 +164,7 @@ windowSettings.manifestId = manifest;
                 emailUrlKeepParams: ['manifest'],
                 emailRecipient: null,
               },
-          optionsRenderMode: 'complex',
+          optionsRenderMode: 'simple',
         },
         sideBarOpenByDefault: false,
         allowFullscreen: true,
