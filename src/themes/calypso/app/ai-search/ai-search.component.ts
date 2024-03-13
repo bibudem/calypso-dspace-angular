@@ -1,30 +1,30 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ClipService } from '../../service/clip.service';
-import { Clip } from '../../models/Clip';
+import { AiService } from '../../service/ai.service';
+import { Ai } from '../../models/Ai';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import {config} from "../../config/config";
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'ds-clip-search',
-  templateUrl: './clip-search.component.html',
-  styleUrls: ['./clip-search.component.scss']
+  selector: 'ds-ai-search',
+  templateUrl: './ai-search.component.html',
+  styleUrls: ['./ai-search.component.scss']
 })
-export class ClipSearchComponent implements OnInit, OnDestroy {
-  images$: Observable<Clip[]>;
+export class AiSearchComponent implements OnInit, OnDestroy {
+  images$: Observable<Ai[]>;
   query: string = null;
   scope: string = null;
   url: string = null;
   size: number = config.sizeElementsClip;
   defaultItemCount: number = 6;
-  clips: Clip[] = [];
+  listeAi: Ai[] = [];
   backendApiFile: string = config.backendApiFile;
   searchQuery: string = '';
 
   private subscription: Subscription;
 
-  constructor(private clipService: ClipService, private route: ActivatedRoute, private router: Router, private location: Location) { }
+  constructor(private aiService: AiService, private route: ActivatedRoute, private router: Router, private location: Location) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -46,12 +46,12 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
 
       try {
         // Récupérer les images en fonction des paramètres de recherche
-        this.images$ = this.clipService.getImages(this.query, this.url, this.scope);
+        this.images$ = this.aiService.getImages(this.query, this.url, this.scope);
 
         this.subscription = this.images$.subscribe(
           (data: any) => {
             // Extraire et mapper les données pertinentes vers des objets Clip
-            this.clips = data?._embedded?.searchResult?._embedded?._embedded?.indexableObject?.map((indexableObject: any) => {
+            this.listeAi = data?._embedded?.searchResult?._embedded?._embedded?.indexableObject?.map((indexableObject: any) => {
               const image = indexableObject?._embedded?.image;
               const scope = indexableObject?._embedded?.scope;
               const pathFile = indexableObject.url ? indexableObject.url : `${this.backendApiFile}${indexableObject.id}/content`;
@@ -69,7 +69,7 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
                 score: image?.score,
                 name: image?.name,
                 scope: scope
-              } as Clip;
+              } as Ai;
             }) || [];
 
             //console.log(this.clips);
@@ -88,9 +88,9 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
       queryParams: { query: this.searchQuery, url:null },
       queryParamsHandling: 'merge',
     });
-    this.clips = [];
+    this.listeAi = [];
     // Récupérez les images en fonction de la nouvelle recherche
-    this.images$ = this.clipService.getImages(this.searchQuery, null, this.scope);
+    this.images$ = this.aiService.getImages(this.searchQuery, null, this.scope);
   }
 
   clearSearchQuery(): void {
@@ -110,11 +110,11 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
 
   // Fonction pour charger plus des elements sur la page
   loadMore() {
-    this.defaultItemCount += 6; // ou ajustez selon vos besoins
+    this.defaultItemCount += 6;
   }
 
   // Ajouter une marque sur l'image pour la recherhe par url
-  selectedImageId(clipId: string): boolean {
+  selectedImageId(aiId: string): boolean {
     // Extrait l'ID de l'URL
     const url = decodeURIComponent(window.location.href);
     // Recherche de la sous-chaîne "bitstreams/" dans l'URL
@@ -131,7 +131,7 @@ export class ClipSearchComponent implements OnInit, OnDestroy {
       idFromUrl = idFromUrl.substring(0, contentIndex);
     }
     // Compare les ID
-    return clipId === idFromUrl;
+    return aiId === idFromUrl;
   }
 
 }

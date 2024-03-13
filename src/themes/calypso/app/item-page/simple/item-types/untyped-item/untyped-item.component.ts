@@ -137,7 +137,7 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
         };
 
         // Naviguez vers la page de recherche de clips avec les paramètres de requête
-        this.router.navigate(['/clip-search'], { queryParams });
+        this.router.navigate(['/ai-search'], { queryParams });
       } else {
         console.error('Bundle "ORIGINAL" introuvable.');
       }

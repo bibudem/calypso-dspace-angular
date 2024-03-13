@@ -42,7 +42,7 @@ export class SearchResultsComponent extends BaseComponent {
     this.modalService.dismissAll();
   }
 
-  redirectToClipSearch() {
+  redirectToAiSearch() {
     this.closeModal();
 
     const queryParams = {};
@@ -53,6 +53,6 @@ export class SearchResultsComponent extends BaseComponent {
       queryParams['query'] = this.query;
     }
 
-    this.router.navigate(['/clip-search'], { queryParams });
+    this.router.navigate(['/ai-search'], { queryParams });
   }
 }

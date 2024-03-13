@@ -75,7 +75,7 @@ import {DsoPageModule} from "../../app/shared/dso-page/dso-page.module";
 import { BrowseByComponent } from './app/shared/browse-by/browse-by.component';
 import {ItemPageComponent} from "./app/item-page/simple/item-page.component";
 import {SearchResultsComponent} from "./app/shared/search/search-results/search-results.component";
-import {ClipSearchComponent} from "./app/clip-search/clip-search.component";
+import {AiSearchComponent} from "./app/ai-search/ai-search.component";
 
 
 
@@ -90,7 +90,7 @@ const DECLARATIONS = [
   BrowseByComponent,
   ItemPageComponent,
   SearchResultsComponent,
-  ClipSearchComponent
+  AiSearchComponent
 ];
 
 @NgModule({

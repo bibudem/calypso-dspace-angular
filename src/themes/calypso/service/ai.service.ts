@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
-import { Clip } from "../models/Clip";
+import { Ai } from "../models/Ai";
 import { config } from '../config/config';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClipService {
-  urlApiClip: string = config.urlApiClip;
+export class AiService {
+  urlApiAi: string = config.urlApiAi;
   size: number = config.sizeElementsClip;
-  private cache$: Observable<Clip[]>;
+  private cache$: Observable<Ai[]>;
   private lastQuery: string;
   private lastUrl: string;
   private lastScope: string;
@@ -20,7 +20,7 @@ export class ClipService {
 
   constructor(private http: HttpClient) {}
 
-  getImages(query: string, url: string, scope: string): Observable<Clip[]> {
+  getImages(query: string, url: string, scope: string): Observable<Ai[]> {
     // Si le cache est vide ou expiré ou si le mot de recherche a changé, fetch les images depuis l'API
     if (!this.cache$ || this.isNewSearch(query, url, scope, this.size)) {
       this.cache$ = this.fetchImagesFromApi(query, url, scope, this.size).pipe(
@@ -40,14 +40,14 @@ export class ClipService {
     return query !== this.lastQuery || url !== this.lastUrl || scope !== this.lastScope || size !== this.lastSize;
   }
 
-  private fetchImagesFromApi(query: string, url: string, scope: string, size: number): Observable<Clip[]> {
+  private fetchImagesFromApi(query: string, url: string, scope: string, size: number): Observable<Ai[]> {
     // Mettez à jour les variables de suivi avec les paramètres actuels
     this.lastQuery = query;
     this.lastUrl = url;
     this.lastScope = scope;
     this.lastSize = size;
 
-    const apiUrl = `${this.urlApiClip}/search`;
+    const apiUrl = `${this.urlApiAi}/search`;
 
     let params = new HttpParams();
 
@@ -79,7 +79,7 @@ export class ClipService {
     if (
       error.status === 0 &&
       error.message.includes('Http failure response') &&
-      error.url.includes(`${this.urlApiClip}/search`)
+      error.url.includes(`${this.urlApiAi}/search`)
     ) {
       // Supprime l'erreur spécifique
       return;

@@ -1,4 +1,4 @@
-export interface Clip {
+export interface Ai {
   id: string;
   url: string;
   pathFile: string;

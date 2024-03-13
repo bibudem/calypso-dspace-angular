@@ -5,14 +5,14 @@
   "calypso.onglet-notice": "Notice complète",
   "calypso.return": "Retour",
   "calypso.consulter": "Consulter",
-  "calypso.clip-titre": "Effectuer une recherche avec IA",
-  "calypso.clip-explication": "Explication ...",
-  "calypso.clip-annuler": "Annuler",
-  "calypso.clip-lien": "Commencer",
-  "calypso.clip-search-title": "",
-  "calypso.clip-search-description": "",
-  "calypso.clip-charger": "Charger plus",
-  "calypso.clip-img-selection": "Image sélectionnée"
+  "calypso.ai-titre": "Effectuer une recherche avec IA",
+  "calypso.ai-explication": "Explication ...",
+  "calypso.ai-annuler": "Annuler",
+  "calypso.ai-lien": "Commencer",
+  "calypso.ai-search-title": "",
+  "calypso.ai-search-description": "",
+  "calypso.ai-charger": "Charger plus",
+  "calypso.ai-img-selection": "Image sélectionnée"
 
 
 }

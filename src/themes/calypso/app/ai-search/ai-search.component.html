@@ -4,9 +4,9 @@
       <i class="fas fa-arrow-left ng-tns-c242-3"></i> {{ 'calypso.retour' | translate }}
     </button>
     <div class="row">
-        <div class="clip-titre">
-          <h1>{{ 'calypso.clip-search-title' | translate }}</h1>
-          <p>{{ 'calypso.clip-search-description' | translate }}</p>
+        <div class="ai-titre">
+          <h1>{{ 'calypso.ai-search-title' | translate }}</h1>
+          <p>{{ 'calypso.ai-search-description' | translate }}</p>
         </div>
       <!-- Formulaire de recherche -->
       <div class="col-md-12 mb-3">
@@ -27,23 +27,23 @@
         </form>
       </div>
       <ng-container *ngIf="images$ | async as images; else loading">
-        <ng-container *ngFor="let clip of clips.slice(0, defaultItemCount); let i = index;">
+        <ng-container *ngFor="let ai of listeAi.slice(0, defaultItemCount); let i = index;">
           <!-- Ajoutez une condition *ngIf pour vérifier la présence de collection?.vedette -->
-          <div *ngIf="clip.pathFile" [ngClass]="{'col-md-4': true}">
-            <div class="card-calypso" [ngStyle]="{ 'background-image': 'url(' + clip.pathFile + ')' }">
+          <div *ngIf="ai.pathFile" [ngClass]="{'col-md-4': true}">
+            <div class="card-calypso" [ngStyle]="{ 'background-image': 'url(' + ai.pathFile + ')' }">
               <div class="specifies" >
-                <p *ngIf="clip.pathFile && selectedImageId(clip.id)" class="promo">{{ 'calypso.clip-img-selection' | translate }}</p>
-                <a  [routerLink]="['/items/', clip.itemId]"><h5>{{clip.itemName}}</h5></a>
+                <p *ngIf="ai.pathFile && selectedImageId(ai.id)" class="promo">{{ 'calypso.ai-img-selection' | translate }}</p>
+                <a  [routerLink]="['/items/', ai.itemId]"><h5>{{ai.itemName}}</h5></a>
                 <ul>
-                  <li>{{clip.description}}</li>
+                  <li>{{ai.description}}</li>
                 </ul>
-                <a class="btn btn-outline-dark btn-sm"  [routerLink]="['/items/', clip.itemId]"> {{ 'calypso.consulter' | translate }}</a>
+                <a class="btn btn-outline-dark btn-sm"  [routerLink]="['/items/', ai.itemId]"> {{ 'calypso.consulter' | translate }}</a>
               </div>
             </div>
           </div>
           <!-- Fin de la condition *ngIf -->
         </ng-container>
-        <button *ngIf="clips.length > defaultItemCount" (click)="loadMore()" class="btn btn-outline-warning btn-sm m-3">{{ 'calypso.clip-charger' | translate }}</button>
+        <button *ngIf="listeAi.length > defaultItemCount" (click)="loadMore()" class="btn btn-outline-warning btn-sm m-3">{{ 'calypso.ai-charger' | translate }}</button>
       </ng-container>
 
       <ng-template #loading class="mt-5 pt-5">

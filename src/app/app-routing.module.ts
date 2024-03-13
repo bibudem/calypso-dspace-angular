@@ -42,7 +42,7 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
 import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 import { ForgotPasswordCheckGuard } from './core/rest-property/forgot-password-check-guard.guard';
-import {ClipSearchComponent} from "../themes/calypso/app/clip-search/clip-search.component";
+import {AiSearchComponent} from "../themes/calypso/app/ai-search/ai-search.component";
 
 @NgModule({
   imports: [
@@ -58,8 +58,8 @@ import {ClipSearchComponent} from "../themes/calypso/app/clip-search/clip-search
           { path: '', redirectTo: '/home', pathMatch: 'full' },
           //add UdeM | module Pages statiques
           {
-            path: 'clip-search',
-            component: ClipSearchComponent,
+            path: 'ai-search',
+            component: AiSearchComponent,
             pathMatch: 'full',
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
