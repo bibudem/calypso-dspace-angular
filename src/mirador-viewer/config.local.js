@@ -151,14 +151,14 @@ windowSettings.manifestId = manifest;
       },
       window: {
         allowClose: false,
-        imageToolsEnabled: true,
+        imageToolsEnabled: false,
         imageToolsOpen: false,
     		textOverlay: {
           enabled: true,
           visible: true,
           skipEmptyLines: true,
     		  opacity: 0.3,
-    		  color: #00FF7B,
+    		  color: '#00FF7B',
               correction: {
                 enabled: true,
                 emailUrlKeepParams: ['manifest'],
