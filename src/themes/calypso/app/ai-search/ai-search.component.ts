@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { AiService } from '../../service/ai.service';
 import { Ai } from '../../models/Ai';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable} from 'rxjs';
 import { config } from "../../config/config";
 import { Location } from '@angular/common';
 import { DSONameService } from "../../../../app/core/breadcrumbs/dso-name.service";
@@ -42,8 +42,6 @@ export class AiSearchComponent implements OnInit {
   @Output() submitSearch = new EventEmitter<any>();
   selectedScope: BehaviorSubject<DSpaceObject> = new BehaviorSubject<DSpaceObject>(undefined);
 
-  private subscription: Subscription;
-
   constructor(
     private aiService: AiService,
     private route: ActivatedRoute,
@@ -58,7 +56,6 @@ export class AiSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Observer les changements des paramètres d'URL
     this.route.queryParams.subscribe(params => {
       // Extraire les paramètres de recherche de l'URL
       this.query = params['query'] || 'all';
