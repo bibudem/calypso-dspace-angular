@@ -15,6 +15,8 @@ import { take, tap } from "rxjs/operators";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DSpaceObjectDataService } from "../../../../app/core/data/dspace-object-data.service";
 import { SearchService } from "../../../../app/core/shared/search/search.service";
+import {NotificationsService} from "../../../../app/shared/notifications/notifications.service";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-ai-search',
@@ -31,6 +33,8 @@ export class AiSearchComponent implements OnInit {
   listeAi: Ai[] = [];
   backendApiFile: string = config.backendApiFile;
   searchQuery: string = '';
+  titleNotif: string = '';
+  contentNotif: string = '';
 
   @Input() inPlaceSearch: boolean;
   @Input() hideScopeInUrl = false;
@@ -49,6 +53,8 @@ export class AiSearchComponent implements OnInit {
     protected dsoService: DSpaceObjectDataService,
     public dsoNameService: DSONameService,
     protected searchService: SearchService,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +88,14 @@ export class AiSearchComponent implements OnInit {
       // Charger les images en fonction des paramètres de recherche
       this.fetchImages();
     });
+
+    // Recouperer les variable de langue pour la boite de notification
+    this.translate.get(['calypso.ai-title-notification', 'calypso.ai-content-notification']).subscribe((messages: { [key: string]: string }) => {
+      this.titleNotif = messages['calypso.ai-title-notification'];
+      this.contentNotif = messages['calypso.ai-content-notification'];
+      this.showInfoNotification(this.titleNotif,this.contentNotif);
+    });
+
   }
 
   // Méthode privée pour récupérer les images
@@ -192,9 +206,7 @@ export class AiSearchComponent implements OnInit {
     this.query = 'all';
 
     const params = this.route.snapshot.queryParams;
-    if (params['query']) {
-      params['query'] = 'all';
-    }
+    delete params['query'];
   }
 
   // Méthode pour retourner en arrière dans l'historique de navigation
@@ -214,5 +226,13 @@ export class AiSearchComponent implements OnInit {
       queryParams['query'] = query;
     }
     this.router.navigate(['/ai-search'], { queryParams });
+  }
+
+  // Méthode pour affichage de la notification
+  showInfoNotification(title: string, content: string): void {
+    this.notificationsService.info(title, content, {
+      timeOut: 10000, // Durée d'affichage
+      animate: 'fromRight' // Animation d'entrée de la notification
+    });
   }
 }

@@ -12,7 +12,8 @@
   "calypso.ai-search-title": "",
   "calypso.ai-search-description": "",
   "calypso.ai-charger": "Charger plus",
-  "calypso.ai-img-selection": "Image sélectionnée"
-
+  "calypso.ai-img-selection": "Image sélectionnée",
+  "calypso.ai-title-notification": "Titre recherche Ai",
+  "calypso.ai-content-notification": "Voici un message pour la recherche Ai"
 
 }

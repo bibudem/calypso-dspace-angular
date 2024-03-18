@@ -2,24 +2,8 @@
   <h2 *ngIf="!disableHeader">{{ (configuration ? configuration + '.search.results.head' : 'search.results.head') | translate }}</h2>
     <div class="align-items-end">
       <!-- Icon made by Pixel perfect from www.flaticon.com -->
-      <img src="/assets/calypso/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia" (click)="openDialog(content)">
+      <img src="/assets/calypso/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia" (click)="redirectToAiSearch()">
       <ds-search-export-csv *ngIf="showCsvExport" [searchConfig]="searchConfig"></ds-search-export-csv>
-      <!-- Définissez le contenu de la modale -->
-      <ng-template #content let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title">{{'calypso.clip-titre' | translate}}</h4>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          {{'calypso.clip-explication' | translate}}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">{{'calypso.clip-annuler' | translate}}Annuler</button>
-          <button type="button" class="btn btn-success" (click)="redirectToAiSearch()">{{'calypso.clip-lien' | translate}}</button>
-        </div>
-      </ng-template>
     </div>
 </div>
 <div *ngIf="searchResults && searchResults?.hasSucceeded && !searchResults?.isLoading && searchResults?.payload?.page.length > 0" @fadeIn>

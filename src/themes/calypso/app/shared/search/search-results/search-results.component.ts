@@ -34,16 +34,8 @@ export class SearchResultsComponent extends BaseComponent {
     });
   }
 
-  openDialog(content): void {
-    this.modalService.open(content, { centered: true });
-  }
-
-  closeModal() {
-    this.modalService.dismissAll();
-  }
 
   redirectToAiSearch() {
-    this.closeModal();
 
     const queryParams = {};
     if (this.collectionId) {

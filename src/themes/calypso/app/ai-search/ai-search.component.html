@@ -43,6 +43,7 @@
             <div class="card-calypso" [ngStyle]="{ 'background-image': 'url(' + ai.pathFile + ')' }">
               <div class="specifies" >
                 <p *ngIf="ai.pathFile && selectedImageId(ai.id)" class="promo">{{ 'calypso.ai-img-selection' | translate }}</p>
+                <span class="badge badge-info pb-1">Item</span>
                 <a  [routerLink]="['/items/', ai.itemId]"><h5>{{ai.itemName}}</h5></a>
                 <ul>
                   <li>{{ai.description}}</li>
