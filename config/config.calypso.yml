@@ -395,3 +395,4 @@ search:
     enabled: true
     # List of filters to enable in "Advanced Search" dropdown
     filter: [ 'title', 'subject', 'calypso.vedette' ]
+
