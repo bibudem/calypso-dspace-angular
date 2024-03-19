@@ -9,69 +9,69 @@
   margin-bottom: 20px;
   background-size: cover;
 
-.specifies {
-  position: absolute;
-  width: 100%;
-  bottom: -60px;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  box-sizing: border-box;
-  transition: 0.6s;
+  .specifies {
+    position: absolute;
+    width: 100%;
+    bottom: -60px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.6s;
 
-h2 {
-  margin: 0;
-  padding: 0;
-  font-size: 1.2rem;
-  letter-spacing: 1px;
-  margin-bottom: 2px;
-  color: #142026;
+    h2 {
+      margin: 0;
+      padding: 0;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+      color: #142026;
 
-&:hover {
-   color: #052f4b;
- }
-}
+      &:hover {
+        color: #052f4b;
+      }
+    }
 
-.left-text {
-  position: absolute;
-  top: 12px;
-  right: 25px;
-  font-weight: bold;
-  color: #000;
-  font-size: 18px;
-}
+    .left-text {
+      position: absolute;
+      top: 12px;
+      right: 25px;
+      font-weight: bold;
+      color: #000;
+      font-size: 18px;
+    }
 
-label {
-  display: block;
-  margin-top: 5px;
-  font-weight: bold;
-  font-size: 15px;
-}
+    label {
+      display: block;
+      margin-top: 5px;
+      font-weight: bold;
+      font-size: 15px;
+    }
 
-ul {
-  display: flex;
-  margin: 0;
-  padding: 0;
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
 
-li {
-  list-style: none;
-  margin: 5px 5px 0;
-  font-size: 15px;
-  font-style: normal;
-  color: #ccc;
-}
-}
+      li {
+        list-style: none;
+        margin: 5px 5px 0;
+        font-size: 15px;
+        font-style: normal;
+        color: #ccc;
+      }
+    }
 
-a {
-  text-decoration: none;
-}
-}
+    a {
+      text-decoration: none;
+    }
+  }
 
-&:hover {
-.specifies {
-  bottom: 0;
-  background: rgb(255, 255, 255);
-}
-}
+  &:hover {
+    .specifies {
+      bottom: 0;
+      background: rgb(255, 255, 255);
+    }
+  }
 }
 
 .calypso-card-lien {
@@ -83,9 +83,9 @@ a {
   font-size: 13px;
   border-radius: 0;
 
-&:hover {
-   color: #da3401;
- }
+  &:hover {
+    color: #da3401;
+  }
 }
 /* fin calypso card style */
 /* Personnalisation d'une carte standard de DSpace */
@@ -144,4 +144,11 @@ a {
     cursor: pointer;
     transform: scale(1.2);
   }
+}
+/* Ajustement mineur du style de l'en-tête dans le thème */
+#main-site-header {
+  border-bottom: 3px solid #124154 !important;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #ced4da;
 }
