@@ -11,6 +11,8 @@ import {
 import {ActivatedRoute, Router} from "@angular/router";
 import {RouteService} from "../../../../../../../app/core/services/route.service";
 import {ItemDataService} from "../../../../../../../app/core/data/item-data.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {config} from "../../../../../config/config";
 
 /**
  * Component that represents an untyped Item page
@@ -28,12 +30,16 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
   activeTab: number = 1;
   metadata: any[] = [];  // Tableau pour stocker les métadonnées de l'élément
   itemRD : any;
+  backendApi: string = config.backendApi;
+  idItem: string;
+  activeTabParam: string;
 
   constructor(
     protected routeService: RouteService,
     protected router: Router,
     protected route: ActivatedRoute,
-    private itemDataService: ItemDataService
+    private itemDataService: ItemDataService,
+    private modalService: NgbModal
   ) {
     super(routeService, router);
   }
@@ -42,10 +48,16 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
     super.ngOnInit();
 
     // Récupérer l'ID de l'élément à partir de l'URL
-    const itemId = this.route.snapshot.paramMap.get('id');
+    this.idItem = this.route.snapshot.paramMap.get('id');
+
+    // Récupérer le paramètre d'URL 'tab' (ou un autre nom que vous préférez)
+    this.activeTabParam = this.route.snapshot.queryParamMap.get('tab');
+
+    // Définir l'onglet actif en fonction du paramètre d'URL
+    this.activeTab = this.activeTabParam ? +this.activeTabParam : 1;
 
     // Appeler le service pour récupérer l'élément avec les métadonnées
-    this.itemDataService.findById(itemId).subscribe(
+    this.itemDataService.findById(this.idItem).subscribe(
       (item) => {
         this.itemRD = item;
         // Accéder aux métadonnées de l'élément
@@ -91,4 +103,46 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
     }
   }
 
+  openDialog(content): void {
+    this.modalService.open(content, { centered: true });
+  }
+
+  closeModal() {
+    this.modalService.dismissAll();
+  }
+
+  async redirectToClipSearch() {
+    this.closeModal();
+
+    try {
+      // Récupérer les informations sur les bundles de l'élément
+      const response = await fetch(this.backendApi + 'items/' + this.idItem + '/bundles');
+      const infoUrlBundles = await response.json();
+
+      // Rechercher le bundle "ORIGINAL"
+      const originalBundle = infoUrlBundles._embedded.bundles.find(bundle => bundle.name === 'ORIGINAL');
+
+      if (originalBundle) {
+        // Récupérer le lien vers le premier bitstream du bundle "ORIGINAL"
+        const bitstreamsResponse = await fetch(originalBundle._links.bitstreams.href);
+        const bitstreamsInfo = await bitstreamsResponse.json();
+
+        // Extraire le lien du premier bitstream
+        const firstBitstreamUrl = bitstreamsInfo._embedded.bitstreams[0]._links.content.href;
+        //console.log(firstBitstreamUrl);
+        // Définissez les paramètres de requête
+        const queryParams = {
+          query: null,
+          url: firstBitstreamUrl
+        };
+
+        // Naviguez vers la page de recherche de clips avec les paramètres de requête
+        this.router.navigate(['/ai-search'], { queryParams });
+      } else {
+        console.error('Bundle "ORIGINAL" introuvable.');
+      }
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la récupération des bundles :', error);
+    }
+  }
 }

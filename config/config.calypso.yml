@@ -318,32 +318,32 @@ themes:
   - name: calypso
     extends: dspace
     headTags:
-    - tagName: link
-      attributes:
-        rel: icon
-        href: assets/calypso/images/favicons/favicon.ico
-        sizes: any
+      - tagName: link
+        attributes:
+          rel: icon
+          href: assets/calypso/images/favicons/favicon.ico
+          sizes: any
 
   - name: dspace
     headTags:
-    - tagName: link
-      attributes:
-        rel: icon
-        href: assets/dspace/images/favicons/favicon.ico
-        sizes: any
-    - tagName: link
-      attributes:
-        rel: icon
-        href: assets/dspace/images/favicons/favicon.svg
-        type: image/svg+xml
-    - tagName: link
-      attributes:
-        rel: apple-touch-icon
-        href: assets/dspace/images/favicons/apple-touch-icon.png
-    - tagName: link
-      attributes:
-        rel: manifest
-        href: assets/dspace/images/favicons/manifest.webmanifest
+      - tagName: link
+        attributes:
+          rel: icon
+          href: assets/dspace/images/favicons/favicon.ico
+          sizes: any
+      - tagName: link
+        attributes:
+          rel: icon
+          href: assets/dspace/images/favicons/favicon.svg
+          type: image/svg+xml
+      - tagName: link
+        attributes:
+          rel: apple-touch-icon
+          href: assets/dspace/images/favicons/apple-touch-icon.png
+      - tagName: link
+        attributes:
+          rel: manifest
+          href: assets/dspace/images/favicons/manifest.webmanifest
 
 # The default bundles that should always be displayed as suggestions when you upload a new bundle
 bundle:
@@ -382,8 +382,9 @@ comcolSelectionSort:
   sortField: 'dc.title'
   sortDirection: 'ASC'
     # Example of fallback collection for suggestions import
-    # suggestion:
-    # - collectionId: 8f7df5ca-f9c2-47a4-81ec-8a6393d6e5af
+  # suggestion:
+  # - collectionId: 8f7df5ca-f9c2-47a4-81ec-8a6393d6e5af
+
   # source: "openaire"
 
 
@@ -394,3 +395,4 @@ search:
     enabled: true
     # List of filters to enable in "Advanced Search" dropdown
     filter: [ 'title', 'subject', 'calypso.vedette' ]
+

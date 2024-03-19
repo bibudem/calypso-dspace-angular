@@ -40,6 +40,7 @@ import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 import { NOTIFICATIONS_MODULE_PATH } from './admin/admin-routing-paths';
 import { ForgotPasswordCheckGuard } from './core/rest-property/forgot-password-check-guard.guard';
+import {AiSearchComponent} from "../themes/calypso/app/ai-search/ai-search.component";
 
 @NgModule({
   imports: [
@@ -53,6 +54,14 @@ import { ForgotPasswordCheckGuard } from './core/rest-property/forgot-password-c
         resolve: [MenuResolver],
         children: [
           { path: '', redirectTo: '/home', pathMatch: 'full' },
+          //add UdeM | module Pages statiques
+          {
+            path: 'ai-search',
+            component: AiSearchComponent,
+            pathMatch: 'full',
+            canActivate: [EndUserAgreementCurrentUserGuard]
+          },
+          //fin add UdeM
           {
             path: 'reload/:rnd',
             component: ThemedPageNotFoundComponent,

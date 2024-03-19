@@ -1,4 +1,25 @@
 <ds-themed-results-back-button *ngIf="showBackButton | async" [back]="back"></ds-themed-results-back-button>
+<div class="align-items-end">
+  <!-- Icon made by Pixel perfect from www.flaticon.com -->
+  <img src="/assets/calypso/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia float-right ml-1" (click)="openDialog(content)">
+</div>
+<!-- Définissez le contenu de la modale -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{'calypso.ai-titre' | translate}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{'calypso.ai-explication' | translate}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">{{'calypso.clip-annuler' | translate}}Annuler</button>
+    <button type="button" class="btn btn-success" (click)="redirectToClipSearch()">{{'calypso.clip-lien' | translate}}</button>
+  </div>
+</ng-template>
+
 <div class="d-flex flex-row mt-2">
   <ds-themed-item-page-title-field [item]="object" class="mr-auto">
   </ds-themed-item-page-title-field>
@@ -9,13 +30,13 @@
 <div  *ngIf="iiifEnabled">
 <!-- Afficher le contenu dans des onglets -->
   <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs" >
-    <li [ngbNavItem]="1"  >
+    <li [ngbNavItem]="1" [routerLink]="['.']" [queryParams]="{tab: 1}" routerLinkActive="active"  >
       <a ngbNavLink (click)="displaySection('calypso-mirador')">{{'calypso.onglet-fichier' | translate}}</a>
       <ng-template ngbNavContent>
         <!-- Cette section reste vide parce qu'elle affichera mirador -->
       </ng-template>
     </li>
-    <li [ngbNavItem]="2" >
+    <li [ngbNavItem]="2" [routerLink]="['.']" [queryParams]="{tab: 2}" routerLinkActive="active" >
       <a ngbNavLink (click)="hideSection('calypso-mirador')">{{'calypso.onglet-notice' | translate}}</a>
       <ng-template ngbNavContent>
         <!-- Afficher les métadonnées dans un tableau -->
@@ -38,7 +59,7 @@
         <!-- fin importation -->
       </ng-template>
     </li>
-    <li [ngbNavItem]="3" >
+    <li [ngbNavItem]="3" [routerLink]="['.']" [queryParams]="{tab: 3}" routerLinkActive="active" >
       <a ngbNavLink (click)="hideSection('calypso-mirador')">{{'calypso.onglet-autre' | translate}}</a>
       <ng-template ngbNavContent>
         <div class="table-responsive mt-2">
@@ -64,7 +85,7 @@
  <!-- Section specifique au onglet choisi -->
  <div [ngbNavOutlet]="nav" class="mt-2"></div>
 <!-- Section pour mirador -->
-  <div class="row" *ngIf="iiifEnabled">
+  <div class="row" *ngIf="iiifEnabled && (activeTab === 1 || !activeTab)">
     <div class="col-12" id="calypso-mirador">
       <ds-mirador-viewer id="iiif-viewer"
                          [object]="object"

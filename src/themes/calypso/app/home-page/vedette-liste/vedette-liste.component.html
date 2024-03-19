@@ -3,7 +3,7 @@
     <ng-template ngbSlide *ngFor="let image of images">
       <img [src]="image.imageUrl" class="d-block w-100 vedette-home" alt="{{ image.title }}">
       <div class="carousel-caption">
-        <h3>{{ image.title }}</h3>
+        <h3><a [routerLink]="['/items/', image.id]">{{ image.title }}</a></h3>
         <p>{{ image.description }}</p>
       </div>
     </ng-template>

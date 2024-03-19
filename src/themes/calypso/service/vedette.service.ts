@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { Vedette } from '../models/Vedette';
+import {config} from "../config/config";
 
 @Injectable({
   providedIn: 'root',
 })
 export class VedetteService {
-  private urlApi = 'http://localhost:3000/api/vedette';
+  urlApiVedette: string = config.urlApiVedette;
   private imagesHomeCache$?: Observable<Vedette[]>;
   private imageCollCache$: { [id: string]: Observable<Vedette[]> } = {};
 
@@ -18,7 +19,7 @@ export class VedetteService {
   getImagesHome(): Observable<Vedette[]> {
     // Si les images ne sont pas en cache, effectuer la requête et mettre en cache les résultats
     if (!this.imagesHomeCache$) {
-      this.imagesHomeCache$ = this.fetchImages(this.urlApi).pipe(shareReplay(1));
+      this.imagesHomeCache$ = this.fetchImages(this.urlApiVedette).pipe(shareReplay(1));
     }
     return this.imagesHomeCache$;
   }
@@ -28,7 +29,7 @@ export class VedetteService {
     const limit = 1;
     // Si les images de la collection ne sont pas en cache, effectuer la requête et mettre en cache les résultats
     if (!this.imageCollCache$[id]) {
-      this.imageCollCache$[id] = this.fetchImages(`${this.urlApi}/${limit}/${id}`).pipe(shareReplay(1));
+      this.imageCollCache$[id] = this.fetchImages(`${this.urlApiVedette}/${limit}/${id}`).pipe(shareReplay(1));
     }
     return this.imageCollCache$[id];
   }
@@ -38,6 +39,7 @@ export class VedetteService {
     return this.http.get(apiUrl).pipe(
       map((data: any) =>
         data.items.map((item: any) => ({
+          id: item.id,
           title: item.title,
           description: item.description,
           imageUrl: item.group.image[0].url,
