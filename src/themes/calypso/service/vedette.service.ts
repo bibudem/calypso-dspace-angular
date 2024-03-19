@@ -39,6 +39,7 @@ export class VedetteService {
     return this.http.get(apiUrl).pipe(
       map((data: any) =>
         data.items.map((item: any) => ({
+          id: item.id,
           title: item.title,
           description: item.description,
           imageUrl: item.group.image[0].url,

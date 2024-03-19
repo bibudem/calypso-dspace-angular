@@ -19,7 +19,7 @@ import { Vedette } from '../../../models/Vedette';
   // templateUrl: '../../../../../app/home-page/top-level-community-list/top-level-community-list.component.html'
 })
 
-export class TopLevelCommunityListComponent extends BaseComponent implements OnDestroy {
+export class TopLevelCommunityListComponent extends BaseComponent  {
   collections$: Observable<any[]> = of([]);
   private unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -102,10 +102,4 @@ export class TopLevelCommunityListComponent extends BaseComponent implements OnD
     }
   }
 
-  ngOnDestroy() {
-    // Désabonnez-vous lors de la destruction du composant
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-    super.ngOnDestroy();
-  }
 }
