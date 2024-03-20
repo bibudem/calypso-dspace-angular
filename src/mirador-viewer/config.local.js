@@ -17,8 +17,11 @@ import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
 import { miradorImageToolsPlugin } from 'mirador-image-tools';
-import textOverlayPlugin from 'mirador-textoverlay/es';
+// import textOverlayPlugin from 'mirador-textoverlay/es';
 import ocrHelperPlugin from '@4eyes/mirador-ocr-helper';
+import annotationPlugins from 'mirador-annotations';
+import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
+// import AnnototAdapter from 'mirador-annotations/es/AnnototAdapter';
 
 const params = new URLSearchParams(location.search);
 const manifest = params.get('manifest');
@@ -27,6 +30,7 @@ const query = params.get('query');
 const multi = params.get('multi');
 const notMobile = params.get('notMobile');
 const langParam = params.get('lang');
+const endpointUrl = 'http://127.0.0.1:3000/annotations';
 
 let windowSettings = {};
 let sidbarPanel = 'info';
@@ -64,6 +68,11 @@ windowSettings.manifestId = manifest;
 (Mirador.viewer(
     {
       id: 'mirador',
+	  annotation: {
+        adapter: (canvasId) => new LocalStorageAdapter(`localStorage://?canvasId=${canvasId}`),
+        // adapter: (canvasId) => new AnnototAdapter(canvasId, endpointUrl),
+        exportLocalStorageAnnotations: true, // display annotation JSON export button
+      },
       mainMenuSettings: {
         show: true
       },
@@ -155,7 +164,7 @@ windowSettings.manifestId = manifest;
         imageToolsOpen: false,
     		textOverlay: {
           enabled: true,
-          visible: true,
+          visible: false,
           skipEmptyLines: true,
     		  opacity: 0.3,
     		  color: '#00FF7B',
@@ -164,8 +173,9 @@ windowSettings.manifestId = manifest;
                 emailUrlKeepParams: ['manifest'],
                 emailRecipient: null,
               },
-          optionsRenderMode: 'simple',
+          optionsRenderMode: 'complex',
         },
+		defaultSideBarPanel: 'annotations',
         sideBarOpenByDefault: false,
         allowFullscreen: true,
         allowMaximize: false,
@@ -203,9 +213,10 @@ windowSettings.manifestId = manifest;
       miradorSharePlugin,
       miradorDownloadDialog,
       miradorDownloadPlugin,
-	    miradorImageToolsPlugin,
-	    textOverlayPlugin,
-      ocrHelperPlugin
+	  miradorImageToolsPlugin,
+	  // textOverlayPlugin,
+      ocrHelperPlugin,
+	  annotationPlugins
     ]
   )
 )(manifest);
