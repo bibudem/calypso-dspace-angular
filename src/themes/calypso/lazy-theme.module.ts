@@ -76,6 +76,8 @@ import { BrowseByComponent } from './app/shared/browse-by/browse-by.component';
 import {ItemPageComponent} from "./app/item-page/simple/item-page.component";
 import {SearchResultsComponent} from "./app/shared/search/search-results/search-results.component";
 import {AiSearchComponent} from "./app/ai-search/ai-search.component";
+import {TopLevelCommunityListComponent} from "./app/home-page/top-level-community-list/top-level-community-list.component";
+import {UntypedItemComponent} from "./app/item-page/simple/item-types/untyped-item/untyped-item.component";
 
 
 
@@ -90,7 +92,9 @@ const DECLARATIONS = [
   BrowseByComponent,
   ItemPageComponent,
   SearchResultsComponent,
-  AiSearchComponent
+  AiSearchComponent,
+  TopLevelCommunityListComponent,
+  UntypedItemComponent
 ];
 
 @NgModule({
