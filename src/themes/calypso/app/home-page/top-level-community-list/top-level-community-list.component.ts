@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { TopLevelCommunityListComponent as BaseComponent } from '../../../../../app/home-page/top-level-community-list/top-level-community-list.component';
 import {Observable, of, Subject} from 'rxjs';
 import { CommunityDataService } from '../../../../../app/core/data/community-data.service';
@@ -10,6 +10,7 @@ import { PaginationService } from '../../../../../app/core/pagination/pagination
 import { VedetteService } from '../../../service/vedette.service';
 import {map, takeUntil} from 'rxjs/operators';
 import { Vedette } from '../../../models/Vedette';
+import {hasValue} from "../../../../../app/shared/empty.util";
 
 @Component({
   selector: 'ds-top-level-community-list',
@@ -19,7 +20,7 @@ import { Vedette } from '../../../models/Vedette';
   // templateUrl: '../../../../../app/home-page/top-level-community-list/top-level-community-list.component.html'
 })
 
-export class TopLevelCommunityListComponent extends BaseComponent  {
+export class TopLevelCommunityListComponent extends BaseComponent  implements OnInit, OnDestroy{
   collections$: Observable<any[]> = of([]);
   private unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -102,4 +103,10 @@ export class TopLevelCommunityListComponent extends BaseComponent  {
     }
   }
 
+  ngOnDestroy() {
+    if (hasValue(this.currentPageSubscription)) {
+      this.currentPageSubscription.unsubscribe();
+    }
+    this.paginationServiceCalypso.clearPagination(this.config.id);
+  }
 }
