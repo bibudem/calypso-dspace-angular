@@ -1,10 +1,10 @@
 <div class="d-flex justify-content-between">
   <h2 *ngIf="!disableHeader">{{ (configuration ? configuration + '.search.results.head' : 'search.results.head') | translate }}</h2>
-    <div class="align-items-end">
-      <!-- Icon made by Pixel perfect from www.flaticon.com -->
-      <img src="/assets/calypso/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia" (click)="redirectToAiSearch()">
-      <ds-search-export-csv *ngIf="showCsvExport" [searchConfig]="searchConfig"></ds-search-export-csv>
-    </div>
+  <ds-search-export-csv *ngIf="showCsvExport" [searchConfig]="searchConfig"></ds-search-export-csv>
+</div>
+<div class="align-items-end">
+  <!-- Icon made by Pixel perfect from www.flaticon.com -->
+  <img src="/assets/calypso/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia" (click)="redirectToAiSearch()">
 </div>
 <div *ngIf="searchResults && searchResults?.hasSucceeded && !searchResults?.isLoading && searchResults?.payload?.page.length > 0" @fadeIn>
   <ds-viewable-collection
@@ -26,7 +26,7 @@
 <ds-themed-loading *ngIf="isLoading()" message="{{'loading.search-results' | translate}}"></ds-themed-loading>
 <ds-error *ngIf="showError()"
           message="{{errorMessageLabel() | translate}}"></ds-error>
-<div *ngIf="searchResults?.payload?.page.length == 0 || searchResults?.statusCode == 400">
+<div *ngIf="searchResults?.payload?.page.length === 0 || searchResults?.statusCode === 400">
   {{ 'search.results.no-results' | translate }}
   <a [routerLink]="['/search']"
      [queryParams]="{ query: surroundStringWithQuotes(searchConfig?.query) }"

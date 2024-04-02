@@ -2,14 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Vedette } from '../../../models/Vedette';
 import { VedetteService } from '../../../service/vedette.service';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
+import {ActivatedRoute, RouterModule} from '@angular/router';
 import {map} from "rxjs/operators";
+import {TranslateModule} from "@ngx-translate/core";
+import {CommonModule} from "@angular/common";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'ds-vedette-coll-liste',
   templateUrl: './vedette-coll-liste.component.html',
-  styleUrls: ['./vedette-coll-liste.component.scss']
+  styleUrls: ['./vedette-coll-liste.component.scss'],
+  standalone: true,
+  imports: [ThemedLoadingComponent, TranslateModule, RouterModule, CommonModule, NgbModule],
 })
 export class VedetteCollListeComponent implements OnInit {
   images$: Observable<Vedette[]>;
@@ -17,12 +22,8 @@ export class VedetteCollListeComponent implements OnInit {
 
   constructor(
     private vedetteService: VedetteService,
-    private config: NgbCarouselConfig,
     private route: ActivatedRoute // Injecter ActivatedRoute
   ) {
-    config.interval = 3000;
-    config.wrap = true;
-    config.keyboard = false;
   }
 
   ngOnInit(): void {

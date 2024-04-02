@@ -1,7 +1,7 @@
-<ds-themed-results-back-button *ngIf="showBackButton | async" [back]="back"></ds-themed-results-back-button>
+<ds-themed-results-back-button *ngIf="showBackButton$ | async" [back]="back"></ds-themed-results-back-button>
 <div class="align-items-end">
   <!-- Icon made by Pixel perfect from www.flaticon.com -->
-  <img src="/assets/calypso/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia float-right ml-1" (click)="openDialog(content)">
+  <img src="/assets/calypso/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia mt-2 float-right ml-1" (click)="openDialog(content)">
 </div>
 <!-- Définissez le contenu de la modale -->
 <ng-template #content let-modal>
@@ -53,7 +53,7 @@
           </table>
         </div>
         <div *ngIf="itemRD?.payload as item">
-          <ds-themed-item-page-full-file-section [item]="item"></ds-themed-item-page-full-file-section>
+
           <ds-item-page-collections [item]="item"></ds-item-page-collections>
         </div>
         <!-- fin importation -->
@@ -96,65 +96,83 @@
   </div>
 </div>
 <div class="row" *ngIf="!iiifEnabled">
-  <div class="col-xs-12 col-md-4">
-    <ng-container *ngIf="!(mediaViewer.image || mediaViewer.video)">
-      <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
-        <ds-themed-thumbnail [thumbnail]="object?.thumbnail | async"></ds-themed-thumbnail>
-      </ds-metadata-field-wrapper>
-    </ng-container>
-    <div *ngIf="mediaViewer.image || mediaViewer.video" class="mb-2">
-      <ds-themed-media-viewer [item]="object"></ds-themed-media-viewer>
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <ng-container *ngIf="!(mediaViewer.image || mediaViewer.video)">
+        <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
+          <ds-themed-thumbnail [thumbnail]="object?.thumbnail | async"></ds-themed-thumbnail>
+        </ds-metadata-field-wrapper>
+      </ng-container>
+      <div *ngIf="mediaViewer.image || mediaViewer.video" class="mb-2">
+        <ds-themed-media-viewer [item]="object"></ds-themed-media-viewer>
+      </div>
+      <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
+      <ds-item-page-date-field [item]="object"></ds-item-page-date-field>
+      <ds-themed-metadata-representation-list class="ds-item-page-mixed-author-field"
+                                              [parentItem]="object"
+                                              [itemType]="'Person'"
+                                              [metadataFields]="['dc.contributor.author', 'dc.creator']"
+                                              [label]="'relationships.isAuthorOf' | translate">
+      </ds-themed-metadata-representation-list>
+      <ds-generic-item-page-field [item]="object"
+                                  [fields]="['journal.title']"
+                                  [label]="'item.page.journal-title'">
+      </ds-generic-item-page-field>
+      <ds-generic-item-page-field [item]="object"
+                                  [fields]="['journal.identifier.issn']"
+                                  [label]="'item.page.journal-issn'">
+      </ds-generic-item-page-field>
+      <ds-generic-item-page-field [item]="object"
+                                  [fields]="['journalvolume.identifier.name']"
+                                  [label]="'item.page.volume-title'">
+      </ds-generic-item-page-field>
+      <ds-generic-item-page-field [item]="object"
+                                  [fields]="['dc.publisher']"
+                                  [label]="'item.page.publisher'">
+      </ds-generic-item-page-field>
     </div>
-    <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
-    <ds-item-page-date-field [item]="object"></ds-item-page-date-field>
-    <ds-themed-metadata-representation-list class="ds-item-page-mixed-author-field"
-                                            [parentItem]="object"
-                                            [itemType]="'Person'"
-                                            [metadataFields]="['dc.contributor.author', 'dc.creator']"
-                                            [label]="'relationships.isAuthorOf' | translate">
-    </ds-themed-metadata-representation-list>
-    <ds-generic-item-page-field [item]="object"
-                                [fields]="['journal.title']"
-                                [label]="'item.page.journal-title'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-                                [fields]="['journal.identifier.issn']"
-                                [label]="'item.page.journal-issn'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-                                [fields]="['journalvolume.identifier.name']"
-                                [label]="'item.page.volume-title'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-                                [fields]="['dc.publisher']"
-                                [label]="'item.page.publisher'">
-    </ds-generic-item-page-field>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <ds-item-page-abstract-field [item]="object"></ds-item-page-abstract-field>
-    <ds-generic-item-page-field [item]="object"
-                                [fields]="['dc.description']"
-                                [label]="'item.page.description'">
-    </ds-generic-item-page-field>
+    <div class="col-xs-12 col-md-6">
+      <ds-item-page-abstract-field [item]="object"></ds-item-page-abstract-field>
+      <ds-generic-item-page-field [item]="object"
+                                  [fields]="['dc.description']"
+                                  [label]="'item.page.description'">
+      </ds-generic-item-page-field>
 
-    <ds-generic-item-page-field [item]="object"
-                                [fields]="['dc.subject']"
-                                [separator]="', '"
-                                [label]="'item.page.subject'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-                                [fields]="['dc.identifier.citation']"
-                                [label]="'item.page.citation'">
-    </ds-generic-item-page-field>
-    <ds-item-page-uri-field [item]="object"
-                            [fields]="['dc.identifier.uri']"
-                            [label]="'item.page.uri'">
-    </ds-item-page-uri-field>
-    <ds-item-page-collections [item]="object"></ds-item-page-collections>
-    <div>
-      <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']" role="button">
-        <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
-      </a>
+      <ds-generic-item-page-field [item]="object"
+                                  [fields]="['dc.subject']"
+                                  [separator]="', '"
+                                  [label]="'item.page.subject'">
+      </ds-generic-item-page-field>
+      <ds-generic-item-page-field [item]="object"
+                                  [fields]="['dc.identifier.citation']"
+                                  [label]="'item.page.citation'">
+      </ds-generic-item-page-field>
+      <ds-item-page-uri-field [item]="object"
+                              [fields]="['dc.identifier.uri']"
+                              [label]="'item.page.uri'">
+      </ds-item-page-uri-field>
+      <ds-item-page-collections [item]="object"></ds-item-page-collections>
+      <ds-item-page-uri-field [item]="object"
+                              [fields]="['notify.relation.endorsedBy']"
+                              [label]="'item.page.endorsement'">
+      </ds-item-page-uri-field>
+      <ds-item-page-uri-field [item]="object"
+                              [fields]="['datacite.relation.isReviewedBy']"
+                              [label]="'item.page.review'">
+      </ds-item-page-uri-field>
+      <ds-item-page-uri-field [item]="object"
+                              [fields]="['datacite.relation.isSupplementedBy']"
+                              [label]="'item.page.dataset'">
+      </ds-item-page-uri-field>
+      <ds-item-page-uri-field [item]="object"
+                              [fields]="['datacite.relation.isReferencedBy']"
+                              [label]="'item.page.dataset'">
+      </ds-item-page-uri-field>
+      <div>
+        <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']" role="button">
+          <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
+        </a>
+      </div>
     </div>
   </div>
 </div>

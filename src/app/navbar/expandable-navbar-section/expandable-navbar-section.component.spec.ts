@@ -1,15 +1,19 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { ExpandableNavbarSectionComponent } from './expandable-navbar-section.component';
-import { By } from '@angular/platform-browser';
-import { MenuServiceStub } from '../../shared/testing/menu-service.stub';
 import { Component } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of as observableOf } from 'rxjs';
+
 import { HostWindowService } from '../../shared/host-window.service';
 import { MenuService } from '../../shared/menu/menu.service';
 import { HostWindowServiceStub } from '../../shared/testing/host-window-service.stub';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuServiceStub } from '../../shared/testing/menu-service.stub';
 import { VarDirective } from '../../shared/utils/var.directive';
+import { ExpandableNavbarSectionComponent } from './expandable-navbar-section.component';
 
 describe('ExpandableNavbarSectionComponent', () => {
   let component: ExpandableNavbarSectionComponent;
@@ -19,17 +23,16 @@ describe('ExpandableNavbarSectionComponent', () => {
   describe('on larger screens', () => {
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [NoopAnimationsModule],
-        declarations: [ExpandableNavbarSectionComponent, TestComponent, VarDirective],
+        imports: [NoopAnimationsModule, ExpandableNavbarSectionComponent, TestComponent, VarDirective],
         providers: [
           { provide: 'sectionDataProvider', useValue: {} },
           { provide: MenuService, useValue: menuService },
-          { provide: HostWindowService, useValue: new HostWindowServiceStub(800) }
-        ]
+          { provide: HostWindowService, useValue: new HostWindowServiceStub(800) },
+        ],
       }).overrideComponent(ExpandableNavbarSectionComponent, {
         set: {
-          entryComponents: [TestComponent]
-        }
+          entryComponents: [TestComponent],
+        },
       })
         .compileComponents();
     }));
@@ -60,7 +63,7 @@ describe('ExpandableNavbarSectionComponent', () => {
         const sidebarToggler = fixture.debugElement.query(By.css('[data-test="navbar-section-wrapper"]'));
         sidebarToggler.triggerEventHandler('mouseenter', {
           preventDefault: () => {/**/
-          }
+          },
         });
       });
 
@@ -88,7 +91,7 @@ describe('ExpandableNavbarSectionComponent', () => {
         const sidebarToggler = fixture.debugElement.query(By.css('[data-test="navbar-section-wrapper"]'));
         sidebarToggler.triggerEventHandler('mouseleave', {
           preventDefault: () => {/**/
-          }
+          },
         });
       });
 
@@ -186,17 +189,16 @@ describe('ExpandableNavbarSectionComponent', () => {
   describe('on smaller, mobile screens', () => {
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [NoopAnimationsModule],
-        declarations: [ExpandableNavbarSectionComponent, TestComponent, VarDirective],
+        imports: [NoopAnimationsModule, ExpandableNavbarSectionComponent, TestComponent, VarDirective],
         providers: [
           { provide: 'sectionDataProvider', useValue: {} },
           { provide: MenuService, useValue: menuService },
-          { provide: HostWindowService, useValue: new HostWindowServiceStub(300) }
-        ]
+          { provide: HostWindowService, useValue: new HostWindowServiceStub(300) },
+        ],
       }).overrideComponent(ExpandableNavbarSectionComponent, {
         set: {
-          entryComponents: [TestComponent]
-        }
+          entryComponents: [TestComponent],
+        },
       })
         .compileComponents();
     }));
@@ -216,7 +218,7 @@ describe('ExpandableNavbarSectionComponent', () => {
         const sidebarToggler = fixture.debugElement.query(By.css('[data-test="navbar-section-wrapper"]'));
         sidebarToggler.triggerEventHandler('mouseenter', {
           preventDefault: () => {/**/
-          }
+          },
         });
       });
 
@@ -231,7 +233,7 @@ describe('ExpandableNavbarSectionComponent', () => {
         const sidebarToggler = fixture.debugElement.query(By.css('[data-test="navbar-section-wrapper"]'));
         sidebarToggler.triggerEventHandler('mouseleave', {
           preventDefault: () => {/**/
-          }
+          },
         });
       });
 
@@ -246,7 +248,7 @@ describe('ExpandableNavbarSectionComponent', () => {
         const sidebarToggler = fixture.debugElement.query(By.css('[data-test="navbar-section-toggler"]'));
         sidebarToggler.triggerEventHandler('click', {
           preventDefault: () => {/**/
-          }
+          },
         });
       });
 
@@ -261,7 +263,8 @@ describe('ExpandableNavbarSectionComponent', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``
+  template: ``,
+  standalone: true,
 })
 class TestComponent {
 }

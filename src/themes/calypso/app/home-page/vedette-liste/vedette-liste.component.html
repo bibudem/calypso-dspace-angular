@@ -1,5 +1,5 @@
 <ng-container *ngIf="images$ | async as images">
-  <ngb-carousel>
+  <ngb-carousel *ngIf="images.length > 0">
     <ng-template ngbSlide *ngFor="let image of images">
       <img [src]="image.imageUrl" class="d-block w-100 vedette-home" alt="{{ image.title }}">
       <div class="carousel-caption">
@@ -8,4 +8,5 @@
       </div>
     </ng-template>
   </ngb-carousel>
+  <ds-themed-loading *ngIf="!(images.length > 0)" message="Loading carousel..."></ds-themed-loading>
 </ng-container>

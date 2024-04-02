@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AiService } from '../../service/ai.service';
 import { Ai } from '../../models/Ai';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { config } from "../../config/config";
-import { Location } from '@angular/common';
+import {AsyncPipe, CommonModule, Location} from '@angular/common';
 import { DSONameService } from "../../../../app/core/breadcrumbs/dso-name.service";
 import { hasValue, isNotEmpty } from "../../../../app/shared/empty.util";
 import { getFirstSucceededRemoteDataPayload } from "../../../../app/core/shared/operators";
@@ -12,16 +12,22 @@ import { DSpaceObject } from "../../../../app/core/shared/dspace-object.model";
 import { currentPath } from "../../../../app/shared/utils/route.utils";
 import { ScopeSelectorModalComponent } from "../../../../app/shared/search-form/scope-selector-modal/scope-selector-modal.component";
 import { take, tap } from "rxjs/operators";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { DSpaceObjectDataService } from "../../../../app/core/data/dspace-object-data.service";
 import { SearchService } from "../../../../app/core/shared/search/search.service";
 import {NotificationsService} from "../../../../app/shared/notifications/notifications.service";
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {ThemedLoadingComponent} from "../../../../app/shared/loading/themed-loading.component";
+import {FormsModule} from "@angular/forms";
+import {SearchFormComponent} from "../../../../app/shared/search-form/search-form.component";
+import {BrowserOnlyPipe} from "../../../../app/shared/utils/browser-only.pipe";
 
 @Component({
   selector: 'ds-ai-search',
   templateUrl: './ai-search.component.html',
-  styleUrls: ['./ai-search.component.scss']
+  styleUrls: ['./ai-search.component.scss'],
+  standalone: true,
+  imports: [ThemedLoadingComponent, TranslateModule, RouterModule, CommonModule, NgbModule, FormsModule, SearchFormComponent, AsyncPipe, BrowserOnlyPipe],
 })
 export class AiSearchComponent implements OnInit {
   images$: Observable<Ai[]>;
