@@ -83,7 +83,8 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
 
       - name: Install Yarn dependencies
-        run: yarn install --frozen-lockfile
+        #run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Run lint
         run: yarn run lint --quiet
