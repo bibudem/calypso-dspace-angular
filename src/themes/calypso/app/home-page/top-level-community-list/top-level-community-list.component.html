@@ -11,7 +11,7 @@
         <p>{{ 'Type: ' + community.type }}</p>
       </div>
       <!-- Récupérer les collections à partir du lien -->
-      <ng-container *ngIf="collections$ | async as collections">
+      <ng-container *ngIf="collections$ | async as collections; else loadingContent">
         <ng-container *ngIf="collections.length > 0">
           <div class="row align-items-center">
             <!-- Boucle sur chaque collection -->
@@ -25,7 +25,7 @@
                     <ul>
                       <li>{{collection.description}}</li>
                     </ul>
-                     <a class="calypso-card-lien"  [routerLink]="['/collections/', collection.id]"> Voir plus</a>
+                    <a class="calypso-card-lien"  [routerLink]="['/collections/', collection.id]"> Voir plus</a>
                   </div>
                 </div>
               </div>
@@ -37,6 +37,8 @@
       <!-- Fin récupérer les collections à partir du lien -->
     </ng-container>
   </ng-container>
+  <ng-template #loadingContent>
+    <ds-themed-loading message="{{ 'loading.top-level-communities' | translate }}"></ds-themed-loading>
+  </ng-template>
   <ds-error *ngIf="communitiesRD?.hasFailed" message="{{ 'error.top-level-communities' | translate }}"></ds-error>
-  <ds-themed-loading *ngIf="communitiesRD?.isLoading" message="{{ 'loading.top-level-communities' | translate }}"></ds-themed-loading>
 </ng-container>

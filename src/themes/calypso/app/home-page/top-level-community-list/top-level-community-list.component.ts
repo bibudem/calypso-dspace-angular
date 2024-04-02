@@ -1,6 +1,16 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {
+  AsyncPipe,
+  CommonModule,
+  NgIf,
+} from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { TopLevelCommunityListComponent as BaseComponent } from '../../../../../app/home-page/top-level-community-list/top-level-community-list.component';
-import {Observable, of, Subject} from 'rxjs';
+import { ErrorComponent } from '../../../../../app/shared/error/error.component';
+import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
+import { ObjectCollectionComponent } from '../../../../../app/shared/object-collection/object-collection.component';
+import { VarDirective } from '../../../../../app/shared/utils/var.directive';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Observable, of, Subject, forkJoin} from 'rxjs';
 import { CommunityDataService } from '../../../../../app/core/data/community-data.service';
 import { CollectionDataService } from '../../../../../app/core/data/collection-data.service';
 import { APP_CONFIG, AppConfig } from '../../../../../config/app-config.interface';
@@ -11,13 +21,17 @@ import { VedetteService } from '../../../service/vedette.service';
 import {map, takeUntil} from 'rxjs/operators';
 import { Vedette } from '../../../models/Vedette';
 import {hasValue} from "../../../../../app/shared/empty.util";
+import { RouterModule } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ds-top-level-community-list',
   styleUrls: ['./top-level-community-list.component.scss'],
-  // styleUrls: ['../../../../../app/home-page/top-level-community-list/top-level-community-list.component.scss'],
-  templateUrl: './top-level-community-list.component.html'
-  // templateUrl: '../../../../../app/home-page/top-level-community-list/top-level-community-list.component.html'
+  //styleUrls: ['../../../../../app/home-page/top-level-community-list/top-level-community-list.component.scss'],
+  templateUrl: './top-level-community-list.component.html',
+  //templateUrl: '../../../../../app/home-page/top-level-community-list/top-level-community-list.component.html',
+  standalone: true,
+  imports: [VarDirective, NgIf, ObjectCollectionComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, RouterModule, CommonModule],
 })
 
 export class TopLevelCommunityListComponent extends BaseComponent  implements OnInit, OnDestroy{
@@ -57,41 +71,41 @@ export class TopLevelCommunityListComponent extends BaseComponent  implements On
           takeUntil(this.unsubscribe$)
         ).subscribe((collectionData) => {
           if(collectionData && collectionData.payload){
-              const collectionsPageLinks = (collectionData.payload._links as any).page;
-              collectionsPageLinks.forEach((collectionLink) => {
-                const collectionUrl = collectionLink.href;
-                // Effectuez une requête HTTP pour récupérer les données de la collection individuelle
-                this.collService.findByHref(collectionUrl).pipe(
-                  takeUntil(this.unsubscribe$)
-                ).subscribe((individualCollectionData) => {
-                  if (individualCollectionData && individualCollectionData.payload && individualCollectionData.payload._links) {
-                    let description = null;
-                    if(individualCollectionData.payload.metadata['dc.description']){
-                      description = individualCollectionData.payload.metadata['dc.description'][0].value;
-                    }
-                    const collections = {
-                      title: individualCollectionData.payload.metadata['dc.title'][0].value,
-                      description: description,
-                      id: individualCollectionData.payload.id,
-                      vedette: null
-                    };
-                    // Récupérez les images vedette de la collection
-                    this.vedetteService.getImagesColl(collections.id).pipe(
-                      takeUntil(this.unsubscribe$)
-                    ).subscribe(
-                      (images: Vedette[]) => {
-                        if (images.length !== 0) {
-                          collections.vedette = images[0].imageUrl;
-                        }
-                      },
-                      (erreur) => {
-                        console.error('Une erreur s\'est produite lors de la récupération des images vedette', erreur);
+            const collectionsPageLinks = (collectionData.payload._links as any).page;
+            collectionsPageLinks.forEach((collectionLink) => {
+              const collectionUrl = collectionLink.href;
+              // Effectuez une requête HTTP pour récupérer les données de la collection individuelle
+              this.collService.findByHref(collectionUrl).pipe(
+                takeUntil(this.unsubscribe$)
+              ).subscribe((individualCollectionData) => {
+                if (individualCollectionData && individualCollectionData.payload && individualCollectionData.payload._links) {
+                  let description = null;
+                  if(individualCollectionData.payload.metadata['dc.description']){
+                    description = individualCollectionData.payload.metadata['dc.description'][0].value;
+                  }
+                  const collections = {
+                    title: individualCollectionData.payload.metadata['dc.title'][0].value,
+                    description: description,
+                    id: individualCollectionData.payload.id,
+                    vedette: null
+                  };
+                  // Récupérez les images vedette de la collection
+                  this.vedetteService.getImagesColl(collections.id).pipe(
+                    takeUntil(this.unsubscribe$)
+                  ).subscribe(
+                    (images: Vedette[]) => {
+                      if (images.length !== 0) {
+                        collections.vedette = images[0].imageUrl;
                       }
-                    );
-                    // Mettez à jour la variable collections$ avec les nouvelles collections
-                    this.collections$ = this.collections$.pipe(
-                      map(collectionsArray => [...collectionsArray, collections])
-                    );
+                    },
+                    (erreur) => {
+                      console.error('Une erreur s\'est produite lors de la récupération des images vedette', erreur);
+                    }
+                  );
+                  // Mettez à jour la variable collections$ avec les nouvelles collections
+                  this.collections$ = this.collections$.pipe(
+                    map(collectionsArray => [...collectionsArray, collections])
+                  );
                 }
               });
             });
@@ -110,3 +124,5 @@ export class TopLevelCommunityListComponent extends BaseComponent  implements On
     this.paginationServiceCalypso.clearPagination(this.config.id);
   }
 }
+
+

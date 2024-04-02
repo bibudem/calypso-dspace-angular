@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { VedetteService } from '../../../service/vedette.service';
 import { Vedette } from '../../../models/Vedette';
 import { Observable } from 'rxjs';
 import {  map } from 'rxjs/operators';
+import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ds-vedette-liste',
   templateUrl: './vedette-liste.component.html',
   styleUrls: ['./vedette-liste.component.scss'],
-  providers: [NgbCarouselConfig],
+  standalone: true,
+  imports: [ThemedLoadingComponent, TranslateModule, RouterModule, CommonModule, NgbModule],
 })
-export class VedetteListeComponent implements OnInit {
+export class VedetteListeComponent implements OnInit{
   images$: Observable<Vedette[]>;
 
   constructor(
-    private vedetteService: VedetteService,
-    private config: NgbCarouselConfig
+    private vedetteService: VedetteService
   ) {
-    config.interval = 3000;
-    config.wrap = true;
-    config.keyboard = false;
+
   }
 
   ngOnInit(): void {
