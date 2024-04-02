@@ -1,15 +1,19 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { MenuService } from '../../../shared/menu/menu.service';
-import { MenuServiceStub } from '../../../shared/testing/menu-service.stub';
 import { CSSVariableService } from '../../../shared/sass-helper/css-variable.service';
 import { CSSVariableServiceStub } from '../../../shared/testing/css-variable-service.stub';
-import { Component } from '@angular/core';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuServiceStub } from '../../../shared/testing/menu-service.stub';
 import { AdminSidebarSectionComponent } from './admin-sidebar-section.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { By } from '@angular/platform-browser';
-import { TranslateModule } from '@ngx-translate/core';
 
 describe('AdminSidebarSectionComponent', () => {
   let component: AdminSidebarSectionComponent;
@@ -21,17 +25,16 @@ describe('AdminSidebarSectionComponent', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [NoopAnimationsModule, RouterTestingModule, TranslateModule.forRoot()],
-        declarations: [AdminSidebarSectionComponent, TestComponent],
+        imports: [NoopAnimationsModule, RouterTestingModule, TranslateModule.forRoot(), AdminSidebarSectionComponent, TestComponent],
         providers: [
-          {provide: 'sectionDataProvider', useValue: {model: {link: 'google.com'}, icon: iconString}},
-          {provide: MenuService, useValue: menuService},
-          {provide: CSSVariableService, useClass: CSSVariableServiceStub},
-        ]
+          { provide: 'sectionDataProvider', useValue: { model: { link: 'google.com' }, icon: iconString } },
+          { provide: MenuService, useValue: menuService },
+          { provide: CSSVariableService, useClass: CSSVariableServiceStub },
+        ],
       }).overrideComponent(AdminSidebarSectionComponent, {
         set: {
-          entryComponents: [TestComponent]
-        }
+          entryComponents: [TestComponent],
+        },
       })
         .compileComponents();
     }));
@@ -61,17 +64,16 @@ describe('AdminSidebarSectionComponent', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [NoopAnimationsModule, RouterTestingModule, TranslateModule.forRoot()],
-        declarations: [AdminSidebarSectionComponent, TestComponent],
+        imports: [NoopAnimationsModule, RouterTestingModule, TranslateModule.forRoot(), AdminSidebarSectionComponent, TestComponent],
         providers: [
-          {provide: 'sectionDataProvider', useValue: {model: {link: 'google.com', disabled: true}, icon: iconString}},
-          {provide: MenuService, useValue: menuService},
-          {provide: CSSVariableService, useClass: CSSVariableServiceStub},
-        ]
+          { provide: 'sectionDataProvider', useValue: { model: { link: 'google.com', disabled: true }, icon: iconString } },
+          { provide: MenuService, useValue: menuService },
+          { provide: CSSVariableService, useClass: CSSVariableServiceStub },
+        ],
       }).overrideComponent(AdminSidebarSectionComponent, {
         set: {
-          entryComponents: [TestComponent]
-        }
+          entryComponents: [TestComponent],
+        },
       })
         .compileComponents();
     }));
@@ -102,7 +104,9 @@ describe('AdminSidebarSectionComponent', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``
+  template: ``,
+  standalone: true,
+  imports: [RouterTestingModule],
 })
 class TestComponent {
 }
