@@ -3,13 +3,11 @@ import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { IdlePreloadModule } from 'angular-idle-preload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { TranslateModule } from '@ngx-translate/core';
-import { AppModule } from '../../app/app.module';
 import {RouterModule} from '@angular/router';
 import { RootModule } from '../../app/root.module';
 import { HomePageComponent } from './app/home-page/home-page.component';
@@ -45,19 +43,18 @@ const DECLARATIONS = [
 
 @NgModule({
   imports: [
-    AppModule,
     RootModule,
     CommonModule,
     DragDropModule,
     FormsModule,
     HttpClientModule,
-    IdlePreloadModule,
     NgbModule,
     RouterModule,
     ScrollToModule,
     StoreModule,
     StoreRouterConnectingModule,
     TranslateModule,
+    FormsModule,
     NgxGalleryModule,
     ...DECLARATIONS,
   ],
