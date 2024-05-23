@@ -13,7 +13,6 @@ import {
   Router,
 } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { TranslateModule } from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
 import { AuthRequestService } from 'src/app/core/auth/auth-request.service';
@@ -23,6 +22,7 @@ import { ActivatedRouteStub } from 'src/app/shared/testing/active-router.stub';
 import { AuthRequestServiceStub } from 'src/app/shared/testing/auth-request-service.stub';
 
 import { APP_CONFIG } from '../../../../../config/app-config.interface';
+import { REQUEST } from '../../../../../express.tokens';
 import { LinkService } from '../../../../core/cache/builders/link.service';
 import { ConfigurationDataService } from '../../../../core/data/configuration-data.service';
 import { FieldChangeType } from '../../../../core/data/object-updates/field-change-type.model';
@@ -38,6 +38,7 @@ import { ItemType } from '../../../../core/shared/item-relationships/item-type.m
 import { Relationship } from '../../../../core/shared/item-relationships/relationship.model';
 import { RelationshipType } from '../../../../core/shared/item-relationships/relationship-type.model';
 import { SearchConfigurationService } from '../../../../core/shared/search/search-configuration.service';
+import { XSRFService } from '../../../../core/xsrf/xsrf.service';
 import { HostWindowService } from '../../../../shared/host-window.service';
 import { RouterMock } from '../../../../shared/mocks/router.mock';
 import { SelectableListService } from '../../../../shared/object-list/selectable-list/selectable-list.service';
@@ -257,6 +258,7 @@ describe('EditRelationshipListComponent', () => {
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
         { provide: AuthRequestService, useValue: new AuthRequestServiceStub() },
         { provide: HardRedirectService, useValue: hardRedirectService },
+        { provide: XSRFService, useValue: {} },
         { provide: APP_CONFIG, useValue: environmentUseThumbs },
         { provide: REQUEST, useValue: {} },
         CookieService,

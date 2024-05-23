@@ -46,6 +46,7 @@ import {
   SearchConfig,
   SortConfig,
 } from '../../core/shared/search/search-filters/search-config.model';
+import { XSRFService } from '../../core/xsrf/xsrf.service';
 import { SEARCH_CONFIG_SERVICE } from '../../my-dspace-page/my-dspace-configuration.service';
 import { HostWindowService } from '../host-window.service';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
@@ -237,6 +238,7 @@ export function configureSearchComponentTestingModule(compType, additionalDeclar
         provide: SearchFilterService,
         useValue: {},
       },
+      { provide: XSRFService, useValue: {} },
       {
         provide: SEARCH_CONFIG_SERVICE,
         useValue: searchConfigurationServiceStub,
@@ -292,6 +294,7 @@ describe('SearchComponent', () => {
 
     const expectedSearchOptions = Object.assign(paginatedSearchOptions$.value, {
       configuration: 'default',
+      scope: '',
       sort: sortOptionsList[0],
     });
     expect(comp.currentConfiguration$).toBeObservable(cold('b', {
