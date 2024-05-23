@@ -38,7 +38,7 @@
     </ng-container>
   </ng-container>
   <ng-template #loadingContent>
-    <ds-themed-loading message="{{ 'loading.top-level-communities' | translate }}"></ds-themed-loading>
+    <ds-loading message="{{ 'loading.top-level-communities' | translate }}"></ds-loading>
   </ng-template>
   <ds-error *ngIf="communitiesRD?.hasFailed" message="{{ 'error.top-level-communities' | translate }}"></ds-error>
 </ng-container>
