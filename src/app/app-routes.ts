@@ -43,6 +43,7 @@ import { PROCESS_MODULE_PATH } from './process-page/process-page-routing.paths';
 import { provideSubmissionState } from './submission/provide-submission-state';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 import {AiSearchComponent} from "../themes/calypso/app/ai-search/ai-search.component";
+import {PagesComponent} from "../themes/calypso/pages/pages.component";
 
 export const APP_ROUTES: Route[] = [
   { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent },
@@ -58,6 +59,12 @@ export const APP_ROUTES: Route[] = [
       {
         path: 'ai-search',
         component: AiSearchComponent,
+        pathMatch: 'full',
+        canActivate: [EndUserAgreementCurrentUserGuard]
+      },
+      {
+        path: 'page/:page',
+        component: PagesComponent,
         pathMatch: 'full',
         canActivate: [EndUserAgreementCurrentUserGuard]
       },

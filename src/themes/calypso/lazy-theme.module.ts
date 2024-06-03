@@ -25,7 +25,9 @@ import {ItemPageComponent} from "./app/item-page/simple/item-page.component";
 import {SearchResultsComponent} from "./app/shared/search/search-results/search-results.component";
 import {TopLevelCommunityListComponent} from "./app/home-page/top-level-community-list/top-level-community-list.component";
 import {AiSearchComponent} from "./app/ai-search/ai-search.component";
-
+import {PagesComponent} from "./pages/pages.component";
+import {Page1Component} from "./pages/page1/page1.component";
+import {Page2Component} from "./pages/page2/page2.component";
 
 
 const DECLARATIONS = [
@@ -40,7 +42,10 @@ const DECLARATIONS = [
   ItemPageComponent,
   SearchResultsComponent,
   TopLevelCommunityListComponent,
-  AiSearchComponent
+  AiSearchComponent,
+  PagesComponent,
+  Page1Component,
+  Page2Component
 ];
 
 @NgModule({
