@@ -28,6 +28,9 @@ import {AiSearchComponent} from "./app/ai-search/ai-search.component";
 import {PagesComponent} from "./pages/pages.component";
 import {Page1Component} from "./pages/page1/page1.component";
 import {Page2Component} from "./pages/page2/page2.component";
+import {FeedbackComponent} from "./app/info/feedback/feedback.component";
+import {FeedbackFormComponent} from "./app/info/feedback/feedback-form/feedback-form.component";
+import {NavbarComponent} from "./app/navbar/navbar.component";
 
 
 const DECLARATIONS = [
@@ -42,6 +45,9 @@ const DECLARATIONS = [
   ItemPageComponent,
   SearchResultsComponent,
   TopLevelCommunityListComponent,
+  NavbarComponent,
+  FeedbackComponent,
+  FeedbackFormComponent,
   AiSearchComponent,
   PagesComponent,
   Page1Component,

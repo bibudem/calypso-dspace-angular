@@ -14,6 +14,14 @@
   "calypso.ai-charger": "Charger plus",
   "calypso.ai-img-selection": "Image sélectionnée",
   "calypso.ai-title-notification": "Titre recherche Ai",
-  "calypso.ai-content-notification": "Voici un message pour la recherche Ai"
+  "calypso.ai-content-notification": "Voici un message pour la recherche Ai",
 
+  // Contact page
+  "calypso.contact-title": "Contact Us",
+  "calypso.contact-description": "For any questions or additional information regarding this platform, please do not hesitate to contact us.",
+  "calypso.contact-phone": "+123 456 7890",
+  "calypso.contact-email": "contact@example.ca",
+  "calypso.contact-links-title": "Stay in touch",
+  "calypso.contact-libraries": "Libraries",
+  "calypso.contact-udem": "University of Montreal"
 }

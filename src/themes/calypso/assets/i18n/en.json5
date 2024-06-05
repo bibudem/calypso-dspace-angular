@@ -1,0 +1,18 @@
+{
+  "repository.title.prefix": "Calypso :: ",
+  "calypso.onglet-fichier": "Files",
+  "calypso.onglet-notice": "Full Record",
+  "calypso.return": "Return",
+  "calypso.consulter": "View",
+  "calypso.ai-titre": "Perform a search with AI",
+  "calypso.ai-explication": "Explanation ...",
+  "calypso.ai-annuler": "Cancel",
+  "calypso.ai-lien": "Start",
+  "calypso.ai-search-title": "",
+  "calypso.ai-search-description": "",
+  "calypso.ai-charger": "Load more",
+  "calypso.ai-img-selection": "Selected Image",
+  "calypso.ai-title-notification": "AI Search Title",
+  "calypso.ai-content-notification": "Here is a message for AI search"
+
+}
