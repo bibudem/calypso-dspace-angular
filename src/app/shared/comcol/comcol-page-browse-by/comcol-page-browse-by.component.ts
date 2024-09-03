@@ -12,6 +12,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import {
   EventType,
+  NavigationEnd,
   Router,
   RouterLink,
   RouterLinkActive,
@@ -53,7 +54,7 @@ export interface ComColPageNavOption {
  * It expects the ID of the Community or Collection as input to be passed on as a scope
  */
 @Component({
-  selector: 'ds-comcol-page-browse-by',
+  selector: 'ds-base-comcol-page-browse-by',
   styleUrls: ['./comcol-page-browse-by.component.scss'],
   templateUrl: './comcol-page-browse-by.component.html',
   imports: [
@@ -129,7 +130,7 @@ export class ComcolPageBrowseByComponent implements OnDestroy, OnInit {
       this.router.events.pipe(
         startWith(this.router),
         filter((next: Router|Scroll) => (isNotEmpty((next as Router)?.url) || (next as Scroll)?.type === EventType.Scroll)),
-        map((next: Router|Scroll) => (next as Router)?.url || (next as Scroll).routerEvent.urlAfterRedirects),
+        map((next: Router|Scroll) => (next as Router)?.url || ((next as Scroll).routerEvent as NavigationEnd).urlAfterRedirects),
         distinctUntilChanged(),
       ),
     ]).subscribe(([navOptions, url]: [ComColPageNavOption[], string]) => {

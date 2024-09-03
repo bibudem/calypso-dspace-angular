@@ -22,7 +22,7 @@ import { Item } from '../../core/shared/item.model';
 import { ITEM } from '../../core/shared/item.resource-type';
 import { MetadataValue } from '../../core/shared/metadata.models';
 import { AlertComponent } from '../../shared/alert/alert.component';
-import { LoadingComponent } from '../../shared/loading/loading.component';
+import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.component';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { TestDataService } from '../../shared/testing/test-data-service.mock';
 import { VarDirective } from '../../shared/utils/var.directive';
@@ -38,9 +38,9 @@ const REINSTATE_BTN = 'reinstate';
 const SAVE_BTN = 'save';
 const DISCARD_BTN = 'discard';
 
-const mockDataServiceMap: any = {
-  [ITEM.value]: () => import('../../shared/testing/test-data-service.mock').then(m => m.TestDataService),
-};
+const mockDataServiceMap: any = new Map([
+  [ITEM.value, () => import('../../shared/testing/test-data-service.mock').then(m => m.TestDataService)],
+]);
 
 describe('DsoEditMetadataComponent', () => {
   let component: DsoEditMetadataComponent;
@@ -112,7 +112,7 @@ describe('DsoEditMetadataComponent', () => {
             DsoEditMetadataValueHeadersComponent,
             DsoEditMetadataFieldValuesComponent,
             AlertComponent,
-            LoadingComponent,
+            ThemedLoadingComponent,
           ],
         },
       })

@@ -46,6 +46,7 @@ import {
   SearchConfig,
   SortConfig,
 } from '../../core/shared/search/search-filters/search-config.model';
+import { XSRFService } from '../../core/xsrf/xsrf.service';
 import { SEARCH_CONFIG_SERVICE } from '../../my-dspace-page/my-dspace-configuration.service';
 import { HostWindowService } from '../host-window.service';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
@@ -137,6 +138,7 @@ const searchServiceStub = jasmine.createSpyObj('SearchService', {
   trackSearch: {},
 }) as SearchService;
 const queryParam = 'test query';
+const hiddenQuery = 'hidden query';
 const scopeParam = '7669c72a-3f2a-451f-a3b9-9210e7a4c02f';
 
 const defaultSearchOptions = new PaginatedSearchOptions({ pagination });
@@ -237,6 +239,7 @@ export function configureSearchComponentTestingModule(compType, additionalDeclar
         provide: SearchFilterService,
         useValue: {},
       },
+      { provide: XSRFService, useValue: {} },
       {
         provide: SEARCH_CONFIG_SERVICE,
         useValue: searchConfigurationServiceStub,
@@ -277,6 +280,7 @@ describe('SearchComponent', () => {
     comp = fixture.componentInstance; // SearchComponent test instance
     comp.inPlaceSearch = false;
     comp.paginationId = paginationId;
+    comp.hiddenQuery = hiddenQuery;
 
     spyOn((comp as any), 'getSearchOptions').and.returnValue(paginatedSearchOptions$.asObservable());
   });
@@ -292,6 +296,7 @@ describe('SearchComponent', () => {
 
     const expectedSearchOptions = Object.assign(paginatedSearchOptions$.value, {
       configuration: 'default',
+      scope: '',
       sort: sortOptionsList[0],
     });
     expect(comp.currentConfiguration$).toBeObservable(cold('b', {

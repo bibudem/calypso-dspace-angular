@@ -13,7 +13,6 @@ import {
 import { By } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { TranslateService } from '@ngx-translate/core';
 import {
   Observable,
@@ -21,6 +20,7 @@ import {
 } from 'rxjs';
 
 import { APP_CONFIG } from '../../../../../../config/app-config.interface';
+import { REQUEST } from '../../../../../../express.tokens';
 import { AuthService } from '../../../../../core/auth/auth.service';
 import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../../../../../core/cache/object-cache.service';
@@ -35,6 +35,7 @@ import { Bitstream } from '../../../../../core/shared/bitstream.model';
 import { HALEndpointService } from '../../../../../core/shared/hal-endpoint.service';
 import { Item } from '../../../../../core/shared/item.model';
 import { UUIDService } from '../../../../../core/shared/uuid.service';
+import { XSRFService } from '../../../../../core/xsrf/xsrf.service';
 import { getMockThemeService } from '../../../../../shared/mocks/theme-service.mock';
 import { CollectionElementLinkType } from '../../../../../shared/object-collection/collection-element-link.type';
 import { ItemSearchResult } from '../../../../../shared/object-collection/shared/item-search-result.model';
@@ -138,6 +139,7 @@ describe('PersonSearchResultListElementSubmissionComponent', () => {
         { provide: Store, useValue: {} },
         { provide: ObjectCacheService, useValue: {} },
         { provide: UUIDService, useValue: {} },
+        { provide: XSRFService, useValue: {} },
         { provide: RemoteDataBuildService, useValue: {} },
         { provide: CommunityDataService, useValue: {} },
         { provide: HALEndpointService, useValue: {} },
@@ -211,7 +213,7 @@ describe('PersonSearchResultListElementSubmissionComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should add the ds-thumbnail element', () => {
+    it('should add the thumbnail element', () => {
       const thumbnail = fixture.debugElement.query(By.css('ds-thumbnail'));
       expect(thumbnail).toBeTruthy();
     });
@@ -264,7 +266,7 @@ describe('PersonSearchResultListElementSubmissionComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should not add the ds-thumbnail element', () => {
+    it('should not add the thumbnail element', () => {
       const thumbnail = fixture.debugElement.query(By.css('ds-thumbnail'));
       expect(thumbnail).toBeNull();
     });
