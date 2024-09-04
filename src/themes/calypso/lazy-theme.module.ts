@@ -54,6 +54,7 @@ const DECLARATIONS = [
     StoreModule,
     StoreRouterConnectingModule,
     TranslateModule,
+    FormsModule,
     NgxGalleryModule,
     ...DECLARATIONS,
   ],

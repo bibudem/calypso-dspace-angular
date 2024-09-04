@@ -69,7 +69,7 @@ import { ItemVersionsSummaryModalComponent } from '../item-versions-summary-moda
     NgIf,
   ],
   templateUrl: './item-versions-row-element-version.component.html',
-  styleUrl: './item-versions-row-element-version.component.scss',
+  styleUrls: ['./item-versions-row-element-version.component.scss'],
 })
 export class ItemVersionsRowElementVersionComponent implements OnInit {
   @Input() hasDraftVersion: boolean | null;

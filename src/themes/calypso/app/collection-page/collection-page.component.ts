@@ -44,7 +44,6 @@ import { VedetteCollListeComponent } from './vedette-coll-liste/vedette-coll-lis
     ThemedComcolPageContentComponent,
     ErrorComponent,
     NgIf,
-    RouterOutlet,
     ThemedLoadingComponent,
     TranslateModule,
     ViewTrackerComponent,
@@ -56,6 +55,7 @@ import { VedetteCollListeComponent } from './vedette-coll-liste/vedette-coll-lis
     DsoEditMenuComponent,
     ThemedComcolPageBrowseByComponent,
     ObjectCollectionComponent,
+    RouterOutlet,
     VedetteCollListeComponent
   ],
 })
