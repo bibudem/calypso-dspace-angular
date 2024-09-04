@@ -59,7 +59,7 @@ export const APP_ROUTES: Route[] = [
         path: 'ai-search',
         component: AiSearchComponent,
         pathMatch: 'full',
-        canActivate: [EndUserAgreementCurrentUserGuard]
+        canActivate: [endUserAgreementCurrentUserGuard]
       },
       //fin add UdeM
       {

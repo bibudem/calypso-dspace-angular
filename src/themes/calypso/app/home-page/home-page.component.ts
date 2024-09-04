@@ -5,7 +5,8 @@ import {
 } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { HomeCoarComponent } from '../../../../app/home-page/home-coar/home-coar.component';
+import { ThemedConfigurationSearchPageComponent } from '../../../../app/search-page/themed-configuration-search-page.component';
 import { ThemedHomeNewsComponent } from '../../../../app/home-page/home-news/themed-home-news.component';
 import { HomePageComponent as BaseComponent } from '../../../../app/home-page/home-page.component';
 import { RecentItemListComponent } from '../../../../app/home-page/recent-item-list/recent-item-list.component';
@@ -34,6 +35,8 @@ import { VedetteListeComponent } from './vedette-liste/vedette-liste.component';
     TranslateModule,
     NgClass,
     ConfigurationSearchPageComponent,
+    HomeCoarComponent,
+    ThemedConfigurationSearchPageComponent,
     SuggestionsPopupComponent,
     VedetteListeComponent],
 })

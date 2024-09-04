@@ -1,4 +1,4 @@
-<ds-themed-results-back-button *ngIf="showBackButton$ | async" [back]="back"></ds-themed-results-back-button>
+<ds-results-back-button *ngIf="showBackButton$ | async" [back]="back"></ds-results-back-button>
 <div class="align-items-end">
   <!-- Icon made by Pixel perfect from www.flaticon.com -->
   <img src="/assets/calypso/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia mt-2 float-right ml-1" (click)="openDialog(content)">
@@ -21,8 +21,8 @@
 </ng-template>
 
 <div class="d-flex flex-row mt-2">
-  <ds-themed-item-page-title-field [item]="object" class="mr-auto">
-  </ds-themed-item-page-title-field>
+  <ds-item-page-title-field [item]="object" class="mr-auto">
+  </ds-item-page-title-field>
   <div class="align-content-end">
     <ds-dso-edit-menu></ds-dso-edit-menu>
   </div>
@@ -100,20 +100,20 @@
     <div class="col-xs-12 col-md-4">
       <ng-container *ngIf="!(mediaViewer.image || mediaViewer.video)">
         <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
-          <ds-themed-thumbnail [thumbnail]="object?.thumbnail | async"></ds-themed-thumbnail>
+          <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
         </ds-metadata-field-wrapper>
       </ng-container>
       <div *ngIf="mediaViewer.image || mediaViewer.video" class="mb-2">
-        <ds-themed-media-viewer [item]="object"></ds-themed-media-viewer>
+        <ds-media-viewer [item]="object"></ds-media-viewer>
       </div>
-      <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
+      <ds-item-page-file-section [item]="object"></ds-item-page-file-section>
       <ds-item-page-date-field [item]="object"></ds-item-page-date-field>
-      <ds-themed-metadata-representation-list class="ds-item-page-mixed-author-field"
+      <ds-metadata-representation-list class="ds-item-page-mixed-author-field"
                                               [parentItem]="object"
                                               [itemType]="'Person'"
                                               [metadataFields]="['dc.contributor.author', 'dc.creator']"
                                               [label]="'relationships.isAuthorOf' | translate">
-      </ds-themed-metadata-representation-list>
+      </ds-metadata-representation-list>
       <ds-generic-item-page-field [item]="object"
                                   [fields]="['journal.title']"
                                   [label]="'item.page.journal-title'">

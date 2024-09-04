@@ -15,7 +15,7 @@ import {
   fadeInOut,
 } from '../../../../app/shared/animations/fade';
 import { ThemedComcolPageBrowseByComponent } from '../../../../app/shared/comcol/comcol-page-browse-by/themed-comcol-page-browse-by.component';
-import { ComcolPageContentComponent } from '../../../../app/shared/comcol/comcol-page-content/comcol-page-content.component';
+import { ThemedComcolPageContentComponent } from '../../../../app/shared/comcol/comcol-page-content/themed-comcol-page-content.component';
 import { ThemedComcolPageHandleComponent } from '../../../../app/shared/comcol/comcol-page-handle/themed-comcol-page-handle.component';
 import { ComcolPageHeaderComponent } from '../../../../app/shared/comcol/comcol-page-header/comcol-page-header.component';
 import { ComcolPageLogoComponent } from '../../../../app/shared/comcol/comcol-page-logo/comcol-page-logo.component';
@@ -41,7 +41,7 @@ import { VedetteCollListeComponent } from './vedette-coll-liste/vedette-coll-lis
   ],
   standalone: true,
   imports: [
-    ComcolPageContentComponent,
+    ThemedComcolPageContentComponent,
     ErrorComponent,
     NgIf,
     RouterOutlet,
