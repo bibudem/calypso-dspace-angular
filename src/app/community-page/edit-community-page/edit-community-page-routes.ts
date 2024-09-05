@@ -1,11 +1,11 @@
 import { Route } from '@angular/router';
 
-import { I18nBreadcrumbResolver } from '../../core/breadcrumbs/i18n-breadcrumb.resolver';
-import { CommunityAdministratorGuard } from '../../core/data/feature-authorization/feature-authorization-guard/community-administrator.guard';
+import { i18nBreadcrumbResolver } from '../../core/breadcrumbs/i18n-breadcrumb.resolver';
+import { communityAdministratorGuard } from '../../core/data/feature-authorization/feature-authorization-guard/community-administrator.guard';
 import { ResourcePolicyCreateComponent } from '../../shared/resource-policies/create/resource-policy-create.component';
 import { ResourcePolicyEditComponent } from '../../shared/resource-policies/edit/resource-policy-edit.component';
-import { ResourcePolicyResolver } from '../../shared/resource-policies/resolvers/resource-policy.resolver';
-import { ResourcePolicyTargetResolver } from '../../shared/resource-policies/resolvers/resource-policy-target.resolver';
+import { resourcePolicyResolver } from '../../shared/resource-policies/resolvers/resource-policy.resolver';
+import { resourcePolicyTargetResolver } from '../../shared/resource-policies/resolvers/resource-policy-target.resolver';
 import { CommunityAccessControlComponent } from './community-access-control/community-access-control.component';
 import { CommunityAuthorizationsComponent } from './community-authorizations/community-authorizations.component';
 import { CommunityCurateComponent } from './community-curate/community-curate.component';
@@ -21,11 +21,11 @@ export const ROUTES: Route[] = [
   {
     path: '',
     resolve: {
-      breadcrumb: I18nBreadcrumbResolver,
+      breadcrumb: i18nBreadcrumbResolver,
     },
     data: { breadcrumbKey: 'community.edit' },
     component: EditCommunityPageComponent,
-    canActivate: [CommunityAdministratorGuard],
+    canActivate: [communityAdministratorGuard],
     children: [
       {
         path: '',
@@ -63,7 +63,7 @@ export const ROUTES: Route[] = [
           {
             path: 'create',
             resolve: {
-              resourcePolicyTarget: ResourcePolicyTargetResolver,
+              resourcePolicyTarget: resourcePolicyTargetResolver,
             },
             component: ResourcePolicyCreateComponent,
             data: { title: 'resource-policies.create.page.title' },
@@ -71,7 +71,7 @@ export const ROUTES: Route[] = [
           {
             path: 'edit',
             resolve: {
-              resourcePolicy: ResourcePolicyResolver,
+              resourcePolicy: resourcePolicyResolver,
             },
             component: ResourcePolicyEditComponent,
             data: { title: 'resource-policies.edit.page.title' },

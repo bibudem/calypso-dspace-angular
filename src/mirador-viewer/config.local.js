@@ -19,6 +19,8 @@ import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
 import { miradorImageToolsPlugin } from 'mirador-image-tools';
 import textOverlayPlugin from 'mirador-textoverlay/es';
 import ocrHelperPlugin from '@4eyes/mirador-ocr-helper';
+// Import your custom component
+//import CustomMiradorDownloadDialog from "./CustomMiradorDownloadDialog";
 
 const params = new URLSearchParams(location.search);
 const manifest = params.get('manifest');
@@ -34,6 +36,7 @@ let defaultView = 'single';
 let multipleItems = false;
 let thumbNavigation = 'off';
 let lang = 'fr' // Default to english, but should not happen
+
 
 windowSettings.manifestId = manifest;
 
@@ -60,6 +63,15 @@ windowSettings.manifestId = manifest;
     lang = langParam;
   }
 })();
+
+// Create a custom plugin to override the CanvasDownloadLinks component
+/*const customPlugin = {
+  target: 'Window',
+  mode: 'wrap',
+  component: CustomMiradorDownloadDialog,
+  mapDispatchToProps: null,
+  mapStateToProps: null,
+};*/
 
 (Mirador.viewer(
     {
@@ -205,7 +217,8 @@ windowSettings.manifestId = manifest;
       miradorDownloadPlugin,
 	    miradorImageToolsPlugin,
 	    textOverlayPlugin,
-      ocrHelperPlugin
+      ocrHelperPlugin,
+      //customPlugin
     ]
   )
 )(manifest);

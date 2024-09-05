@@ -27,12 +27,12 @@ import { RemoteDataBuildService } from '../../../../../core/cache/builders/remot
 import { ExternalSourceDataService } from '../../../../../core/data/external-source-data.service';
 import { LookupRelationService } from '../../../../../core/data/lookup-relation.service';
 import { RelationshipDataService } from '../../../../../core/data/relationship-data.service';
-import { RelationshipTypeDataService } from '../../../../../core/data/relationship-type-data.service';
 import { Collection } from '../../../../../core/shared/collection.model';
 import { ExternalSource } from '../../../../../core/shared/external-source.model';
 import { Item } from '../../../../../core/shared/item.model';
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
 import { WorkspaceItem } from '../../../../../core/submission/models/workspaceitem.model';
+import { XSRFService } from '../../../../../core/xsrf/xsrf.service';
 import { ItemSearchResult } from '../../../../object-collection/shared/item-search-result.model';
 import { SelectableListService } from '../../../../object-list/selectable-list/selectable-list.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../../remote-data.utils';
@@ -138,7 +138,6 @@ describe('DsDynamicLookupRelationModalComponent', () => {
         {
           provide: RelationshipDataService, useValue: { getNameVariant: () => observableOf(nameVariant) },
         },
-        { provide: RelationshipTypeDataService, useValue: {} },
         { provide: RemoteDataBuildService, useValue: rdbService },
         {
           provide: Store, useValue: {
@@ -147,6 +146,7 @@ describe('DsDynamicLookupRelationModalComponent', () => {
             },
           },
         },
+        { provide: XSRFService, useValue: {} },
         { provide: NgZone, useValue: new NgZone({}) },
         { provide: APP_DATA_SERVICES_MAP, useValue: {} },
         NgbActiveModal,

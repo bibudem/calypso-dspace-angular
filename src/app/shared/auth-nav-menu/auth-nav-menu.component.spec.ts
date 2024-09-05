@@ -27,6 +27,7 @@ import {
 } from '../../core/auth/auth.reducer';
 import { AuthService } from '../../core/auth/auth.service';
 import { AuthTokenInfo } from '../../core/auth/models/auth-token-info.model';
+import { XSRFService } from '../../core/xsrf/xsrf.service';
 import { HostWindowService } from '../host-window.service';
 import { ActivatedRouteStub } from '../testing/active-router.stub';
 import { BrowserOnlyMockPipe } from '../testing/browser-only-mock.pipe';
@@ -102,6 +103,7 @@ describe('AuthNavMenuComponent', () => {
           { provide: HostWindowService, useValue: window },
           { provide: AuthService, useValue: authService },
           { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+          { provide: XSRFService, useValue: {} },
         ],
         schemas: [
           CUSTOM_ELEMENTS_SCHEMA,
@@ -265,7 +267,7 @@ describe('AuthNavMenuComponent', () => {
           component = null;
         });
         it('should render UserMenuComponent component', () => {
-          const logoutDropdownMenu = deNavMenuItem.query(By.css('ds-themed-user-menu'));
+          const logoutDropdownMenu = deNavMenuItem.query(By.css('ds-user-menu'));
           expect(logoutDropdownMenu.nativeElement).toBeDefined();
         });
       });
