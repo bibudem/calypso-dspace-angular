@@ -1,10 +1,7 @@
-<div class="container">
+<div class="container mt-4">
   <h1>{{ 'faq.titre' | translate }}</h1>
   <p [innerHTML]="'faq.description' | translate"></p>
-  <section #faq>
-
-  </section>
-  <div class='faq'>
+  <div class='faq mt-4' #faq>
     <input id='faq-a' type='checkbox'>
     <label for='faq-a'>
       <p class="faq-heading">{{ 'faq.calypso_question' | translate }}</p>
