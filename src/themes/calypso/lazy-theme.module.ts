@@ -23,12 +23,14 @@ import {ItemPageComponent} from "./app/item-page/simple/item-page.component";
 import {SearchResultsComponent} from "./app/shared/search/search-results/search-results.component";
 import {TopLevelCommunityListComponent} from "./app/home-page/top-level-community-list/top-level-community-list.component";
 import {AiSearchComponent} from "./app/ai-search/ai-search.component";
-import {PagesComponent} from "./pages/pages.component";
-import {Page1Component} from "./pages/page1/page1.component";
-import {Page2Component} from "./pages/page2/page2.component";
+import {PagesComponent} from "./app/pages/pages.component";
+import {Page1Component} from "./app/pages/page1/page1.component";
+import {FaqComponent} from "./app/pages/faq/faq.component";
 import {FeedbackComponent} from "./app/info/feedback/feedback.component";
 import {FeedbackFormComponent} from "./app/info/feedback/feedback-form/feedback-form.component";
 import {NavbarComponent} from "./app/navbar/navbar.component";
+import {BreadcrumbsComponent} from "../../app/breadcrumbs/breadcrumbs.component";
+import {RootComponent} from "./app/root/root.component";
 
 
 const DECLARATIONS = [
@@ -49,7 +51,9 @@ const DECLARATIONS = [
   AiSearchComponent,
   PagesComponent,
   Page1Component,
-  Page2Component
+  FaqComponent,
+  BreadcrumbsComponent,
+  RootComponent
 ];
 
 @NgModule({

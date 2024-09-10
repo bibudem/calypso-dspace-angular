@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
-import { ThemedLoadingComponent } from "../../../app/shared/loading/themed-loading.component";
+import { ThemedLoadingComponent } from "../../../../app/shared/loading/themed-loading.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateModule } from '@ngx-translate/core';
 import { Page1Component } from "./page1/page1.component";
-import { Page2Component } from "./page2/page2.component";
+import { FaqComponent } from "./faq/faq.component";
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,14 +18,14 @@ import { CommonModule } from '@angular/common';
     RouterModule,
     NgbModule,
     Page1Component,
-    Page2Component
+    FaqComponent
   ],
 })
 export class PagesComponent implements OnInit {
   currentComponent: any;
   private readonly componentMap: { [key: string]: any } = {
     'page1': Page1Component,
-    'page2': Page2Component
+    'faq': FaqComponent
   };
 
   constructor(
@@ -46,8 +46,13 @@ export class PagesComponent implements OnInit {
     });
   }
 
-  // Function to reload URL
+  /**
+   * Fonction pour recharger l'URL de manière propre
+   * @param url - L'URL cible vers laquelle rediriger
+   * @returns Une promesse de navigation
+   */
   reload(url: string): Promise<boolean> {
+    // Navigation temporaire vers l'URL courante sans changer l'historique, puis redirection vers l'URL cible
     return this.router.navigateByUrl('.', { skipLocationChange: true })
       .then(() => this.router.navigateByUrl(url));
   }

@@ -43,7 +43,8 @@ import { PROCESS_MODULE_PATH } from './process-page/process-page-routing.paths';
 import { provideSubmissionState } from './submission/provide-submission-state';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 import {AiSearchComponent} from "../themes/calypso/app/ai-search/ai-search.component";
-import {PagesComponent} from "../themes/calypso/pages/pages.component";
+import {PagesComponent} from "../themes/calypso/app/pages/pages.component";
+import {i18nBreadcrumbResolver} from "./core/breadcrumbs/i18n-breadcrumb.resolver";
 
 export const APP_ROUTES: Route[] = [
   { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent },
@@ -60,13 +61,17 @@ export const APP_ROUTES: Route[] = [
         path: 'ai-search',
         component: AiSearchComponent,
         pathMatch: 'full',
+        resolve: { breadcrumb: i18nBreadcrumbResolver },
+        data: { title: 'calypso.ai-search', breadcrumbKey: 'calypso.ai-search' },
         canActivate: [endUserAgreementCurrentUserGuard]
       },
       {
         path: 'page/:page',
         component: PagesComponent,
         pathMatch: 'full',
-        canActivate: [EndUserAgreementCurrentUserGuard]
+        resolve: { breadcrumb: i18nBreadcrumbResolver },
+        data: { title: 'calypso.page-udem', breadcrumbKey: 'calypso.page-udem' },
+        canActivate: [endUserAgreementCurrentUserGuard]
       },
       //fin add UdeM
       {

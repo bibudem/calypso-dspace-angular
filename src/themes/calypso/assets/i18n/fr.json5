@@ -9,12 +9,16 @@
   "calypso.ai-explication": "Explication ...",
   "calypso.ai-annuler": "Annuler",
   "calypso.ai-lien": "Commencer",
-  "calypso.ai-search-title": "",
-  "calypso.ai-search-description": "",
+  "calypso.ai-search-title": "Trouver des images similaires avec l'IA",
+  "calypso.ai-search-description": "Explorez des objets visuellement similaires de notre collection en un seul clic",
   "calypso.ai-charger": "Charger plus",
   "calypso.ai-img-selection": "Image sélectionnée",
   "calypso.ai-title-notification": "Titre recherche Ai",
   "calypso.ai-content-notification": "Voici un message pour la recherche Ai",
+
+  //variable pour texte dans nav top
+  "calypso.page-udem.breadcrumbs": "Lire plus",
+  "calypso.ai-search.breadcrumbs": "Recherche IA",
 
   // Contact page
   "calypso.contact-title": "Contact Us",
@@ -23,5 +27,30 @@
   "calypso.contact-email": "contact@example.ca",
   "calypso.contact-links-title": "Stay in touch",
   "calypso.contact-libraries": "Libraries",
-  "calypso.contact-udem": "University of Montreal"
+  "calypso.contact-udem": "University of Montreal",
+
+
+  //FAQ
+  "faq": {
+    "titre": "FAQ - Vos Questions, Nos Réponses",
+    "description": "Trouvez rapidement les informations essentielles pour mieux naviguer sur notre site",
+
+    "calypso_question": "Qu'est-ce que Calypso ?",
+    "calypso_answer": "Calypso est une interface qui regroupe divers objets numériques provenant des collections de l'Université de Montréal. Elle permet aux utilisateurs de rechercher et d'accéder à ces objets. Ces objets sont principalement des images, mais incluent aussi des fichiers audio et vidéo.",
+
+    "limited_access_question": "Comment accéder aux objets à accès limité ?",
+    "limited_access_answer": "Si vous êtes à l’extérieur du campus et que vous souhaitez accéder à des objets dont l'accès est réservé à la communauté universitaire de l'UdeM, vous devez utiliser le service PROXY pour vous authentifier et obtenir l’accès.",
+
+    "simple_search_question": "Qu'est-ce que la recherche simple ?",
+    "simple_search_answer": "La recherche simple vous permet de repérer tous les objets qui comportent le ou les mots que vous avez entrés, dans toutes les zones et collections de Calypso. Par exemple, si vous tapez \"navigation québec\", Calypso affichera tous les objets qui contiennent les termes \"navigation\" ET \"québec\".",
+
+    "advanced_search_question": "Qu'est-ce que la recherche avancée ?",
+    "advanced_search_answer": "La recherche avancée vous permet d'affiner vos résultats en effectuant des recherches dans une ou plusieurs collections avec des paramètres spécifiques tels que : <strong>Titre</strong>, <strong>Sujet</strong>, <strong>Type de document</strong>, <strong>Description</strong>, <strong>Date</strong>. Vous pouvez afficher jusqu'à quatre zones de recherche pour des résultats plus précis.",
+
+    "tips_tricks_question": "Quels sont les trucs et astuces pour une recherche efficace ?",
+    "tips_tricks_answer": "Utilisez des mots significatifs dans vos recherches pour obtenir des résultats plus pertinents. Pour rechercher une expression exacte, l'utilisation des guillemets (\"musique classique\") ne fonctionne pas. Utilisez plutôt l'option \"Expression exacte\" dans la recherche avancée. Faites attention à la ponctuation, car elle est prise en compte dans les recherches. La pertinence des résultats est influencée par la fréquence des mots-clés dans l'objet. Les correspondances trouvées dans les champs <strong>Titre</strong> ou <strong>Sujet</strong> sont davantage priorisées. Pour rechercher des pluriels ou faire des recherches partielles sur des mots, utilisez la troncature (*). Par exemple : ville* repérera \"ville\" et \"villes\" ; pla*e repérera \"place\", \"plane\", etc.",
+
+    "boolean_operators_question": "Quels sont les opérateurs booléens disponibles ?",
+    "boolean_operators_answer": "<strong>ET</strong> : Cet opérateur est automatiquement utilisé dans la recherche \"Tous ces mots\". Cela signifie que Calypso affichera des résultats qui contiennent tous les mots que vous avez entrés. <strong>OU</strong> : Utilisé dans la recherche \"N'importe lequel de ces mots\", cet opérateur permet de trouver des résultats qui contiennent au moins un des mots entrés. <strong>SAUF</strong> : Pour exclure certains mots de vos résultats, utilisez une boîte de recherche avec l'option \"aucun de ces mots\". Cela permet d'affiner votre recherche en éliminant les objets qui contiennent ces termes."
+  }
 }

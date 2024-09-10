@@ -1,18 +1,55 @@
 {
+  // "repository.title.prefix": "DSpace Angular :: ",
   "repository.title.prefix": "Calypso :: ",
-  "calypso.onglet-fichier": "Files",
-  "calypso.onglet-notice": "Full Record",
+  "calypso.tab-files": "Files",
+  "calypso.tab-notice": "Full notice",
   "calypso.return": "Return",
-  "calypso.consulter": "View",
-  "calypso.ai-titre": "Perform a search with AI",
-  "calypso.ai-explication": "Explanation ...",
-  "calypso.ai-annuler": "Cancel",
-  "calypso.ai-lien": "Start",
-  "calypso.ai-search-title": "",
-  "calypso.ai-search-description": "",
-  "calypso.ai-charger": "Load more",
-  "calypso.ai-img-selection": "Selected Image",
-  "calypso.ai-title-notification": "AI Search Title",
-  "calypso.ai-content-notification": "Here is a message for AI search"
+  "calypso.consult": "Consult",
+  "calypso.ai-title": "Perform a search with AI",
+  "calypso.ai-explanation": "Explanation ...",
+  "calypso.ai-cancel": "Cancel",
+  "calypso.ai-link": "Start",
+  "calypso.ai-search-title": "Find Similar Images with AI",
+  "calypso.ai-search-description": "Explore visually similar items from our collection with just one click",
+  "calypso.ai-load-more": "Load more",
+  "calypso.ai-selected-img": "Selected image",
+  "calypso.ai-notification-title": "AI Search Title",
+  "calypso.ai-notification-content": "Here is a message for the AI search",
 
+  //variable pour texte dans nav top
+  "calypso.page-udem.breadcrumbs": "Lire plus",
+  "calypso.ai-search.breadcrumbs": "Recherche IA",
+
+  // Contact page
+  "calypso.contact-title": "Contact Us",
+  "calypso.contact-description": "For any questions or additional information regarding this platform, please do not hesitate to contact us.",
+  "calypso.contact-phone": "+123 456 7890",
+  "calypso.contact-email": "contact@example.ca",
+  "calypso.contact-links-title": "Stay in touch",
+  "calypso.contact-libraries": "Libraries",
+  "calypso.contact-udem": "University of Montreal",
+
+  // FAQ
+  "faq": {
+    "title": "FAQ - Your Questions, Our Answers",
+    "description": "Quickly find essential information to better navigate our site",
+
+    "calypso_question": "What is Calypso?",
+    "calypso_answer": "Calypso is an interface that gathers various digital objects from the collections of the University of Montreal. It allows users to search and access these objects. These objects are primarily images, but also include audio and video files.",
+
+    "limited_access_question": "How can I access restricted items?",
+    "limited_access_answer": "If you are off-campus and wish to access items restricted to the UdeM academic community, you must use the PROXY service to authenticate and gain access.",
+
+    "simple_search_question": "What is a simple search?",
+    "simple_search_answer": "A simple search allows you to find all items containing the word(s) you entered across all areas and collections of Calypso. For example, if you type \"navigation québec\", Calypso will display all items that contain the terms \"navigation\" AND \"québec\".",
+
+    "advanced_search_question": "What is an advanced search?",
+    "advanced_search_answer": "An advanced search allows you to refine your results by searching within one or more collections with specific parameters such as: <strong>Title</strong>, <strong>Subject</strong>, <strong>Document Type</strong>, <strong>Description</strong>, <strong>Date</strong>. You can display up to four search fields for more precise results.",
+
+    "tips_tricks_question": "What are some tips and tricks for an effective search?",
+    "tips_tricks_answer": "Use meaningful words in your searches for more relevant results. To search for an exact phrase, using quotation marks (\"classical music\") does not work. Instead, use the \"Exact Phrase\" option in advanced search. Pay attention to punctuation as it is taken into account in searches. The relevance of results is influenced by the frequency of keywords in the item. Matches found in the <strong>Title</strong> or <strong>Subject</strong> fields are given higher priority. To search for plurals or perform partial word searches, use truncation (*). For example: ville* will find \"ville\" and \"villes\"; pla*e will find \"place\", \"plane\", etc.",
+
+    "boolean_operators_question": "What boolean operators are available?",
+    "boolean_operators_answer": "<strong>AND</strong>: This operator is automatically used in the \"All of these words\" search. This means that Calypso will display results that contain all the words you entered. <strong>OR</strong>: Used in the \"Any of these words\" search, this operator allows you to find results that contain at least one of the entered words. <strong>NOT</strong>: To exclude certain words from your results, use a search box with the \"none of these words\" option. This helps refine your search by removing items that contain these terms."
+  }
 }
