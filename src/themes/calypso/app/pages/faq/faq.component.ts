@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
   imports: [ThemedLoadingComponent, TranslateModule, RouterModule, CommonModule, NgbModule],
 })
 export class FaqComponent implements OnInit {
-  faqData$: Observable<any[]>; // Utilisation d'un Observable pour les données FAQ
+  faqData$: Observable<any[]>;
   currentLang: string;
 
   constructor(

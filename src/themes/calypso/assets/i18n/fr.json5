@@ -32,5 +32,10 @@
   "faq": {
     "titre": "FAQ - Vos Questions, Nos Réponses",
     "description": "Trouvez rapidement les informations essentielles pour mieux naviguer sur notre site",
+  },
+
+  "droits": {
+    "titre": "Droit d'auteur et utilisation",
+    "description": "Avis sur l'utilisation du contenu des collections d'objets numériques",
   }
 }
