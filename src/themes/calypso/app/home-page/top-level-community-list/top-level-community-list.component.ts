@@ -22,7 +22,6 @@ import {map, takeUntil} from 'rxjs/operators';
 import { Vedette } from '../../../models/Vedette';
 import {hasValue} from "../../../../../app/shared/empty.util";
 import { RouterModule } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ds-top-level-community-list',

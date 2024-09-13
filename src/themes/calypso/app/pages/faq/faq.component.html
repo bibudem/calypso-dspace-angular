@@ -1,44 +1,22 @@
 <div class="container mt-4">
   <h1>{{ 'faq.titre' | translate }}</h1>
   <p [innerHTML]="'faq.description' | translate"></p>
+
   <div class='faq mt-4' #faq>
-    <input id='faq-a' type='checkbox'>
-    <label for='faq-a'>
-      <p class="faq-heading">{{ 'faq.calypso_question' | translate }}</p>
-      <div class='faq-arrow'></div>
-      <p class="faq-text" [innerHTML]="'faq.calypso_answer' | translate"></p>
-    </label>
-    <input id='faq-b' type='checkbox'>
-    <label for='faq-b'>
-      <p class="faq-heading">{{ 'faq.limited_access_question' | translate }}</p>
-      <div class='faq-arrow'></div>
-      <p class="faq-text" [innerHTML]="'faq.limited_access_answer' | translate"></p>
-    </label>
-    <input id='faq-c' type='checkbox'>
-    <label for='faq-c'>
-      <p class="faq-heading">{{ 'faq.simple_search_question' | translate }}</p>
-      <div class='faq-arrow'></div>
-      <p class="faq-text" [innerHTML]="'faq.simple_search_answer' | translate"></p>
-    </label>
-    <input id='faq-d' type='checkbox'>
-    <label for='faq-d'>
-      <p class="faq-heading">{{ 'faq.advanced_search_question' | translate }}</p>
-      <div class='faq-arrow'></div>
-      <p class="faq-text" [innerHTML]="'faq.advanced_search_answer' | translate"></p>
-    </label>
-    <input id='faq-e' type='checkbox'>
-    <label for='faq-e'>
-      <p class="faq-heading">{{ 'faq.tips_tricks_question' | translate }}</p>
-      <div class='faq-arrow'></div>
-      <p class="faq-text" [innerHTML]="'faq.tips_tricks_answer' | translate"></p>
-    </label>
-    <input id='settings' type='checkbox'>
-    <input id='faq-f' type='checkbox'>
-    <label for='faq-f'>
-      <p class="faq-heading">{{ 'faq.boolean_operators_question' | translate }}</p>
-      <div class='faq-arrow'></div>
-      <p class="faq-text" [innerHTML]="'faq.boolean_operators_answer' | translate"></p>
-    </label>
+    <ng-container *ngIf="faqData$ | async as faqData">
+      <div *ngFor="let item of faqData; let i = index">
+        <!-- Chaque question est associée à un ID unique basé sur son index -->
+        <input id='faq-{{ i }}' type='checkbox'>
+        <label for='faq-{{ i }}'>
+          <p class="faq-heading">{{ item.question }}</p>
+          <div class='faq-arrow'></div>
+          <p class="faq-text" [innerHTML]="item.answer"></p>
+        </label>
+      </div>
+    </ng-container>
   </div>
 
+  <ng-template #loading>
+    <p>Loading FAQ data...</p>
+  </ng-template>
 </div>
