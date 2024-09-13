@@ -13,10 +13,7 @@
           <p class="faq-text" [innerHTML]="item.answer"></p>
         </label>
       </div>
+      <ds-loading *ngIf="!(faqData.length > 0)" message="..."></ds-loading>
     </ng-container>
   </div>
-
-  <ng-template #loading>
-    <p>Loading FAQ data...</p>
-  </ng-template>
 </div>
