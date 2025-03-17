@@ -14,8 +14,17 @@
             <ng-container
               *ngComponentOutlet="(sectionMap$ | async).get(section.id)?.component; injector: (sectionMap$ | async).get(section.id)?.injector;"></ng-container>
           </ng-container>
-          <!--Ajout des liens dans le menu-->
-          <li><a class="nav-item nav-link calypso-menu" href="/info/feedback">{{'calypso.menu.principale.contact' | translate}}</a></li>
+          <!-- Main menu with dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="javascript:void(0);" id="infoMenu" role="button" aria-haspopup="true" aria-expanded="false">
+              {{ 'calypso.menu.principale.autre' | translate }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="infoMenu">
+              <a class="dropdown-item" href="/info/feedback">{{ 'calypso.menu.principale.contact' | translate }}</a>
+              <a class="dropdown-item" href="/page/droits">{{ 'calypso.menu.principale.droits' | translate }}</a>
+              <a class="dropdown-item" href="/page/faq">{{ 'calypso.menu.principale.faq' | translate }}</a>
+            </div>
+          </li>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
   NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { ThemedUserMenuComponent } from 'src/app/shared/auth-nav-menu/user-menu/themed-user-menu.component';
@@ -26,6 +27,7 @@ import { UserMenuComponent } from '../../../../app/shared/auth-nav-menu/user-men
   animations: [slideMobileNav],
   standalone: true,
   imports: [NgbDropdownModule, NgClass, NgIf, UserMenuComponent, ThemedUserMenuComponent, NgFor, NgComponentOutlet, AsyncPipe, TranslateModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NavbarComponent extends BaseComponent {
 }
