@@ -29,13 +29,11 @@
   "calypso.contact-libraries": "Libraries",
   "calypso.contact-udem": "University of Montreal",
 
-  "faq": {
-    "titre": "FAQ - Vos Questions, Nos Réponses",
-    "description": "Trouvez rapidement les informations essentielles pour mieux naviguer sur notre site",
-  },
+  "calypso.faq.titre": "FAQ - Vos Questions, Nos Réponses",
 
-  "droits": {
-    "titre": "Droit d'auteur et utilisation",
-    "description": "Avis sur l'utilisation du contenu des collections d'objets numériques",
-  }
+  "calypso.faq.description": "Trouvez rapidement les informations essentielles pour mieux naviguer sur notre site",
+
+  "calypso.droits.titre": "Droit d'auteur et utilisation",
+
+  "calypso.droits.description": "Avis sur l'utilisation du contenu des collections d'objets numériques"
 }

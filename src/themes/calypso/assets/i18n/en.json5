@@ -30,9 +30,10 @@
   "calypso.contact-udem": "University of Montreal",
 
   // FAQ
-  "faq": {
-    "title": "FAQ - Your Questions, Our Answers",
-    "description": "Quickly find the essential information to better navigate our site",
-  }
+  "calypso.faq.titre": "FAQ - Your Questions, Our Answers",
+  "calypso.faq.description": "FAQ - Your Questions, Our Answers",
+
+  "calypso.droits.titre": "Copyright and Usage",
+  "calypso.droits.description": "Notice on the Use of Digital Object Collection Content"
 
 }

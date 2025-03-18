@@ -84,7 +84,7 @@ export const APP_ROUTES: Route[] = [
         path: 'home',
         loadChildren: () => import('./home-page/home-page-routes')
           .then((m) => m.ROUTES),
-        data: { showBreadcrumbs: false },
+        data: { showBreadcrumbs: false,  enableRSS: true },
         providers: [provideSuggestionNotificationsState()],
         canActivate: [endUserAgreementCurrentUserGuard],
       },
@@ -122,12 +122,14 @@ export const APP_ROUTES: Route[] = [
         path: COMMUNITY_MODULE_PATH,
         loadChildren: () => import('./community-page/community-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
         path: COLLECTION_MODULE_PATH,
         loadChildren: () => import('./collection-page/collection-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
@@ -158,6 +160,7 @@ export const APP_ROUTES: Route[] = [
         path: 'mydspace',
         loadChildren: () => import('./my-dspace-page/my-dspace-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         providers: [provideSuggestionNotificationsState()],
         canActivate: [authenticatedGuard, endUserAgreementCurrentUserGuard],
       },
@@ -165,6 +168,7 @@ export const APP_ROUTES: Route[] = [
         path: 'search',
         loadChildren: () => import('./search-page/search-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
@@ -177,6 +181,7 @@ export const APP_ROUTES: Route[] = [
         path: ADMIN_MODULE_PATH,
         loadChildren: () => import('./admin/admin-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [siteAdministratorGuard, endUserAgreementCurrentUserGuard],
       },
       {
@@ -221,6 +226,7 @@ export const APP_ROUTES: Route[] = [
         providers: [provideSubmissionState()],
         loadChildren: () => import('./workflowitems-edit-page/workflowitems-edit-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
