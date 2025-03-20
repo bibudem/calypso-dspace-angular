@@ -1,9 +1,19 @@
-<ds-results-back-button *ngIf="showBackButton$ | async" [back]="back"></ds-results-back-button>
+@if (showBackButton$ | async) {
+<ds-results-back-button [back]="back"></ds-results-back-button>
+}
+<!-- Add bib icons pour la recheche AI -->
 <div class="align-items-end">
-  <!-- Icon made by Pixel perfect from www.flaticon.com -->
   <img src="/assets/calypso/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="calypso-img-ia mt-2 float-right ml-1" (click)="openDialog(content)">
 </div>
-<!-- Définissez le contenu de la modale -->
+<!-- fin bib -->
+
+<div class="d-flex flex-row">
+  <ds-item-page-title-field [item]="object" class="me-auto">
+  </ds-item-page-title-field>
+  <ds-dso-edit-menu></ds-dso-edit-menu>
+</div>
+
+<!-- Add bib modal confirmation -->
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{'calypso.ai-titre' | translate}}</h4>
@@ -19,6 +29,7 @@
     <button type="button" class="btn btn-success" (click)="redirectToClipSearch()">{{'calypso.clip-lien' | translate}}</button>
   </div>
 </ng-template>
+<!-- fin bib -->
 
 <div class="d-flex flex-row mt-2">
   <ds-item-page-title-field [item]="object" class="mr-auto">
@@ -27,8 +38,10 @@
     <ds-dso-edit-menu></ds-dso-edit-menu>
   </div>
 </div>
-<div  *ngIf="iiifEnabled">
-<!-- Afficher le contenu dans des onglets -->
+
+<!-- Add bib afficher le contenu dans des onglets -->
+@if (iiifEnabled) {
+<div>
   <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs" >
     <li [ngbNavItem]="1" [routerLink]="['.']" [queryParams]="{tab: 1}" routerLinkActive="active"  >
       <a ngbNavLink (click)="displaySection('calypso-mirador')">{{'calypso.onglet-fichier' | translate}}</a>
@@ -66,53 +79,56 @@
           <!-- Ajoutez le contenu spécifique à l'onglet 3 ici -->
           <table class="table  table-striped mt-3">
             <tbody>
-              <tr>
-                <th>Colone 1</th>
-                <th>Colone 2</th>
-                <th>Colone 3</th>
-              </tr>
-              <tr>
-                <td>Donnees 1</td>
-                <td>Donnees 2</td>
-                <td>Donnees 3</td>
-              </tr>
+            <tr>
+              <th>Colone 1</th>
+              <th>Colone 2</th>
+              <th>Colone 3</th>
+            </tr>
+            <tr>
+              <td>Donnees 1</td>
+              <td>Donnees 2</td>
+              <td>Donnees 3</td>
+            </tr>
             </tbody>
           </table>
         </div>
       </ng-template>
     </li>
   </ul>
- <!-- Section specifique au onglet choisi -->
- <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
+<!-- Section specifique au onglet choisi -->
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
 <!-- Section pour mirador -->
-  <div class="row" *ngIf="iiifEnabled && (activeTab === 1 || !activeTab)">
-    <div class="col-12" id="calypso-mirador">
-      <ds-mirador-viewer id="iiif-viewer"
-                         [object]="object"
-                         [searchable]="iiifSearchEnabled"
-                         [query]="iiifQuery$ | async">
-      </ds-mirador-viewer>
-    </div>
+<div class="row" *ngIf="iiifEnabled && (activeTab === 1 || !activeTab)">
+  <div class="col-12" id="calypso-mirador">
+    <ds-mirador-viewer id="iiif-viewer"
+                       [object]="object"
+                       [searchable]="iiifSearchEnabled"
+                       [query]="iiifQuery$ | async">
+    </ds-mirador-viewer>
   </div>
 </div>
+<!-- Fin bib add -->
+}
 <div class="row" *ngIf="!iiifEnabled">
-  <div class="row">
     <div class="col-xs-12 col-md-4">
-      <ng-container *ngIf="!(mediaViewer.image || mediaViewer.video)">
-        <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
-          <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
-        </ds-metadata-field-wrapper>
-      </ng-container>
-      <div *ngIf="mediaViewer.image || mediaViewer.video" class="mb-2">
+      @if (!(mediaViewer.image || mediaViewer.video)) {
+      <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
+        <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
+      </ds-metadata-field-wrapper>
+      }
+      @if (mediaViewer.image || mediaViewer.video) {
+      <div class="mb-2">
         <ds-media-viewer [item]="object"></ds-media-viewer>
       </div>
+      }
       <ds-item-page-file-section [item]="object"></ds-item-page-file-section>
       <ds-item-page-date-field [item]="object"></ds-item-page-date-field>
       <ds-metadata-representation-list class="ds-item-page-mixed-author-field"
-                                              [parentItem]="object"
-                                              [itemType]="'Person'"
-                                              [metadataFields]="['dc.contributor.author', 'dc.creator']"
-                                              [label]="'relationships.isAuthorOf' | translate">
+                                       [parentItem]="object"
+                                       [itemType]="'Person'"
+                                       [metadataFields]="['dc.contributor.author', 'dc.creator']"
+                                       [label]="'relationships.isAuthorOf' | translate">
       </ds-metadata-representation-list>
       <ds-generic-item-page-field [item]="object"
                                   [fields]="['journal.title']"
@@ -153,7 +169,7 @@
       </ds-item-page-uri-field>
       <ds-item-page-collections [item]="object"></ds-item-page-collections>
       <ds-item-page-uri-field [item]="object"
-                              [fields]="['notify.relation.endorsedBy']"
+                              [fields]="['coar.notify.endorsedBy']"
                               [label]="'item.page.endorsement'">
       </ds-item-page-uri-field>
       <ds-item-page-uri-field [item]="object"
@@ -162,12 +178,14 @@
       </ds-item-page-uri-field>
       <ds-item-page-uri-field [item]="object"
                               [fields]="['datacite.relation.isSupplementedBy']"
-                              [label]="'item.page.dataset'">
+                              [label]="'item.page.supplemented'">
       </ds-item-page-uri-field>
       <ds-item-page-uri-field [item]="object"
                               [fields]="['datacite.relation.isReferencedBy']"
-                              [label]="'item.page.dataset'">
+                              [label]="'item.page.referenced'">
       </ds-item-page-uri-field>
+      <ds-item-page-cc-license-field [item]="object" [variant]="'full'">
+      </ds-item-page-cc-license-field>
       <div>
         <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']" role="button">
           <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
@@ -175,4 +193,3 @@
       </div>
     </div>
   </div>
-</div>

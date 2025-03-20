@@ -1,68 +1,56 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
-import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import {RouterModule} from '@angular/router';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { RootModule } from '../../app/root.module';
-import { HomePageComponent } from './app/home-page/home-page.component';
-import {VedetteListeComponent} from "./app/home-page/vedette-liste/vedette-liste.component";
-import {HomeNewsComponent} from "./app/home-page/home-news/home-news.component";
-import {CollectionPageComponent} from "./app/collection-page/collection-page.component";
-import {VedetteCollListeComponent} from "./app/collection-page/vedette-coll-liste/vedette-coll-liste.component";
-import {EditItemTemplatePageComponent} from "./app/collection-page/edit-item-template-page/edit-item-template-page.component";
+import { SearchResultsSkeletonComponent } from '../../app/shared/search/search-results/search-results-skeleton/search-results-skeleton.component';
+import { CollectionPageComponent } from './app/collection-page/collection-page.component';
+import { EditItemTemplatePageComponent } from './app/collection-page/edit-item-template-page/edit-item-template-page.component';
 import { DsoEditMetadataComponent } from './app/dso-shared/dso-edit-metadata/dso-edit-metadata.component';
-import {NgxGalleryModule} from "@kolkov/ngx-gallery";
+import { HomePageComponent } from './app/home-page/home-page.component';
+import { FeedbackComponent } from './app/info/feedback/feedback.component';
+import { FeedbackFormComponent } from './app/info/feedback/feedback-form/feedback-form.component';
+import { ItemPageComponent } from './app/item-page/simple/item-page.component';
+import { RootComponent } from './app/root/root.component';
 import { BrowseByComponent } from './app/shared/browse-by/browse-by.component';
-import {ItemPageComponent} from "./app/item-page/simple/item-page.component";
-import {SearchResultsComponent} from "./app/shared/search/search-results/search-results.component";
-import {TopLevelCommunityListComponent} from "./app/home-page/top-level-community-list/top-level-community-list.component";
+import { SearchResultsComponent } from './app/shared/search/search-results/search-results.component';
+// calypso modules
+import {VedetteCollListeComponent} from "./app/collection-page/vedette-coll-liste/vedette-coll-liste.component";
 import {AiSearchComponent} from "./app/ai-search/ai-search.component";
-import {PagesComponent} from "./app/pages/pages.component";
-import {FaqComponent} from "./app/pages/faq/faq.component";
-import {FeedbackComponent} from "./app/info/feedback/feedback.component";
-import {FeedbackFormComponent} from "./app/info/feedback/feedback-form/feedback-form.component";
-import {NavbarComponent} from "./app/navbar/navbar.component";
-import {BreadcrumbsComponent} from "../../app/breadcrumbs/breadcrumbs.component";
-import {RootComponent} from "./app/root/root.component";
-import {DroitsComponent} from "./app/pages/droits/droits.component";
 
 
 const DECLARATIONS = [
   HomePageComponent,
-  VedetteListeComponent,
-  HomeNewsComponent,
-  CollectionPageComponent,
-  EditItemTemplatePageComponent,
   VedetteCollListeComponent,
-  DsoEditMetadataComponent,
-  BrowseByComponent,
+  AiSearchComponent,
+  RootComponent,
+  CollectionPageComponent,
   ItemPageComponent,
-  SearchResultsComponent,
-  TopLevelCommunityListComponent,
-  NavbarComponent,
   FeedbackComponent,
   FeedbackFormComponent,
-  AiSearchComponent,
-  PagesComponent,
-  DroitsComponent,
-  FaqComponent,
-  BreadcrumbsComponent,
-  RootComponent
+  EditItemTemplatePageComponent,
+  SearchResultsComponent,
+  DsoEditMetadataComponent,
+  BrowseByComponent,
+  SearchResultsSkeletonComponent
 ];
 
 @NgModule({
-  imports: [
-    RootModule,
+  imports: [RootModule,
     CommonModule,
     DragDropModule,
     FormsModule,
-    HttpClientModule,
     NgbModule,
     RouterModule,
     ScrollToModule,
@@ -71,9 +59,10 @@ const DECLARATIONS = [
     TranslateModule,
     FormsModule,
     NgxGalleryModule,
-    ...DECLARATIONS,
+    ...DECLARATIONS],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
   ],
-
 })
 
   /**
@@ -85,4 +74,3 @@ const DECLARATIONS = [
    */
 class LazyThemeModule {
 }
-

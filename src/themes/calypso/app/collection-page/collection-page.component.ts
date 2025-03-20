@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -29,7 +26,7 @@ import { VedetteCollListeComponent } from './vedette-coll-liste/vedette-coll-lis
 
 
 @Component({
-  selector: 'ds-collection-page',
+  selector: 'ds-themed-collection-page',
   templateUrl: './collection-page.component.html',
   //templateUrl: '../../../../app/collection-page/collection-page.component.html',
   styleUrls: ['./collection-page.component.scss'],
@@ -43,7 +40,6 @@ import { VedetteCollListeComponent } from './vedette-coll-liste/vedette-coll-lis
   imports: [
     ThemedComcolPageContentComponent,
     ErrorComponent,
-    NgIf,
     ThemedLoadingComponent,
     TranslateModule,
     ViewTrackerComponent,

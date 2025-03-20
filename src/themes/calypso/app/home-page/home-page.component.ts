@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import { Component } from '@angular/core';
@@ -20,7 +19,7 @@ import { VedetteListeComponent } from './vedette-liste/vedette-liste.component';
 import {ConfigurationSearchPageComponent} from "../../../../app/search-page/configuration-search-page.component";
 
 @Component({
-  selector: 'ds-home-page',
+  selector: 'ds-themed-home-page',
   styleUrls: ['./home-page.component.scss'],
   //styleUrls: ['../../../../app/home-page/home-page.component.scss'],
   templateUrl: './home-page.component.html',
@@ -28,7 +27,7 @@ import {ConfigurationSearchPageComponent} from "../../../../app/search-page/conf
   standalone: true,
   imports: [
     ThemedHomeNewsComponent,
-    NgIf,
+    NgTemplateOutlet,
     ViewTrackerComponent,
     ThemedSearchFormComponent,
     ThemedTopLevelCommunityListComponent,

@@ -1,7 +1,8 @@
-import { NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterModule} from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import {
   fadeIn,
@@ -12,10 +13,14 @@ import { ThemedLoadingComponent } from '../../../../../../app/shared/loading/the
 import { ObjectCollectionComponent } from '../../../../../../app/shared/object-collection/object-collection.component';
 import { SearchExportCsvComponent } from '../../../../../../app/shared/search/search-export-csv/search-export-csv.component';
 import { SearchResultsComponent as BaseComponent } from '../../../../../../app/shared/search/search-results/search-results.component';
+import { SearchResultsSkeletonComponent } from '../../../../../../app/shared/search/search-results/search-results-skeleton/search-results-skeleton.component';
+import { SearchService } from '../../../../../../app/core/shared/search/search.service';
+import { SearchConfigurationService } from '../../../../../../app/core/shared/search/search-configuration.service';
+
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'ds-search-results',
+  selector: 'ds-themed-search-results',
   templateUrl: './search-results.component.html',
   //templateUrl: '../../../../../../app/shared/search/search-results/search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
@@ -24,7 +29,18 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
     fadeInOut,
   ],
   standalone: true,
-  imports: [NgIf, SearchExportCsvComponent, ObjectCollectionComponent, ThemedLoadingComponent, ErrorComponent, RouterLink, TranslateModule, RouterModule],
+  imports: [
+    AsyncPipe,
+    ErrorComponent,
+    ThemedLoadingComponent,
+    NgxSkeletonLoaderModule,
+    ObjectCollectionComponent,
+    RouterLink,
+    SearchExportCsvComponent,
+    SearchResultsSkeletonComponent,
+    TranslateModule,
+    RouterModule
+  ],
 })
 export class SearchResultsComponent extends BaseComponent {
   collectionId: string;
@@ -32,32 +48,34 @@ export class SearchResultsComponent extends BaseComponent {
 
   constructor(private modalService: NgbModal,
               private router: Router,
-              private route: ActivatedRoute) {
-    super();
+              private route: ActivatedRoute,
+              public searchConfigService: SearchConfigurationService,
+              public searchService: SearchService) {
+
+    super(searchConfigService, searchService);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.initializeSearchParameters();
+  }
+
+  private initializeSearchParameters(): void {
     // Récupérer l'ID de l'élément à partir de l'URL
-    this.collectionId = this.route.snapshot.paramMap.get('id')|| null;
+    this.collectionId = this.route.snapshot.paramMap.get('id') || null;
 
     // Observer les changements d'URL et extraire les paramètres
-    this.route.queryParams.subscribe(params => {
-      // Extraire la variable 'query' de l'URL pour la recherche
+    this.route.queryParams.subscribe((params) => {
       this.query = params['query'] || 'all';
     });
   }
 
+  redirectToAiSearch(): void {
+    const queryParams = {
+      scope: this.collectionId || undefined,
+      query: this.query || undefined,
+    };
 
-  redirectToAiSearch() {
-
-    const queryParams = {};
-    if (this.collectionId) {
-      queryParams['scope'] = this.collectionId;
-    }
-    if (this.query) {
-      queryParams['query'] = this.query;
-    }
-
+    // Utiliser navigate avec un objet pour simplifier la gestion des queryParams
     this.router.navigate(['/ai-search'], { queryParams });
   }
 }
