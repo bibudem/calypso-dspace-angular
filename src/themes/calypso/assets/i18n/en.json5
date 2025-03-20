@@ -1,0 +1,39 @@
+{
+  // "repository.title.prefix": "DSpace Angular :: ",
+  "repository.title.prefix": "Calypso :: ",
+  "calypso.tab-files": "Files",
+  "calypso.tab-notice": "Full notice",
+  "calypso.return": "Return",
+  "calypso.consult": "Consult",
+  "calypso.ai-title": "Perform a search with AI",
+  "calypso.ai-explanation": "Explanation ...",
+  "calypso.ai-cancel": "Cancel",
+  "calypso.ai-link": "Start",
+  "calypso.ai-search-title": "Find Similar Images with AI",
+  "calypso.ai-search-description": "Explore visually similar items from our collection with just one click",
+  "calypso.ai-load-more": "Load more",
+  "calypso.ai-selected-img": "Selected image",
+  "calypso.ai-notification-title": "AI Search Title",
+  "calypso.ai-notification-content": "Here is a message for the AI search",
+
+  //variable pour texte dans nav top
+  "calypso.page-udem.breadcrumbs": "Lire plus",
+  "calypso.ai-search.breadcrumbs": "Recherche IA",
+
+  // Contact page
+  "calypso.contact-title": "Contact Us",
+  "calypso.contact-description": "For any questions or additional information regarding this platform, please do not hesitate to contact us.",
+  "calypso.contact-phone": "+123 456 7890",
+  "calypso.contact-email": "contact@example.ca",
+  "calypso.contact-links-title": "Stay in touch",
+  "calypso.contact-libraries": "Libraries",
+  "calypso.contact-udem": "University of Montreal",
+
+  // FAQ
+  "calypso.faq.titre": "FAQ - Your Questions, Our Answers",
+  "calypso.faq.description": "FAQ - Your Questions, Our Answers",
+
+  "calypso.droits.titre": "Copyright and Usage",
+  "calypso.droits.description": "Notice on the Use of Digital Object Collection Content"
+
+}

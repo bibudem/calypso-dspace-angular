@@ -43,6 +43,8 @@ import { PROCESS_MODULE_PATH } from './process-page/process-page-routing.paths';
 import { provideSubmissionState } from './submission/provide-submission-state';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 import {AiSearchComponent} from "../themes/calypso/app/ai-search/ai-search.component";
+import {PagesComponent} from "../themes/calypso/app/pages/pages.component";
+import {i18nBreadcrumbResolver} from "./core/breadcrumbs/i18n-breadcrumb.resolver";
 
 export const APP_ROUTES: Route[] = [
   { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent },
@@ -59,6 +61,16 @@ export const APP_ROUTES: Route[] = [
         path: 'ai-search',
         component: AiSearchComponent,
         pathMatch: 'full',
+        resolve: { breadcrumb: i18nBreadcrumbResolver },
+        data: { title: 'calypso.ai-search', breadcrumbKey: 'calypso.ai-search' },
+        canActivate: [endUserAgreementCurrentUserGuard]
+      },
+      {
+        path: 'page/:page',
+        component: PagesComponent,
+        pathMatch: 'full',
+        resolve: { breadcrumb: i18nBreadcrumbResolver },
+        data: { title: 'calypso.page-udem', breadcrumbKey: 'calypso.page-udem' },
         canActivate: [endUserAgreementCurrentUserGuard]
       },
       //fin add UdeM
@@ -72,7 +84,7 @@ export const APP_ROUTES: Route[] = [
         path: 'home',
         loadChildren: () => import('./home-page/home-page-routes')
           .then((m) => m.ROUTES),
-        data: { showBreadcrumbs: false },
+        data: { showBreadcrumbs: false,  enableRSS: true },
         providers: [provideSuggestionNotificationsState()],
         canActivate: [endUserAgreementCurrentUserGuard],
       },
@@ -110,12 +122,14 @@ export const APP_ROUTES: Route[] = [
         path: COMMUNITY_MODULE_PATH,
         loadChildren: () => import('./community-page/community-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
         path: COLLECTION_MODULE_PATH,
         loadChildren: () => import('./collection-page/collection-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
@@ -146,6 +160,7 @@ export const APP_ROUTES: Route[] = [
         path: 'mydspace',
         loadChildren: () => import('./my-dspace-page/my-dspace-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         providers: [provideSuggestionNotificationsState()],
         canActivate: [authenticatedGuard, endUserAgreementCurrentUserGuard],
       },
@@ -153,6 +168,7 @@ export const APP_ROUTES: Route[] = [
         path: 'search',
         loadChildren: () => import('./search-page/search-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
@@ -165,6 +181,7 @@ export const APP_ROUTES: Route[] = [
         path: ADMIN_MODULE_PATH,
         loadChildren: () => import('./admin/admin-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [siteAdministratorGuard, endUserAgreementCurrentUserGuard],
       },
       {
@@ -209,6 +226,7 @@ export const APP_ROUTES: Route[] = [
         providers: [provideSubmissionState()],
         loadChildren: () => import('./workflowitems-edit-page/workflowitems-edit-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {

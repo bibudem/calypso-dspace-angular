@@ -9,11 +9,31 @@
   "calypso.ai-explication": "Explication ...",
   "calypso.ai-annuler": "Annuler",
   "calypso.ai-lien": "Commencer",
-  "calypso.ai-search-title": "",
-  "calypso.ai-search-description": "",
+  "calypso.ai-search-title": "Trouver des images similaires avec l'IA",
+  "calypso.ai-search-description": "Explorez des objets visuellement similaires de notre collection en un seul clic",
   "calypso.ai-charger": "Charger plus",
   "calypso.ai-img-selection": "Image sélectionnée",
   "calypso.ai-title-notification": "Titre recherche Ai",
-  "calypso.ai-content-notification": "Voici un message pour la recherche Ai"
+  "calypso.ai-content-notification": "Voici un message pour la recherche Ai",
 
+  //variable pour texte dans nav top
+  "calypso.page-udem.breadcrumbs": "Lire plus",
+  "calypso.ai-search.breadcrumbs": "Recherche IA",
+
+  // Contact page
+  "calypso.contact-title": "Contact Us",
+  "calypso.contact-description": "For any questions or additional information regarding this platform, please do not hesitate to contact us.",
+  "calypso.contact-phone": "+123 456 7890",
+  "calypso.contact-email": "contact@example.ca",
+  "calypso.contact-links-title": "Stay in touch",
+  "calypso.contact-libraries": "Libraries",
+  "calypso.contact-udem": "University of Montreal",
+
+  "calypso.faq.titre": "FAQ - Vos Questions, Nos Réponses",
+
+  "calypso.faq.description": "Trouvez rapidement les informations essentielles pour mieux naviguer sur notre site",
+
+  "calypso.droits.titre": "Droit d'auteur et utilisation",
+
+  "calypso.droits.description": "Avis sur l'utilisation du contenu des collections d'objets numériques"
 }

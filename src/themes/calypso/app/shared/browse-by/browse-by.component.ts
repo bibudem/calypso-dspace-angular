@@ -2,7 +2,6 @@ import {
   AsyncPipe,
   NgClass,
   NgComponentOutlet,
-  NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -21,7 +20,7 @@ import { StartsWithLoaderComponent } from '../../../../../app/shared/starts-with
 import {ViewModeSwitchComponent} from "../../../../../app/shared/view-mode-switch/view-mode-switch.component";
 
 @Component({
-  selector: 'ds-browse-by',
+  selector: 'ds-themed-browse-by',
   // styleUrls: ['./browse-by.component.scss'],
   styleUrls: ['../../../../../app/shared/browse-by/browse-by.component.scss'],
   templateUrl: './browse-by.component.html',
@@ -31,7 +30,7 @@ import {ViewModeSwitchComponent} from "../../../../../app/shared/view-mode-switc
     fadeInOut,
   ],
   standalone: true,
-  imports: [VarDirective, NgClass, NgComponentOutlet, NgIf, ThemedResultsBackButtonComponent, ObjectCollectionComponent,
+  imports: [VarDirective, NgClass, NgComponentOutlet, ThemedResultsBackButtonComponent, ObjectCollectionComponent,
     ThemedLoadingComponent, ErrorComponent, AsyncPipe, TranslateModule, StartsWithLoaderComponent, ViewModeSwitchComponent],
 })
 export class BrowseByComponent extends BaseComponent {

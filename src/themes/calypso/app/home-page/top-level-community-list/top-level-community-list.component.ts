@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  CommonModule,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { TopLevelCommunityListComponent as BaseComponent } from '../../../../../app/home-page/top-level-community-list/top-level-community-list.component';
 import { ErrorComponent } from '../../../../../app/shared/error/error.component';
@@ -22,16 +18,16 @@ import {map, takeUntil} from 'rxjs/operators';
 import { Vedette } from '../../../models/Vedette';
 import {hasValue} from "../../../../../app/shared/empty.util";
 import { RouterModule } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'ds-top-level-community-list',
+  selector: 'ds-themed-top-level-community-list',
   styleUrls: ['./top-level-community-list.component.scss'],
   //styleUrls: ['../../../../../app/home-page/top-level-community-list/top-level-community-list.component.scss'],
   templateUrl: './top-level-community-list.component.html',
   //templateUrl: '../../../../../app/home-page/top-level-community-list/top-level-community-list.component.html',
   standalone: true,
-  imports: [VarDirective, NgIf, ObjectCollectionComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, RouterModule, CommonModule],
+  imports: [VarDirective, ObjectCollectionComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, RouterModule, CommonModule],
 })
 
 export class TopLevelCommunityListComponent extends BaseComponent  implements OnInit, OnDestroy{

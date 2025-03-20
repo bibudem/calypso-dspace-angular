@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   isPlatformBrowser,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -53,7 +51,7 @@ import {
   templateUrl: './search-range-filter.component.html',
   animations: [facetLoad],
   standalone: true,
-  imports: [FormsModule, NgIf, NouisliderComponent, DebounceDirective, NgFor, SearchFacetRangeOptionComponent, AsyncPipe, TranslateModule],
+  imports: [FormsModule, NouisliderComponent, DebounceDirective, SearchFacetRangeOptionComponent, AsyncPipe, TranslateModule],
 })
 
 /**
@@ -98,7 +96,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
 
   /**
    * Whether the sider is being controlled by the keyboard.
-   * Supresses any changes until the key is released.
+   * Suppresses any changes until the key is released.
    */
   keyboardControl: boolean;
 

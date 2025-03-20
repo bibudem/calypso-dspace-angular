@@ -2,19 +2,27 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { RootModule } from '../../app/root.module';
+import { FooterComponent } from './app/footer/footer.component';
+import { HomeNewsComponent } from './app/home-page/home-news/home-news.component';
+import { TopLevelCommunityListComponent } from './app/home-page/top-level-community-list/top-level-community-list.component';
 import { UntypedItemComponent } from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
+import {NavbarComponent} from "./app/navbar/navbar.component";
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
  * This will ensure that decorator gets picked up when the app loads
  */
 const ENTRY_COMPONENTS = [
+
   UntypedItemComponent,
+  TopLevelCommunityListComponent,
 ];
 
 const DECLARATIONS = [
   ...ENTRY_COMPONENTS,
-
+  HomeNewsComponent,
+  FooterComponent,
+  NavbarComponent,
 ];
 
 @NgModule({
