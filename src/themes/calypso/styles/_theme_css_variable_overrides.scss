@@ -1,11 +1,19 @@
 // Override or add CSS variables for your theme here
+/* -------------------------------------------------------
+   Variables pour le thème blue fonsé
+---------------------------------------------------------- */
+@import './_variables.scss';
+
+// Override or add CSS variables for your theme here
 
 :root {
   --ds-header-logo-height: 40px;
   --ds-banner-text-background: rgba(0, 0, 0, 0.45);
   --ds-banner-background-gradient-width: 300px;
   --ds-home-news-link-color: #{$blue};
-  --ds-home-news-link-hover-color: #{darken($cyan, 15%)};
+  --ds-home-news-link-hover-color: #{darken($secondary, 15%)};
   --ds-header-navbar-border-bottom-color: #{$blue};
+  --ds-navbar-link-color: #{$primary};
+  --ds-header-icon-color: #{$autreblue};
 }
 

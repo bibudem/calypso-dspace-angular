@@ -156,32 +156,38 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  async redirectToClipSearch() {
+  async redirectToClipSearch(): Promise<void> {
     this.closeModal();
 
     try {
       // Récupérer les informations sur les bundles de l'élément
-      const response = await fetch(this.backendApi + 'items/' + this.idItem + '/bundles');
+      const response = await fetch(`${this.backendApi}items/${this.idItem}/bundles`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch bundles');
+      }
       const infoUrlBundles = await response.json();
 
       // Rechercher le bundle "ORIGINAL"
-      const originalBundle = infoUrlBundles._embedded.bundles.find(bundle => bundle.name === 'ORIGINAL');
+      const originalBundle = infoUrlBundles._embedded.bundles.find((bundle) => bundle.name === 'ORIGINAL');
 
       if (originalBundle) {
         // Récupérer le lien vers le premier bitstream du bundle "ORIGINAL"
         const bitstreamsResponse = await fetch(originalBundle._links.bitstreams.href);
+        if (!bitstreamsResponse.ok) {
+          throw new Error('Failed to fetch bitstreams');
+        }
         const bitstreamsInfo = await bitstreamsResponse.json();
 
         // Extraire le lien du premier bitstream
         const firstBitstreamUrl = bitstreamsInfo._embedded.bitstreams[0]._links.content.href;
-        //console.log(firstBitstreamUrl);
-        // Définissez les paramètres de requête
+
+        // Définir les paramètres de requête
         const queryParams = {
           query: null,
-          url: firstBitstreamUrl
+          url: firstBitstreamUrl,
         };
 
-        // Naviguez vers la page de recherche de clips avec les paramètres de requête
+        // Naviguer vers la page de recherche de clips avec les paramètres de requête
         this.router.navigate(['/ai-search'], { queryParams });
       } else {
         console.error('Bundle "ORIGINAL" introuvable.');

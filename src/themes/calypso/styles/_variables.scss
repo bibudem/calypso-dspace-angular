@@ -1,0 +1,46 @@
+// _variables.scss
+// Import the custom fonts
+@import 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Lora:wght@400;600&display=swap';
+
+// Configure Bootstrap to use these fonts
+$font-family-sans-serif: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif !default;
+$font-family-serif: 'Lora', serif !default;
+
+// Assign the fonts to specific Bootstrap components or SCSS variables
+$headings-font-family: $font-family-sans-serif;
+$h4-font-family: $font-family-serif;
+$body-font-family: $font-family-sans-serif;
+
+/* Reassign color vars to semantic color scheme */
+$blue: #2380D1 !default;
+$primary: #0b113a !default;
+$autreblue: #00407F !default;
+$lightblue: #CCE2F3;
+$extralightblue: #E5F0F8;
+
+$secondary: #6BA5D1 !default;
+$darkblue: #0b113a !default;
+
+$redorange: #f04e24;
+$rose: #fee1de;
+$green: #024244;
+$autregreen: #249194;
+$greensecondary: #04696c;
+$darkgreen: #01282AFF;
+$lightgreen: #4aa28b;
+$extralightgreen: #e5fdf0;
+$gray: #37424D;
+$ligthblue:#E7EBEE;
+
+$white: #ffffff !default;
+$yellow: #FFCA40 !default;
+$red: #c52f08 !default;
+$dark: darken($green, 17%) !default;
+
+$gray-800: #343a40 !default;
+$gray-700: #37424D !default;
+$gray-600: #37424D !default;
+$gray-500: #607386 !default;
+$gray-400: #607386 !default;
+$gray-100: #E7EBEE !default;

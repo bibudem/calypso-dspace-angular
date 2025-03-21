@@ -1,0 +1,105 @@
+@import '../../styles/_variables.scss';
+:host {
+  display: block;
+  position: relative;
+}
+
+// Section Hero avec fond et overlay
+.hero-section {
+  position: relative;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url('/assets/calypso/images/bibImage-home.jpg') no-repeat center center;
+  background-size: cover;
+  margin-top:-10%!important;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 3rem;
+  border-radius: 10px;
+  color: white;
+  width: 100%;
+  height: 85vh;
+}
+
+.hero-section h1 {
+  margin-top: 15%;
+  text-align: left;
+  font-size: 90px;
+  width: 60%;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  font-family: $font-family-serif;
+  padding: 30px;
+}
+
+// Barre de recherche et filtres
+.search-bar {
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 30px;
+}
+
+
+.filter {
+  padding: 0.75rem;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background: white;
+  cursor: pointer;
+}
+
+.search-btn {
+  padding: 0.75rem 1.5rem;
+  background: #fff;
+  color: #333;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.search-btn:hover {
+  background: #ddd;
+}
+
+.hero-section {
+  position: relative;
+  margin-top: 0;
+}
+
+.search-bar>ds-search-form>ds-base-search-form>form>div>div>.input-group>.form-control {
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 20px 0 0 20px;
+  color:white!important;
+}
+
+.search-bar>.input-group .btn {
+  background: transparent;
+  border: 2px solid white;
+}
+
+// Ajustements responsifs
+@media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .filter, .search-btn {
+    width: 100%;
+  }
+}

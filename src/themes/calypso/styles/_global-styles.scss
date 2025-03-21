@@ -1,23 +1,353 @@
+// Import the custom fonts
+@import 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Lora:wght@400;600&display=swap';
+
+// Configure Bootstrap to use these fonts
+$font-family-sans-serif: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif !default;
+$font-family-serif: 'Lora', serif !default;
+
+// Assign the fonts to specific Bootstrap components or SCSS variables
+$headings-font-family: $font-family-sans-serif;
+$h4-font-family: $font-family-serif;
+$body-font-family: $font-family-sans-serif;
+
+/* -------------------------------------------------------
+   Importation des styles globaux
+---------------------------------------------------------- */
+// Importation des styles globaux de base
+@import '../../../styles/_global-styles.scss';
+
+/* -------------------------------------------------------
+   Variables pour le thème vert
+---------------------------------------------------------- */
+@import './_variables.scss';
 // Add any global css for the theme here
 
 // imports the base global style
 @import '../../../styles/_global-styles.scss';
 
-.facet-filter, .setting-option {
-  background-color: var(--bs-light);
-  border-radius: var(--bs-border-radius);
+/* -------------------------------------------------------
+   Titres
+---------------------------------------------------------- */
 
-  &.p-3 {
-    // Needs !important because the original bootstrap class uses it
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
+h1, h2, h3, h5, h6 {
+  font-weight: 600;
+  font-family: Figtree;
+  color: $gray-800;
+}
+
+h4 {
+  font-family: Lora;
+}
+
+h2{
+  font-size: 46px;
+  font-weight: 600;
+}
+
+a {
+  color: $blue;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+a.lead {
+  font-weight: 450 !important;
+  color:$blue;
+}
+
+a.lead:hover {
+  color: $autreblue;
+}
+
+/* Styles pour les badges */
+.badge-secondary {
+  background-color: var(--bs-primary);
+}
+
+nav#admin-sidebar a {
+  color: $extralightblue!important;
+  text-decoration: none!important;
+}
+
+/* -------------------------------------------------------
+   Styles pour les paragraphes et le texte
+---------------------------------------------------------- */
+p, span, a {
+  font-family: Figtree;
+}
+
+// -------------------------------------------------------
+// Button Styles
+// -------------------------------------------------------
+.btn {
+  border-radius: 60px;
+}
+
+.bg-footer-dark {
+  background-color: #262525;
+}
+
+
+.cm-btn-success{
+  background-color: $blue!important;
+  color: $extralightblue!important;
+}
+
+.navbar-nav .dropdown-menu {
+  background: $white !important;
+}
+
+#user-menu-dropdown{
+  padding: 10px;
+}
+
+.img-radius-bib {
+  border-radius: 12px!important;
+}
+
+/* -------------------------------------------------------
+   Couleurs de fond personnalisées
+---------------------------------------------------------- */
+.bg-lightgreen {
+  background-color: $lightblue;
+}
+
+.bg-ligthblue {
+  background-color: $ligthblue;
+}
+
+.bg-darkgreen {
+  background-color: $darkblue;
+}
+
+.badge-secondary {
+  background-color: $blue;
+  color: $extralightblue;
+}
+
+
+.text-extralightgreen {
+  color: $extralightblue;
+}
+
+.text-lightblue {
+  color: $lightblue;
+}
+/* ===========================
+   Styles pour la carte Calypso
+   =========================== */
+.card-calypso {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.05),
+  0 2px 3px rgba(0, 0, 0, 0.05),
+  0 2px 1px rgba(0, 0, 0, 0.05);
+  border-radius: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-size: cover;
+
+  .specifies {
+    position: absolute;
+    width: 100%;
+    bottom: -60px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.6s;
+
+    .left-text {
+      position: absolute;
+      top: 12px;
+      right: 25px;
+      font-weight: bold;
+      color: #000;
+      font-size: 18px;
+    }
+
+    label {
+      display: block;
+      margin-top: 5px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        margin: 5px 5px 0;
+        font-size: 15px;
+        font-style: normal;
+        color: #ccc;
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
   }
 
-  .badge-secondary {
-    background-color: var(--bs-primary);
+  &:hover .specifies {
+    bottom: 0;
+    background: rgb(255, 255, 255);
   }
+}
 
-  h5 {
-    font-size: 1.1rem
+/* Lien associé à la carte Calypso */
+.calypso-card-lien {
+  display: block;
+  padding: 5px;
+  color: #d94607;
+  margin: 10px 0 0;
+  width: 100%;
+  font-size: 13px;
+  border-radius: 0;
+
+  &:hover {
+    color: #da3401;
+  }
+}
+
+/* ===============================
+   Personnalisation des cartes DSpace
+   =============================== */
+.card-columns .card {
+  position: relative;
+  height: 420px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.05),
+  0 2px 3px rgba(0, 0, 0, 0.05),
+  0 2px 1px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-size: cover;
+  border: none !important;
+
+  .card-body {
+    padding: 1rem !important;
+
+    a {
+      position: absolute;
+      top: 90%;
+      right: 5px;
+      color: #ffffff;
+      font-size: 14px;
+      border-radius: 0;
+    }
+  }
+}
+
+/* Cache un élément spécifique */
+.calypso-hide {
+  display: none !important;
+}
+
+/* ===========================
+   Style pour l'image de la recherche AI
+   =========================== */
+.calypso-img-ia {
+  width: 35px;
+  height: 35px;
+  float: right;
+  margin-left: 10px;
+  margin-top: -3px;
+  margin-right: 0.5em;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+}
+
+/* ===========================
+   Ajustement du style de l'en-tête
+   =========================== */
+#main-site-header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  margin: 20px 10%;
+  border-radius: 20px;
+  background: white;
+  z-index: 3000 !important;
+}
+
+/* Lien du menu Calypso */
+a.calypso-menu {
+  color: $autreblue !important;
+}
+
+/* ===========================
+   Styles pour la FAQ
+   =========================== */
+.faq-container {
+  .accordion {
+    .card {
+      border: none !important;
+      margin-top: 10px !important;
+
+      &:hover {
+        color: #0c0000;
+        font-weight: 600;
+      }
+
+      .card-header {
+        border-radius: 0;
+        background: rgba(233, 236, 239, 0.5);
+        border-block-color: white;
+
+        // Bouton sans effet visuel au clic ou au survol
+        .btn-link {
+          text-decoration: none !important;
+          color: #343a40;
+          cursor: pointer;
+          outline: none;
+          background: none;
+          border: none;
+
+          &:focus,
+          &:active {
+            outline: none !important;
+            box-shadow: none !important;
+            background-color: transparent;
+          }
+
+          &:hover {
+            background-color: transparent !important;
+            color: inherit;
+          }
+        }
+      }
+
+      // Animation d'ouverture de l'accordéon
+      .collapse {
+        padding: 0px 15px;
+        margin: 5px 0;
+        width: 100% !important;
+        height: 0;
+        overflow: hidden;
+        z-index: -1;
+        position: relative;
+        opacity: 0;
+        transition: 0.3s ease;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  /* Organisation du logo avec le menu sur petits écrans */
+  .navbar-right-bib {
+    margin-top: 5rem!important;
+    padding-bottom: 2.5rem!important;
   }
 }
