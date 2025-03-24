@@ -343,8 +343,59 @@ a.calypso-menu {
     }
   }
 }
+/* Personalisation dy style de la page d'accueil*/
+
+.navbar-expand .navbar-nav {
+  flex-direction: row;
+  margin-top: 10px;
+  margin-left: 10%;
+}
+
+.hero-section .hero-overlay ds-base-search-form form .input-group  {
+  width: 70% !important;
+  margin-left: 5%;
+  margin-top: 25px;
+}
+
+.hero-section .hero-overlay ds-base-search-form form .input-group .form-control {
+  position: relative !important;
+  width: 70% !important;
+  height: 50px !important;
+  background: transparent !important;
+  border-radius: 20px 0 0 20px !important;
+}
+
+.hero-section .hero-overlay ds-base-search-form form .input-group .btn-primary {
+  border: 1px solid white !important;
+  background: transparent;
+}
+
+.hero-section .hero-overlay ds-base-search-form form .input-group .form-control::placeholder {
+  color: white!important;
+  opacity: 1 !important;
+}
+
+.hero-section h1 {
+  text-align: left;
+  font-size: 90px;
+  width: 100%;
+  color: white;
+  font-weight: 500;
+  font-family: $font-family-serif;
+  margin-top: 30%;
+  margin-left: 5%;
+}
 
 @media (max-width: 600px) {
+  .hero-section h1 {
+    font-size: 60px;
+    margin-top: 70%;
+    margin-left: 0;
+  }
+
+  .hero-section .hero-overlay ds-base-search-form form .input-group .form-control {
+    height: 40px !important;
+  }
   /* Organisation du logo avec le menu sur petits écrans */
   .navbar-right-bib {
     margin-top: 5rem!important;
