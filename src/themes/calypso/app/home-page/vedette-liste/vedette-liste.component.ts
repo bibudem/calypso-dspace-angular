@@ -16,20 +16,31 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   standalone: true,
   imports: [ThemedLoadingComponent, TranslateModule, RouterModule, CommonModule, NgbModule],
 })
-export class VedetteListeComponent implements OnInit{
-  images$: Observable<Vedette[]>;
+export class VedetteListeComponent implements OnInit {
+  imagesGrouped$: Observable<Vedette[][]>;
 
-  constructor(
-    private vedetteService: VedetteService
-  ) {
-
-  }
+  constructor(private vedetteService: VedetteService) {}
 
   ngOnInit(): void {
-    this.images$ = this.vedetteService.getImagesHome().pipe(
-      map(images => this.vedetteService.shuffleArray(images)), // Mélanger le tableau d'images
-      map(shuffledImages => shuffledImages.slice(0, 5)) // Prendre les 5 premières images du tableau mélangé
+    this.imagesGrouped$ = this.vedetteService.getImagesHome().pipe(
+      map(images => this.vedetteService.shuffleArray(images)), // Mélanger les images
+      map(shuffledImages => shuffledImages.slice(0, 6)), // Prendre 6 images max
+      map(images => this.groupImages(images, 2)) // Regrouper par paires
     );
+  }
+
+  // Fonction pour grouper les images par taille de `size`
+  private groupImages(images: Vedette[], size: number): Vedette[][] {
+    const grouped: Vedette[][] = [];
+    for (let i = 0; i < images.length; i += size) {
+      grouped.push(images.slice(i, i + size));
+    }
+    return grouped;
+  }
+
+
+  trackByFn(index: number, item: Vedette[]) {
+    return item.map(img => img.id).join('-');
   }
 
 }

@@ -1,12 +1,47 @@
-<ng-container *ngIf="images$ | async as images">
-  <ngb-carousel *ngIf="images.length > 0">
-    <ng-template ngbSlide *ngFor="let image of images">
-      <img [src]="image.imageUrl" class="d-block w-100 vedette-home" alt="{{ image.title }}">
-      <div class="carousel-caption">
-        <h3><a [routerLink]="['/items/', image.id]">{{ image.title }}</a></h3>
-        <p>{{ image.description }}</p>
+<div class="testimonial-slider">
+  <div id="carouselExampleControls" class="carousel carousel-dark">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="testimonial-title">
+            <i class="bi bi-quote display-1"></i>
+            <h2 class="fw-bold display-6">{{ 'calypso.accueil.vedette.titre' | translate }}</h2>
+            <p>{{ 'calypso.accueil.vedette.description' | translate }}</p>
+          </div>
+          <button class="carousel-control-prev control-top-9" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next control-top-9" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="col-md-8">
+          <div class="carousel-inner">
+            <ng-container *ngIf="imagesGrouped$ | async as groupedImages">
+              <div class="carousel-item" [class.active]="i === 0" *ngFor="let group of groupedImages; let i = index; trackBy: trackByFn">
+                <div class="row">
+                  <div class="col-md-6" *ngFor="let image of group">
+                    <div class="card">
+                      <div class="img-wrapper">
+                        <img [src]="image.imageUrl" class="d-block w-100" [alt]="image.title">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          <a [routerLink]="['/items/', image.id]">{{ image.title }}</a>
+                        </h5>
+                        <p class="card-text">{{ image.description }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
       </div>
-    </ng-template>
-  </ngb-carousel>
-  <ds-loading *ngIf="!(images.length > 0)" message="Loading carousel..."></ds-loading>
-</ng-container>
+    </div>
+  </div>
+  <ds-loading *ngIf="!(imagesGrouped$ | async)?.length" message="Loading..."></ds-loading>
+</div>

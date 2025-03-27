@@ -18,7 +18,7 @@ $body-font-family: $font-family-sans-serif;
 @import '../../../styles/_global-styles.scss';
 
 /* -------------------------------------------------------
-   Variables pour le thème vert
+   Variables pour le thème collspec
 ---------------------------------------------------------- */
 @import './_variables.scss';
 // Add any global css for the theme here
@@ -278,7 +278,7 @@ p, span, a {
   margin: 20px 10%;
   border-radius: 20px;
   background: white;
-  z-index: 3000 !important;
+  z-index: 10 !important;
 }
 
 /* Lien du menu Calypso */
@@ -354,12 +354,13 @@ a.calypso-menu {
 .hero-section .hero-overlay ds-base-search-form form .input-group  {
   width: 70% !important;
   margin-left: 5%;
-  margin-top: 25px;
+  padding-left: 20px;
 }
 
 .hero-section .hero-overlay ds-base-search-form form .input-group .form-control {
   position: relative !important;
-  width: 70% !important;
+  flex: none;
+  width: 75% !important;
   height: 50px !important;
   background: transparent !important;
   border-radius: 20px 0 0 20px !important;
@@ -382,11 +383,58 @@ a.calypso-menu {
   color: white;
   font-weight: 500;
   font-family: $font-family-serif;
-  margin-top: 30%;
+  margin-top: 40vh;
   margin-left: 5%;
+  margin-bottom: 5%;
+  padding-left: 20px;
 }
 
-@media (max-width: 600px) {
+// ============================
+// Section Hero avec fond et overlay sur la page d'accueil
+// ============================
+.hero-section {
+  position: relative;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url('/assets/calypso/images/bibImage-home.jpg') no-repeat center center;
+  background-size: cover;
+  margin-top: -15% !important;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 3rem;
+  border-radius: 10px;
+  color: white;
+  width: 100%;
+  height: 90vh;
+}
+
+// ============================
+// Ajustements responsifs
+// ============================
+@media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;
+  }
+
+  .hero-overlay {
+    height: 50vh;
+    margin-top: -100%;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .filter, .search-btn {
+    width: 100%;
+  }
+
   .hero-section h1 {
     font-size: 60px;
     margin-top: 70%;
@@ -396,9 +444,16 @@ a.calypso-menu {
   .hero-section .hero-overlay ds-base-search-form form .input-group .form-control {
     height: 40px !important;
   }
+
+
   /* Organisation du logo avec le menu sur petits écrans */
   .navbar-right-bib {
     margin-top: 5rem!important;
     padding-bottom: 2.5rem!important;
+  }
+
+  .hero-section .hero-overlay ds-base-search-form form .input-group .form-control {
+    flex: none;
+    width: 50% !important;
   }
 }
