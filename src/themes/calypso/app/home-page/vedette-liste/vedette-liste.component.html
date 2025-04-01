@@ -1,47 +1,51 @@
-<div class="testimonial-slider">
-  <div id="carouselExampleControls" class="carousel carousel-dark">
+<div class="carousel-home-slider">
+  <div id="carouselHome" class="carousel slide carousel-dark" data-bs-ride="carousel" data-bs-interval="5000">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-4">
-          <div class="testimonial-title">
+          <div class="carousel-title">
             <i class="bi bi-quote display-1"></i>
             <h2 class="fw-bold display-6">{{ 'calypso.accueil.vedette.titre' | translate }}</h2>
             <p>{{ 'calypso.accueil.vedette.description' | translate }}</p>
           </div>
-          <button class="carousel-control-prev control-top-9" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        </div>
+        <div class="col-md-8">
+          <button class="carousel-control-prev control-top-3" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next control-top-9" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <button class="carousel-control-next control-top-3" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
-        </div>
-        <div class="col-md-8">
           <div class="carousel-inner">
-            <ng-container *ngIf="imagesGrouped$ | async as groupedImages">
-              <div class="carousel-item" [class.active]="i === 0" *ngFor="let group of groupedImages; let i = index; trackBy: trackByFn">
-                <div class="row">
-                  <div class="col-md-6" *ngFor="let image of group">
-                    <div class="card">
-                      <div class="img-wrapper">
-                        <img [src]="image.imageUrl" class="d-block w-100" [alt]="image.title">
-                      </div>
-                      <div class="card-body">
-                        <h5 class="card-title">
-                          <a [routerLink]="['/items/', image.id]">{{ image.title }}</a>
-                        </h5>
-                        <p class="card-text">{{ image.description }}</p>
-                      </div>
+            <ng-container *ngIf="imagesGrouped$ | async as images; else loading">
+              <div
+                class="carousel-item"
+                [ngClass]="{'active': i === 0}"
+                *ngFor="let image of imagesGrouped$ | async; let i = index; trackBy: trackByFn">
+
+                <div class="card h-100">
+                  <div class="img-wrapper">
+                    <img [src]="image.imageUrl" class="d-block" [alt]="image.title" loading="lazy">
+                    <div class="overlay">
+                      <h5 class="card-title">
+                        <a [routerLink]="['/items/', image.id]">{{ image.title }}</a>
+                      </h5>
                     </div>
                   </div>
                 </div>
+
               </div>
             </ng-container>
+            <ng-template #loading>
+              <ds-loading message="Loading..."></ds-loading>
+            </ng-template>
           </div>
         </div>
+
+
       </div>
     </div>
   </div>
-  <ds-loading *ngIf="!(imagesGrouped$ | async)?.length" message="Loading..."></ds-loading>
 </div>

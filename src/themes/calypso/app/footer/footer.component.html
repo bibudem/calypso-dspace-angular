@@ -1,0 +1,64 @@
+<footer  class="footer mt-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a  class="text-decoration-none" href="https://bib.umontreal.ca" target="_blank">
+          <p class="text-bib">{{ 'calypso.footer.bibliotheque' | translate }}</p>
+        </a>
+      </div>
+      <div class="col-md-3 col-sm-4 border-r mt-4">
+        <h5 class="text-lightgreen">{{ 'calypso.footer.contact.titre' | translate }}</h5>
+        <ul class="list-unstyled text-gray">
+          <li class="footer-link-udem">
+            <a  class="footer-link-udem" href="mailto:depot@bib.umontreal.ca"><i class="fas fa-envelope"></i> {{ 'calypso.footer.contact.ecrire' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-5 col-sm-4 pl-5 border-r mt-4">
+        <h5 class="text-lightgreen">{{ 'calypso.footer.infos.titre' | translate }}</h5>
+        <ul class="list-unstyled text-gray">
+          <li class="footer-link-udem">
+            <a class="footer-link-udem" href="https://bib.umontreal.ca/guides/bd/depot-institutionnel-papyrus">
+              <i class="fas fa-external-link-alt fa-lg fa-fw footer-link-udem"></i> {{ 'calypso.footer.infos.a_propos' | translate }}
+            </a>
+          </li>
+          <li class="footer-link-udem mt-2">
+            <a class="footer-link-udem" href="https://vie-privee.umontreal.ca/confidentialite/" target="_blank">
+              <i class="fas fa-external-link-alt fa-lg fa-fw footer-link-udem"></i> {{ 'calypso.footer.liens.confidentialite' | translate }}
+            </a>
+          </li>
+          <li class="footer-link-udem mt-2">
+            <a class="footer-link-udem" href="https://vie-privee.umontreal.ca/conditions-dutilisation/" target="_blank">
+              <i class="fas fa-external-link-alt fa-lg fa-fw footer-link-udem"></i> {{ 'calypso.footer.liens.accord_utilisateur' | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-4 pl-5 mt-4">
+        <a href="https://bib.umontreal.ca/" target="_blank"><img src="assets/calypso/images/logo-Biblio.png" alt="{{ 'calypso.footer.bibliotheque' | translate }}" class="footer-logo-bib"></a>
+      </div>
+    </div>
+    <div class="row p-3 mt-4">
+      <div class="col-md-12 text-center">
+        <a class="mr-2 text-white" href="http://www.dspace.org/" target="_blank">
+          {{ 'calypso.footer.dspace.copyright' | translate :{ year: dateObj | date:'y'} }}
+        </a>
+        <a class="mr-2 text-white" href="https://lyrasis.org/" target="_blank">
+          {{ 'calypso.footer.liens.lyrasis' | translate}}
+        </a>
+        <span class="text-blue">|</span>
+        <span class="ml-2 text-lightgreen">{{ 'calypso.footer.propulse_par' | translate }}</span>
+        <a href="https://scholaris.ca/fr/" >
+          <img src="assets/montreal/images/scholaris-logo-light.svg" alt="Logo Scholaris" class="footer-logo">
+        </a>
+      </div>
+    </div>
+  </div>
+  <section class="bg-footer-dark">
+    <div class="text-center p-2">
+      <small>
+        <a href="https://www.umontreal.ca/" class="text-white" target="_blank"> {{ 'calypso.footer.copyright' | translate: { year: dateObj | date:'y' } }}</a>
+      </small>
+    </div>
+  </section>
+</footer>

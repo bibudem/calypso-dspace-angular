@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {CommonModule, isPlatformBrowser} from '@angular/common';
 import { VedetteService } from '../../../service/vedette.service';
-import { Vedette } from '../../../models/Vedette';
 import { Observable } from 'rxjs';
-import {  map } from 'rxjs/operators';
-import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { map } from 'rxjs/operators';
+import {Vedette} from "../../../models/Vedette";
+import {ThemedLoadingComponent} from "../../../../../app/shared/loading/themed-loading.component";
+import {TranslateModule} from "@ngx-translate/core";
+import {RouterModule} from "@angular/router";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'ds-vedette-liste',
@@ -16,31 +18,48 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   standalone: true,
   imports: [ThemedLoadingComponent, TranslateModule, RouterModule, CommonModule, NgbModule],
 })
-export class VedetteListeComponent implements OnInit {
-  imagesGrouped$: Observable<Vedette[][]>;
+export class VedetteListeComponent implements OnInit, AfterViewInit {
+  imagesGrouped$: Observable<Vedette[]>;
+  isBrowser: boolean;
 
-  constructor(private vedetteService: VedetteService) {}
+  constructor(
+    private vedetteService: VedetteService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit(): void {
     this.imagesGrouped$ = this.vedetteService.getImagesHome().pipe(
-      map(images => this.vedetteService.shuffleArray(images)), // Mélanger les images
-      map(shuffledImages => shuffledImages.slice(0, 6)), // Prendre 6 images max
-      map(images => this.groupImages(images, 2)) // Regrouper par paires
+      map(images => this.vedetteService.shuffleArray(images)),
+      map(shuffledImages => shuffledImages.slice(0, 6)) // ✅ Garde une liste simple
     );
   }
 
-  // Fonction pour grouper les images par taille de `size`
-  private groupImages(images: Vedette[], size: number): Vedette[][] {
-    const grouped: Vedette[][] = [];
-    for (let i = 0; i < images.length; i += size) {
-      grouped.push(images.slice(i, i + size));
+  ngAfterViewInit(): void {
+    if (this.isBrowser) {
+      setTimeout(() => {
+        const carouselElement = document.getElementById('carouselHome');
+
+        if (carouselElement) {
+          console.log('Bootstrap:', typeof bootstrap.Carousel);
+
+          try {
+            const carousel = new bootstrap.Carousel(carouselElement, {
+              interval: 5000,
+              ride: 'carousel',
+              wrap: true,
+            });
+            console.log('Carousel initialisé:', carousel);
+          } catch (error) {
+            console.error('Erreur lors de l’init du carousel:', error);
+          }
+        }
+      }, 500);
     }
-    return grouped;
   }
 
-
-  trackByFn(index: number, item: Vedette[]) {
-    return item.map(img => img.id).join('-');
+  trackByFn(index: number, item: Vedette) {
+    return item.id;
   }
-
 }

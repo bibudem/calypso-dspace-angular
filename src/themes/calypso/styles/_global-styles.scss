@@ -414,6 +414,84 @@ a.calypso-menu {
 }
 
 // ============================
+// Section footer
+// ============================
+.footer {
+  background-color: $fondbase!important;
+  color: #f8f9fa;
+  padding-top: 40px;
+
+  h5 {
+    margin-bottom: 20px;
+    font-family: Figtree;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .footer-link-udem {
+    font-size: 14px;
+    color: $extralightblue;
+    margin: 0 10px;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $lightblue;
+    }
+  }
+
+  .footer-logo {
+    width: 150px;
+    margin-top: -10px;
+  }
+
+  .footer-logo-bib {
+    width: 175px;
+  }
+
+  .footer-link {
+    color: #f8f9fa;
+    margin: 0 10px;
+
+    &:hover {
+      color: $lightblue;
+    }
+  }
+
+  .text-blue {
+    color: $lightblue;
+  }
+
+  .text-gray {
+    color: #C3CCD5;
+  }
+
+  .border-r {
+    border-right: 1px solid #607386;
+  }
+
+  .text-bib {
+    color: #FFF;
+    font-family: Figtree;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 150%;
+  }
+}
+
+
+// ============================
 // Ajustements responsifs
 // ============================
 @media (max-width: 768px) {
