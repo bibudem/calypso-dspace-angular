@@ -87,7 +87,7 @@ p, span, a {
 }
 
 .bg-footer-dark {
-  background-color: #262525;
+  background-color: #040616;
 }
 
 
@@ -119,7 +119,7 @@ p, span, a {
   background-color: $ligthblue;
 }
 
-.bg-darkgreen {
+.bg-darkblue {
   background-color: $darkblue;
 }
 
@@ -136,6 +136,40 @@ p, span, a {
 .text-lightblue {
   color: $lightblue;
 }
+
+/* -------------------------------------------------------
+   Style boutons
+---------------------------------------------------------- */
+.btn-darkblue {
+  background-color: $darkblue;
+  color: $gray-100;
+  font-size: 13px;
+  position: relative;
+  padding-right: 2rem; // Ajoute de l'espace pour la flèche
+  transition: padding-right 0.3s ease-in-out;
+
+  &::after {
+    content: '➝';
+    position: absolute;
+    opacity: 0;
+    right: 1rem;
+    transition: opacity 0.3s, right 0.3s;
+  }
+
+  &:hover {
+    padding-right: 2.5rem;
+    background-color: $hoverdarkblue;
+    color: #FFFFFF;
+
+    &::after {
+      opacity: 1;
+      right: 0.5rem;
+    }
+  }
+}
+
+
+
 /* ===========================
    Styles pour la carte Calypso
    =========================== */
@@ -458,6 +492,7 @@ a.calypso-menu {
 
   .footer-logo-bib {
     width: 175px;
+    margin-left: 20px;
   }
 
   .footer-link {
@@ -473,16 +508,20 @@ a.calypso-menu {
     color: $lightblue;
   }
 
+  .text-primary{
+    color: $blue;
+  }
+
   .text-gray {
-    color: #C3CCD5;
+    color: #bcbebf;
   }
 
   .border-r {
-    border-right: 1px solid #607386;
+    border-right: 1px solid #60738665;
   }
 
-  .text-bib {
-    color: #FFF;
+  .text-title-bib {
+    color: $secondaryblue!important;
     font-family: Figtree;
     font-size: 24px;
     font-weight: 600;

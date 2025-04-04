@@ -4,7 +4,7 @@
 @import 'src/themes/calypso/styles/_variables.scss';
 
 /* -------------------------------------------------------
-   Styles généraux du carrousel
+   Composant principal : Carrousel vedette
 ------------------------------------------------------- */
 .carousel-home-slider {
   background-color: #f8f9fa;
@@ -48,46 +48,74 @@
   }
 
   /* ---------------------------------------------------
-     Conteneur des items du carrousel
+     Items du carrousel
   --------------------------------------------------- */
   .carousel-inner {
     padding: 1rem;
     display: flex;
     overflow: hidden;
+    position: relative;
 
     .carousel-item {
-      transition: transform 0.6s ease-in-out;
-      display: block !important;
       margin-right: 20px;
-      flex: 0 0 25%;;
+      flex: 0 0 25%;
+      opacity: 0.5;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+      position: relative;
+      z-index: 1;
+      visibility: hidden;
+      will-change: transform, opacity;
 
-      // Premier élément (actif) - plein largeur et clair
       &.active {
         flex: 0 0 70%;
         opacity: 1;
-        transform: none;
-        z-index: 1;
+        z-index: 3;
+        visibility: visible;
       }
 
-      // Éléments suivants - aperçu réduit
-      &.next {
-        flex: 0 0 25%;
+      &.active + .carousel-item {
         opacity: 0.7;
-        transform: scale(0.9);
+        visibility: visible;
+        z-index: 2;
+        flex: 0 0 70%;
       }
-      &.prev {
-        display: block;
+
+      &.d-none {
+        display: none !important;
       }
+
+      &.active,
+      &.active + .carousel-item:not(.d-none) {
+        display: block !important;
+      }
+    }
+
+    /* -------------------------------------------------
+       Transitions directionnelles
+    ------------------------------------------------- */
+    .carousel-item-next,
+    .carousel-item-prev {
+      display: block;
+    }
+
+    .carousel-item-next:not(.carousel-item-start),
+    .active.carousel-item-end {
+      transform: translateX(75%) scale(1);
+    }
+
+    .carousel-item-prev:not(.carousel-item-end),
+    .active.carousel-item-start {
+      transform: translateX(-75%) scale(1);
     }
   }
 
   /* ---------------------------------------------------
-     Boutons de contrôle du carrousel
+     Contrôles du carrousel (flèches)
   --------------------------------------------------- */
   .carousel-control-prev,
   .carousel-control-next {
     width: 4%;
-    top: 40vh;
+    top: 42vh;
     transform: translateY(-50%);
     opacity: 1;
     margin-left: 35%;
@@ -114,7 +142,7 @@
   }
 
   /* ---------------------------------------------------
-     Style des cartes dans le carrousel
+     Style des cartes dans les items
   --------------------------------------------------- */
   .card {
     border: none;
@@ -125,7 +153,7 @@
     transition: all 0.3s ease;
 
     .img-wrapper {
-      height: 30vh;
+      height: 35vh;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -172,8 +200,9 @@
 /* -------------------------------------------------------
    Styles responsives
 ------------------------------------------------------- */
+
+/* Grand écran : ≤ 992px */
 @media (max-width: 992px) {
-  .carousel-home-slider {
     .carousel-title {
       text-align: center;
       padding-bottom: 0;
@@ -181,36 +210,54 @@
       h2 {
         font-size: 1.75rem;
       }
+
+      p {
+        margin-left: 0;
+        text-align: center;
+      }
     }
 
     .carousel-inner {
       .carousel-item {
-        flex: 0 0 80% !important;
+        display: none !important;
+        flex: 0 0 70% !important;
+        margin-right: 10px;
 
-        &:not(.active) {
-          flex: 0 0 30% !important;
+        &.active {
+          display: block !important;
         }
       }
     }
-  }
 }
 
+/* Mobile : ≤ 768px */
 @media (max-width: 768px) {
-  .carousel-home-slider {
-    padding: 2rem 0;
 
     .carousel-inner {
-      .carousel-item {
-        flex: 0 0 90% !important;
+      flex-direction: column;
 
-        &:not(.active) {
-          display: none !important;
+      .carousel-item {
+        flex: 0 0 100% !important;
+        margin-right: 0;
+        display: none !important;
+
+        &.active {
+          display: block !important;
         }
       }
-    }
+
 
     .img-wrapper {
       height: 200px !important;
     }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 8%;
+      top: 80%;
+      margin-left: 0;
+      transform: translateY(-50%);
+    }
   }
 }
+

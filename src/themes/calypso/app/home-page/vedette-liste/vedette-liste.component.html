@@ -1,5 +1,5 @@
 <div class="carousel-home-slider">
-  <div id="carouselHome" class="carousel slide carousel-dark" data-bs-ride="carousel" data-bs-interval="5000">
+  <div id="carouselHome" class="carousel slide carousel-dark carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-4">
@@ -23,8 +23,7 @@
               <div
                 class="carousel-item"
                 [ngClass]="{'active': i === 0}"
-                *ngFor="let image of imagesGrouped$ | async; let i = index; trackBy: trackByFn">
-
+                *ngFor="let image of images; let i = index; trackBy: trackByFn">
                 <div class="card h-100">
                   <div class="img-wrapper">
                     <img [src]="image.imageUrl" class="d-block" [alt]="image.title" loading="lazy">
@@ -35,7 +34,6 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </ng-container>
             <ng-template #loading>
@@ -43,8 +41,6 @@
             </ng-template>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>

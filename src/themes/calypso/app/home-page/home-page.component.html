@@ -14,7 +14,7 @@
 <ds-home-news></ds-home-news>
 <ds-vedette-liste></ds-vedette-liste>
 <div [ngClass]="appConfig.homePage.showDiscoverFilters ? 'container-fluid' : 'container'">
-  <div class="row m-5">
+  <div class="row">
     <div class="col-sm-3" *ngIf="appConfig.homePage.showDiscoverFilters">
       @if (showDiscoverFilters) {
         <ds-configuration-search-page
