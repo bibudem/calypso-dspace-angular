@@ -60,68 +60,72 @@ export class VedetteListeComponent implements OnInit, AfterViewInit {
    * Initialise le carrousel une fois la vue chargée (si navigateur).
    * Gère l'effet de boucle et la visibilité des éléments.
    */
-  ngAfterViewInit(): void {
-    if (!this.isBrowser) return;
+    ngAfterViewInit(): void {
+      if (this.isBrowser) {
+        setTimeout(() => this.initializeCarousel(), 100);
+      }
+    }
 
-    setTimeout(() => {
-      const carouselElement = document.getElementById('carouselHome');
-      if (!carouselElement) return;
+  /**
+   * Initialise le carrousel Bootstrap et configure la boucle "circulaire" manuelle.
+   */
+  private initializeCarousel(): void {
+    const carouselElement = document.getElementById('carouselHome');
+    if (!carouselElement) return;
 
-      const inner = carouselElement.querySelector('.carousel-inner');
-      if (!inner) return;
+    const inner = carouselElement.querySelector('.carousel-inner');
+    const items = carouselElement.querySelectorAll('.carousel-item');
 
-      const items = carouselElement.querySelectorAll('.carousel-item');
-      if (items.length < 2) return;
+    if (items.length < 2 || !inner) return;
 
-      // Duplique les deux premiers éléments à la fin pour simuler une boucle
-      [0, 1].forEach((i) => inner.appendChild(items[i].cloneNode(true)));
+    // Duplique les deux premiers éléments à la fin pour simuler une boucle
+    [0, 1].forEach(i => inner.appendChild(items[i].cloneNode(true)));
 
-      // Initialise le carrousel Bootstrap
-      this.carousel = new bootstrap.Carousel(carouselElement, {
-        interval: 5000,
-        wrap: false,
-        touch: true,
-      });
+    this.carousel = new bootstrap.Carousel(carouselElement, {
+      interval: 5000,
+      wrap: false,
+      touch: true,
+    });
 
-      /**
-       * Met à jour la visibilité des éléments :
-       * seuls l'élément actif et le suivant sont visibles.
-       */
-      const updateVisibility = () => {
-        const active = carouselElement.querySelector(
-          '.carousel-item.active'
-        ) as HTMLElement;
-        const next = active?.nextElementSibling as HTMLElement;
+    this.updateVisibility(carouselElement);
 
-        carouselElement.querySelectorAll('.carousel-item').forEach((el) => {
-          const item = el as HTMLElement;
-          const isVisible = item === active || item === next;
-          item.classList.toggle('d-none', !isVisible);
-          item.style.display = isVisible ? 'block' : 'none';
-        });
-      };
+    carouselElement.addEventListener('slid.bs.carousel', (event: any) => {
+      this.onSlideChange(event, carouselElement);
+    });
+  }
 
-      // Initialisation de la visibilité
-      updateVisibility();
+  /**
+   * Met à jour les éléments visibles dans le carrousel :
+   * seuls l'actif et le suivant sont affichés.
+   */
+  private updateVisibility(carouselElement: HTMLElement): void {
+    const active = carouselElement.querySelector('.carousel-item.active') as HTMLElement;
+    const next = active?.nextElementSibling as HTMLElement;
 
-      /**
-       * Écoute le changement de slide et reboucle
-       * si on atteint la fin simulée.
-       */
-      carouselElement.addEventListener('slid.bs.carousel', (event: any) => {
-        const activeIndex = event?.to;
-        const items = carouselElement.querySelectorAll('.carousel-item');
+    carouselElement.querySelectorAll('.carousel-item').forEach((el) => {
+      const item = el as HTMLElement;
+      const isVisible = item === active || item === next;
+      item.classList.toggle('d-none', !isVisible);
+      item.style.display = isVisible ? 'block' : 'none';
+    });
+  }
 
-        updateVisibility();
+  /**
+   * Callback exécuté après chaque transition de slide.
+   * Si on atteint le dernier "faux" slide, on rebascule sans transition au début.
+   */
+  private onSlideChange(event: any, carouselElement: HTMLElement): void {
+    const activeIndex = event?.to;
+    const items = carouselElement.querySelectorAll('.carousel-item');
 
-        if (activeIndex === items.length - 3) {
-          setTimeout(() => {
-            this.carousel.to(0, { duration: 0 });
-            setTimeout(updateVisibility, 10);
-          }, 50);
-        }
-      });
-    }, 100);
+    this.updateVisibility(carouselElement);
+
+    if (activeIndex === items.length - 3) {
+      setTimeout(() => {
+        this.carousel.to(0, { duration: 0 });
+        setTimeout(() => this.updateVisibility(carouselElement), 10);
+      }, 50);
+    }
   }
 
   /**

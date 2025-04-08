@@ -31,7 +31,7 @@
 
   "calypso.accueil.vedette.titre": "Découvrez nos meilleures publications",
 
-  "calypso.accueil.vedette.description": "Découvrez notre collection exclusive d'articles en vedette, méticuleusement sélectionnés pour vous offrir le meilleur de notre contenu. Chaque article a été choisi avec soin afin de vous proposer une expérience enrichissante et captivante, reflétant notre engagement à vous présenter des informations de qualité et des perspectives uniques. Explorez ces pièces maîtresses qui incarnent l'essence de notre travail et laissent une empreinte durable dans votre esprit.",
+  "calypso.accueil.vedette.description": "Découvrez notre collection exclusive d'articles en vedette, méticuleusement sélectionnés pour vous offrir le meilleur de notre contenu. Chaque article a été choisi avec soin afin de vous proposer une expérience enrichissante et captivante, reflétant notre engagement à vous présenter des informations de qualité et des perspectives uniques.",
 
   "calypso.faq.titre": "FAQ - Vos Questions, Nos Réponses",
 
@@ -47,10 +47,11 @@
   "calypso.footer.bibliotheque": "Les bibliothèques de l’Université de Montréal",
   "calypso.footer.emergency": "Urgence 514 343-7771",
   "calypso.footer.contact.titre": "Nous joindre",
+  "calypso.footer.contact.clavarder": "Clavarder avec l'équipe des bibliothèques",
   "calypso.footer.infos.titre": "Infos",
   "calypso.footer.infos.a_propos": "À propos",
   "calypso.footer.infos.a_propos.description": "Ce portail vous permet d'explorer une sélection d'articles issus des collections spéciales de la Bibliothèque de l’Université de Montréal. Ces documents, conservés pour leur valeur historique, académique ou culturelle, sont accessibles pour consultation et recherche.",
-  "calypso.footer.liens.confidentialite": "Politique de confidentialité",
-  "calypso.footer.liens.accord_utilisateur": "Conditions d'utilisation de l'UdeM",
+  "calypso.footer.liens.confidentialite": "Confidentialité",
+  "calypso.footer.liens.accord_utilisateur": " Condition d’utilisation",
   "calypso.footer.copyright": "© Université de Montréal, {{year}}. Tous droits réservés"
 }

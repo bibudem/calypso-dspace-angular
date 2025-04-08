@@ -60,7 +60,8 @@
       margin-right: 20px;
       flex: 0 0 25%;
       opacity: 0.5;
-      transition: transform 0.8s ease, opacity 0.8s ease;
+      transition: transform 0.8s ease, opacity 0.8s ease, scale 0.8s ease;
+      transform: scale(0.95);
       position: relative;
       z-index: 1;
       visibility: hidden;
@@ -68,16 +69,18 @@
 
       &.active {
         flex: 0 0 70%;
+        transform: scale(1);
         opacity: 1;
         z-index: 3;
         visibility: visible;
       }
 
       &.active + .carousel-item {
-        opacity: 0.7;
         visibility: visible;
         z-index: 2;
         flex: 0 0 70%;
+        opacity: 1;
+        pointer-events: auto;
       }
 
       &.d-none {
@@ -96,6 +99,8 @@
     .carousel-item-next,
     .carousel-item-prev {
       display: block;
+      opacity: 0.7;
+      transition: transform 0.8s ease, opacity 0.8s ease;
     }
 
     .carousel-item-next:not(.carousel-item-start),
@@ -232,32 +237,52 @@
 
 /* Mobile : ≤ 768px */
 @media (max-width: 768px) {
+  .carousel-inner {
+    flex-direction: row; // on reste horizontal pour le swipe
+    scroll-snap-type: x mandatory; // pour forcer l'arrêt au bon item (bonus UX)
 
-    .carousel-inner {
-      flex-direction: column;
+    .carousel-item {
+      flex: 0 0 100% !important;
+      margin-right: 0;
+      display: none !important;
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      scroll-snap-align: center;
 
-      .carousel-item {
-        flex: 0 0 100% !important;
-        margin-right: 0;
-        display: none !important;
-
-        &.active {
-          display: block !important;
-        }
+      &.active {
+        display: block !important;
+        opacity: 1;
       }
 
+      img {
+        object-fit: cover;
+        height: 220px !important;
+      }
+    }
+  }
 
-    .img-wrapper {
-      height: 200px !important;
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 12%;
+    top: 85%;
+    transform: translateY(-50%);
+    margin-left: 0;
+  }
+
+  .carousel-title {
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.5rem;
+      text-align: center;
     }
 
-    .carousel-control-prev,
-    .carousel-control-next {
-      width: 8%;
-      top: 80%;
+    p {
+      text-align: center;
       margin-left: 0;
-      transform: translateY(-50%);
+      font-size: 0.95rem;
     }
   }
 }
+
 

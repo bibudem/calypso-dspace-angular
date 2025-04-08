@@ -527,6 +527,17 @@ a.calypso-menu {
     font-weight: 600;
     line-height: 150%;
   }
+
+  .link-footer{
+    color: $gray-400!important;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .link-footer:hover{
+    color: $lightblue!important;
+  }
+
 }
 
 

@@ -12,39 +12,48 @@
           {{ 'calypso.footer.infos.a_propos.description' | translate }}
         </p>
       </div>
-      <div class="col-md-4 col-sm-4 pl-5 border-r mt-5 mb-5">
-        <h5 class="text-lightblue ml-2">{{ 'calypso.footer.infos.titre' | translate }}</h5>
+      <div class="col-md-3 col-sm-4 pl-5 border-r mt-5 mb-5">
+        <h5 class="text-lightblue">{{ 'calypso.footer.contact.titre' | translate }}</h5>
         <ul class="list-unstyled text-gray ml-2">
-          <li class="footer-link-udem mt-2">
-            <a class="footer-link-udem" href="https://vie-privee.umontreal.ca/confidentialite/" target="_blank">
-               {{ 'calypso.footer.liens.confidentialite' | translate }}
-            </a>
-          </li>
-          <li class="footer-link-udem mt-2">
-            <a class="footer-link-udem" href="https://vie-privee.umontreal.ca/conditions-dutilisation/" target="_blank">
-               {{ 'calypso.footer.liens.accord_utilisateur' | translate }}
-            </a>
-          </li>
           <li class="footer-link-udem mt-2">
             <a class="footer-link-udem" href="https://bib.umontreal.ca/nous-joindre">
               <img src="/assets/calypso/images/Chats.svg" alt=""> {{ 'calypso.footer.contact.titre' | translate }}
             </a>
           </li>
           <li class="footer-link-udem mt-2">
-            <a href="#" class="footer-link-udem"><img src="/assets/calypso/images/Siren.svg" alt=""></a> {{ 'calypso.footer.emergency' | translate }}
+            <a href="#" class="footer-link-udem">
+              <img src="/assets/calypso/images/Siren.svg" alt=""> {{ 'calypso.footer.emergency' | translate }}
+            </a>
           </li>
         </ul>
       </div>
-      <div class="col-md-3 col-sm-4 pl-5 mt-5 mb-5">
+      <div class="col-md-4 col-sm-4 pl-5 mt-5 mb-5">
         <a href="https://bib.umontreal.ca/" target="_blank"><img src="assets/calypso/images/logo-Biblio.png" alt="{{ 'calypso.footer.bibliotheque' | translate }}" class="footer-logo-bib"></a>
       </div>
     </div>
   </div>
   <section class="bg-footer-dark">
-    <div class="text-center p-2">
-      <small>
-        <a href="https://www.umontreal.ca/" class="text-white" target="_blank"> {{ 'calypso.footer.copyright' | translate: { year: dateObj | date:'y' } }}</a>
-      </small>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 text-sm-left">
+          <ul  class="terms-privacy d-flex justify-content-sm-start list-unstyled mt-3">
+            <li class="ml-2">
+               <a href="https://www.umontreal.ca/" class="link-footer" target="_blank"> {{ 'calypso.footer.copyright' | translate: { year: dateObj | date:'y' } }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-sm-6 text-sm-left ">
+          <ul  class="terms-privacy d-flex justify-content-sm-end  list-unstyled mt-3">
+            <li class="ml-2">
+                <a href="https://vie-privee.umontreal.ca/confidentialite/" target="_blank" class="link-footer"> {{ 'calypso.footer.liens.confidentialite' | translate }}</a>
+            </li>
+            <li class="ml-2"> | </li>
+            <li class="ml-2">
+                <a href="https://vie-privee.umontreal.ca/conditions-dutilisation/" target="_blank" class="link-footer">{{ 'calypso.footer.liens.accord_utilisateur' | translate }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 </footer>
