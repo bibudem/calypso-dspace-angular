@@ -6930,59 +6930,59 @@
 
   "search.filters.access_status.unknown": "Unknown",
 
-  "calypso.tab-files": "Files",
+  "collspec.tab-files": "Files",
 
-  "calypso.tab-notice": "Full notice",
+  "collspec.tab-notice": "Full notice",
 
-  "calypso.return": "Return",
+  "collspec.return": "Return",
 
-  "calypso.consult": "Consult",
+  "collspec.consult": "Consult",
 
-  "calypso.ai-title": "Perform a search with AI",
+  "collspec.ai-title": "Perform a search with AI",
 
-  "calypso.ai-explanation": "Explanation ...",
+  "collspec.ai-explanation": "Explanation ...",
 
-  "calypso.ai-cancel": "Cancel",
+  "collspec.ai-cancel": "Cancel",
 
-  "calypso.ai-link": "Start",
+  "collspec.ai-link": "Start",
 
-  "calypso.ai-search-title": "Find Similar Images with AI",
+  "collspec.ai-search-title": "Find Similar Images with AI",
 
-  "calypso.ai-search-description": "Explore visually similar items from our collection with just one click",
+  "collspec.ai-search-description": "Explore visually similar items from our collection with just one click",
 
-  "calypso.ai-load-more": "Load more",
+  "collspec.ai-load-more": "Load more",
 
-  "calypso.ai-selected-img": "Selected image",
+  "collspec.ai-selected-img": "Selected image",
 
-  "calypso.ai-notification-title": "AI Search Title",
+  "collspec.ai-notification-title": "AI Search Title",
 
-  "calypso.ai-notification-content": "Here is a message for the AI search",
+  "collspec.ai-notification-content": "Here is a message for the AI search",
 
-  "calypso.page-udem.breadcrumbs": "Lire plus",
+  "collspec.page-udem.breadcrumbs": "Lire plus",
 
-  "calypso.ai-search.breadcrumbs": "Recherche IA",
+  "collspec.ai-search.breadcrumbs": "Recherche IA",
 
-  "calypso.contact-title": "Contact Us",
+  "collspec.contact-title": "Contact Us",
 
-  "calypso.contact-description": "For any questions or additional information regarding this platform, please do not hesitate to contact us.",
+  "collspec.contact-description": "For any questions or additional information regarding this platform, please do not hesitate to contact us.",
 
-  "calypso.contact-phone": "+123 456 7890",
+  "collspec.contact-phone": "+123 456 7890",
 
-  "calypso.contact-email": "contact@example.ca",
+  "collspec.contact-email": "contact@example.ca",
 
-  "calypso.contact-links-title": "Stay in touch",
+  "collspec.contact-links-title": "Stay in touch",
 
-  "calypso.contact-libraries": "Libraries",
+  "collspec.contact-libraries": "Libraries",
 
-  "calypso.contact-udem": "University of Montreal",
+  "collspec.contact-udem": "University of Montreal",
 
-  "calypso.faq.titre": "FAQ - Your Questions, Our Answers",
+  "collspec.faq.titre": "FAQ - Your Questions, Our Answers",
 
-  "calypso.faq.description": "FAQ - Your Questions, Our Answers",
+  "collspec.faq.description": "FAQ - Your Questions, Our Answers",
 
-  "calypso.droits.titre": "Copyright and Usage",
+  "collspec.droits.titre": "Copyright and Usage",
 
-  "calypso.droits.description": "Notice on the Use of Digital Object Collection Content"
+  "collspec.droits.description": "Notice on the Use of Digital Object Collection Content"
 
 }
 

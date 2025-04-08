@@ -60,9 +60,9 @@
                 "bundleName": "dspace-theme"
               },
               {
-                "input": "src/themes/calypso/styles/theme.scss",
+                "input": "src/themes/collspec/styles/theme.scss",
                 "inject": false,
-                "bundleName": "calypso-theme"
+                "bundleName": "collspec-theme"
               }
             ],
             "scripts": [],

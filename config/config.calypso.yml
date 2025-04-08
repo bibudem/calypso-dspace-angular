@@ -106,14 +106,14 @@ auth:
 # est:
 #
 # 1) Variables d'environnement
-# 2) Fichier config/config.calypso.yml
+# 2) Fichier config/config.collspec.yml
 # 3) Fichier config/config.[prod|dev|test].yml
 # 4) Fichier config/config.yml
 #
 # À noter qu'une variable d'environnement est nécessaire pour que le fichier
 # .local soit lu:
 #
-# export DSPACE_APP_CONFIG_PATH=config/config.calypso.yml
+# export DSPACE_APP_CONFIG_PATH=config/config.collspec.yml
 #
 # Voir config/config.server.ts pour les détails
 #############################################################################
@@ -315,13 +315,13 @@ themes:
   # - name: BASE_THEME_NAME
   #
 
-  - name: calypso
+  - name: collspec
     extends: dspace
     headTags:
       - tagName: link
         attributes:
           rel: icon
-          href: assets/calypso/images/favicons/favicon.ico
+          href: assets/collspec/images/favicons/favicon.ico
           sizes: any
 
   - name: dspace
@@ -394,5 +394,5 @@ search:
   advancedFilters:
     enabled: true
     # List of filters to enable in "Advanced Search" dropdown
-    filter: [ 'title', 'subject', 'calypso.vedette' ]
+    filter: [ 'title', 'subject', 'collspec.vedette' ]
 

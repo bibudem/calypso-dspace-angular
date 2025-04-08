@@ -1,0 +1,587 @@
+// Import the custom fonts
+@import 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Lora:wght@400;600&display=swap';
+
+// Configure Bootstrap to use these fonts
+$font-family-sans-serif: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif !default;
+$font-family-serif: 'Lora', serif !default;
+
+// Assign the fonts to specific Bootstrap components or SCSS variables
+$headings-font-family: $font-family-sans-serif;
+$h4-font-family: $font-family-serif;
+$body-font-family: $font-family-sans-serif;
+
+/* -------------------------------------------------------
+   Importation des styles globaux
+---------------------------------------------------------- */
+// Importation des styles globaux de base
+@import '../../../styles/_global-styles.scss';
+
+/* -------------------------------------------------------
+   Variables pour le thème collspec
+---------------------------------------------------------- */
+@import './_variables.scss';
+// Add any global css for the theme here
+
+// imports the base global style
+@import '../../../styles/_global-styles.scss';
+
+/* -------------------------------------------------------
+   Titres
+---------------------------------------------------------- */
+
+h1, h2, h3, h5, h6 {
+  font-weight: 600;
+  font-family: Figtree;
+  color: $gray-800;
+}
+
+h4 {
+  font-family: Lora;
+}
+
+h2{
+  font-size: 46px;
+  font-weight: 600;
+}
+
+a {
+  color: $blue;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+a.lead {
+  font-weight: 450 !important;
+  color:$blue;
+}
+
+a.lead:hover {
+  color: $autreblue;
+}
+
+/* Styles pour les badges */
+.badge-secondary {
+  background-color: var(--bs-primary);
+}
+
+nav#admin-sidebar a {
+  color: $extralightblue!important;
+  text-decoration: none!important;
+}
+
+/* -------------------------------------------------------
+   Styles pour les paragraphes et le texte
+---------------------------------------------------------- */
+p, span, a {
+  font-family: Figtree;
+}
+
+// -------------------------------------------------------
+// Button Styles
+// -------------------------------------------------------
+.btn {
+  border-radius: 60px;
+}
+
+.bg-footer-dark {
+  background-color: #040616;
+}
+
+
+.cm-btn-success{
+  background-color: $blue!important;
+  color: $extralightblue!important;
+}
+
+.navbar-nav .dropdown-menu {
+  background: $white !important;
+}
+
+#user-menu-dropdown{
+  padding: 10px;
+}
+
+.img-radius-bib {
+  border-radius: 12px!important;
+}
+
+/* -------------------------------------------------------
+   Couleurs de fond personnalisées
+---------------------------------------------------------- */
+.bg-lightgreen {
+  background-color: $lightblue;
+}
+
+.bg-ligthblue {
+  background-color: $ligthblue;
+}
+
+.bg-darkblue {
+  background-color: $darkblue;
+}
+
+.badge-secondary {
+  background-color: $blue;
+  color: $extralightblue;
+}
+
+
+.text-extralightgreen {
+  color: $extralightblue;
+}
+
+.text-lightblue {
+  color: $lightblue;
+}
+
+/* -------------------------------------------------------
+   Style boutons
+---------------------------------------------------------- */
+.btn-darkblue {
+  background-color: $darkblue;
+  color: $gray-100;
+  font-size: 13px;
+  position: relative;
+  padding-right: 2rem; // Ajoute de l'espace pour la flèche
+  transition: padding-right 0.3s ease-in-out;
+
+  &::after {
+    content: '➝';
+    position: absolute;
+    opacity: 0;
+    right: 1rem;
+    transition: opacity 0.3s, right 0.3s;
+  }
+
+  &:hover {
+    padding-right: 2.5rem;
+    background-color: $hoverdarkblue;
+    color: #FFFFFF;
+
+    &::after {
+      opacity: 1;
+      right: 0.5rem;
+    }
+  }
+}
+
+
+
+/* ===========================
+   Styles pour la carte Calypso
+   =========================== */
+.card-collspec {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.05),
+  0 2px 3px rgba(0, 0, 0, 0.05),
+  0 2px 1px rgba(0, 0, 0, 0.05);
+  border-radius: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-size: cover;
+
+  .specifies {
+    position: absolute;
+    width: 100%;
+    bottom: -60px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.6s;
+
+    .left-text {
+      position: absolute;
+      top: 12px;
+      right: 25px;
+      font-weight: bold;
+      color: #000;
+      font-size: 18px;
+    }
+
+    label {
+      display: block;
+      margin-top: 5px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        margin: 5px 5px 0;
+        font-size: 15px;
+        font-style: normal;
+        color: #ccc;
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &:hover .specifies {
+    bottom: 0;
+    background: rgb(255, 255, 255);
+  }
+}
+
+/* Lien associé à la carte Calypso */
+.collspec-card-lien {
+  display: block;
+  padding: 5px;
+  color: #d94607;
+  margin: 10px 0 0;
+  width: 100%;
+  font-size: 13px;
+  border-radius: 0;
+
+  &:hover {
+    color: #da3401;
+  }
+}
+
+/* ===============================
+   Personnalisation des cartes DSpace
+   =============================== */
+.card-columns .card {
+  position: relative;
+  height: 420px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.05),
+  0 2px 3px rgba(0, 0, 0, 0.05),
+  0 2px 1px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-size: cover;
+  border: none !important;
+
+  .card-body {
+    padding: 1rem !important;
+
+    a {
+      position: absolute;
+      top: 90%;
+      right: 5px;
+      color: #ffffff;
+      font-size: 14px;
+      border-radius: 0;
+    }
+  }
+}
+
+/* Cache un élément spécifique */
+.collspec-hide {
+  display: none !important;
+}
+
+/* ===========================
+   Style pour l'image de la recherche AI
+   =========================== */
+.collspec-img-ia {
+  width: 35px;
+  height: 35px;
+  float: right;
+  margin-left: 10px;
+  margin-top: -3px;
+  margin-right: 0.5em;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+}
+
+/* ===========================
+   Ajustement du style de l'en-tête
+   =========================== */
+#main-site-header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  margin: 20px 10%;
+  border-radius: 20px;
+  background: white;
+  z-index: 10 !important;
+}
+
+/* Lien du menu Calypso */
+a.collspec-menu {
+  color: $autreblue !important;
+}
+
+/* ===========================
+   Styles pour la FAQ
+   =========================== */
+.faq-container {
+  .accordion {
+    .card {
+      border: none !important;
+      margin-top: 10px !important;
+
+      &:hover {
+        color: #0c0000;
+        font-weight: 600;
+      }
+
+      .card-header {
+        border-radius: 0;
+        background: rgba(233, 236, 239, 0.5);
+        border-block-color: white;
+
+        // Bouton sans effet visuel au clic ou au survol
+        .btn-link {
+          text-decoration: none !important;
+          color: #343a40;
+          cursor: pointer;
+          outline: none;
+          background: none;
+          border: none;
+
+          &:focus,
+          &:active {
+            outline: none !important;
+            box-shadow: none !important;
+            background-color: transparent;
+          }
+
+          &:hover {
+            background-color: transparent !important;
+            color: inherit;
+          }
+        }
+      }
+
+      // Animation d'ouverture de l'accordéon
+      .collapse {
+        padding: 0px 15px;
+        margin: 5px 0;
+        width: 100% !important;
+        height: 0;
+        overflow: hidden;
+        z-index: -1;
+        position: relative;
+        opacity: 0;
+        transition: 0.3s ease;
+      }
+    }
+  }
+}
+/* Personalisation dy style de la page d'accueil*/
+
+.navbar-expand .navbar-nav {
+  flex-direction: row;
+  margin-top: 10px;
+  margin-left: 10%;
+}
+
+.hero-section .hero-overlay ds-base-search-form form .input-group  {
+  width: 70% !important;
+  margin-left: 5%;
+  padding-left: 20px;
+}
+
+.hero-section .hero-overlay ds-base-search-form form .input-group .form-control {
+  position: relative !important;
+  flex: none;
+  width: 75% !important;
+  height: 50px !important;
+  background: transparent !important;
+  border-radius: 20px 0 0 20px !important;
+}
+
+.hero-section .hero-overlay ds-base-search-form form .input-group .btn-primary {
+  border: 1px solid white !important;
+  background: transparent;
+}
+
+.hero-section .hero-overlay ds-base-search-form form .input-group .form-control::placeholder {
+  color: white!important;
+  opacity: 1 !important;
+}
+
+.hero-section h1 {
+  text-align: left;
+  font-size: 90px;
+  width: 100%;
+  color: white;
+  font-weight: 500;
+  font-family: $font-family-serif;
+  margin-top: 40vh;
+  margin-left: 5%;
+  margin-bottom: 5%;
+  padding-left: 20px;
+}
+
+// ============================
+// Section Hero avec fond et overlay sur la page d'accueil
+// ============================
+.hero-section {
+  position: relative;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url('/assets/collspec/images/bibImage-home.jpg') no-repeat center center;
+  background-size: cover;
+  margin-top: -15% !important;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 3rem;
+  border-radius: 10px;
+  color: white;
+  width: 100%;
+  height: 90vh;
+}
+
+// ============================
+// Section footer
+// ============================
+.footer {
+  background-color: $fondbase!important;
+  color: #f8f9fa;
+  padding-top: 40px;
+
+  h5 {
+    margin-bottom: 20px;
+    font-family: Figtree;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .footer-link-udem {
+    font-size: 14px;
+    color: $extralightblue;
+    margin: 0 10px;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $lightblue;
+    }
+  }
+
+  .footer-logo {
+    width: 150px;
+    margin-top: -10px;
+  }
+
+  .footer-logo-bib {
+    width: 175px;
+    margin-left: 20px;
+  }
+
+  .footer-link {
+    color: #f8f9fa;
+    margin: 0 10px;
+
+    &:hover {
+      color: $lightblue;
+    }
+  }
+
+  .text-blue {
+    color: $lightblue;
+  }
+
+  .text-primary{
+    color: $blue;
+  }
+
+  .text-gray {
+    color: #bcbebf;
+  }
+
+  .border-r {
+    border-right: 1px solid #60738665;
+  }
+
+  .text-title-bib {
+    color: $secondaryblue!important;
+    font-family: Figtree;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 150%;
+  }
+
+  .link-footer{
+    color: $gray-400!important;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .link-footer:hover{
+    color: $lightblue!important;
+  }
+
+}
+
+
+// ============================
+// Ajustements responsifs
+// ============================
+@media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;
+  }
+
+  .hero-overlay {
+    height: 50vh;
+    margin-top: -100%;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .filter, .search-btn {
+    width: 100%;
+  }
+
+  .hero-section h1 {
+    font-size: 60px;
+    margin-top: 70%;
+    margin-left: 0;
+  }
+
+  .hero-section .hero-overlay ds-base-search-form form .input-group .form-control {
+    height: 40px !important;
+  }
+
+
+  /* Organisation du logo avec le menu sur petits écrans */
+  .navbar-right-bib {
+    margin-top: 5rem!important;
+    padding-bottom: 2.5rem!important;
+  }
+
+  .hero-section .hero-overlay ds-base-search-form form .input-group .form-control {
+    flex: none;
+    width: 50% !important;
+  }
+}
