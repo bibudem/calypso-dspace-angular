@@ -1223,7 +1223,7 @@
 
   "collection.page.edit": "Éditer cette collection",
 
-  "collection.page.handle": "URI permanent de cette collection",
+  "collection.page.handle": "URI: ",
 
   "collection.page.license": "Licence",
 
@@ -6402,6 +6402,8 @@
   "collspec.ai-content-notification": "Voici un message pour la recherche Ai",
 
   "collspec.page-udem.breadcrumbs": "Lire plus",
+
+  "collspec.voir.plus": "Voir plus",
 
   "collspec.ai-search.breadcrumbs": "Recherche IA",
 

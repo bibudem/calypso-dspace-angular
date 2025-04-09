@@ -1,5 +1,5 @@
 .hero-banner {
-  flex: 1 1 100%;
+  width: 100%;
   margin-bottom: 20px;
   height: 40vh;
   border-radius: 1rem;
@@ -13,7 +13,7 @@
   .hero-overlay {
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 10%, transparent 80%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 10%, transparent 80%);
     position: absolute;
     top: 0;
     left: 0;
@@ -30,12 +30,12 @@
     max-width: 600px;
 
     .hero-title {
-      font-size: 2.5rem;
+      font-size: 1.5rem;
       font-weight: 500;
       line-height: 1.2;
       margin-bottom: 0.75rem;
       color: white;
-      margin-left: 20%;
+      font-family: 'Lora';
     }
 
     .hero-text {

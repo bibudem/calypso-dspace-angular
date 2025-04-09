@@ -2,9 +2,9 @@
 <ds-results-back-button [back]="back"></ds-results-back-button>
 }
 <!-- Add bib icons pour la recheche AI -->
-<div class="align-items-end">
+<!--<div class="align-items-end">
   <img src="/assets/collspec/images/ai.png" alt="Clip recherche Calypso" title="Rechercher avec CLIP " class="collspec-img-ia mt-2 float-right ml-1" (click)="openDialog(content)">
-</div>
+</div>-->
 <!-- fin bib -->
 
 <div class="d-flex flex-row">
@@ -14,7 +14,7 @@
 </div>
 
 <!-- Add bib modal confirmation -->
-<ng-template #content let-modal>
+<!--<ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{'collspec.ai-titre' | translate}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -28,7 +28,7 @@
     <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">{{'collspec.clip-annuler' | translate}}Annuler</button>
     <button type="button" class="btn btn-success" (click)="redirectToClipSearch()">{{'collspec.clip-lien' | translate}}</button>
   </div>
-</ng-template>
+</ng-template>-->
 <!-- fin bib -->
 
 <!-- Add bib afficher le contenu dans des onglets -->
@@ -64,28 +64,28 @@
         <!-- fin importation -->
       </ng-template>
     </li>
-    <li [ngbNavItem]="3" [routerLink]="['.']" [queryParams]="{tab: 3}" routerLinkActive="active" >
+    <!--<li [ngbNavItem]="3" [routerLink]="['.']" [queryParams]="{tab: 3}" routerLinkActive="active" >
       <a ngbNavLink (click)="hideSection('collspec-mirador')">{{'collspec.onglet-autre' | translate}}</a>
       <ng-template ngbNavContent>
         <div class="table-responsive mt-2">
-          <!-- Ajoutez le contenu spécifique à l'onglet 3 ici -->
-          <table class="table  table-striped mt-3">
-            <tbody>
-            <tr>
-              <th>Colone 1</th>
-              <th>Colone 2</th>
-              <th>Colone 3</th>
-            </tr>
-            <tr>
-              <td>Donnees 1</td>
-              <td>Donnees 2</td>
-              <td>Donnees 3</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </ng-template>
-    </li>
+          Ajoutez le contenu spécifique à l'onglet 3 ici -->
+        <!--<table class="table  table-striped mt-3">
+          <tbody>
+          <tr>
+            <th>Colone 1</th>
+            <th>Colone 2</th>
+            <th>Colone 3</th>
+          </tr>
+          <tr>
+            <td>Donnees 1</td>
+            <td>Donnees 2</td>
+            <td>Donnees 3</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+    </li>-->
   </ul>
 </div>
 <!-- Section specifique au onglet choisi -->

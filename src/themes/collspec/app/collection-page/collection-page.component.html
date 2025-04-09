@@ -8,33 +8,37 @@
       <ds-view-tracker [object]="collection"></ds-view-tracker>
       <div class="d-flex flex-row border-bottom mb-4 pb-4">
         <header class="comcol-header me-auto">
-          <!-- Image vedette de la collection -->
+
           <div class="row">
-            <ds-vedette-coll-liste></ds-vedette-coll-liste>
+            <div class="col-md-4 bib-coll-titre">
+              <!-- Collection Name -->
+              <ds-comcol-page-header
+                [name]="dsoNameService.getName(collection)">
+              </ds-comcol-page-header>
+              <!-- Handle -->
+              <ds-comcol-page-handle
+                [content]="collection.handle"
+                [title]="'collection.page.handle'">
+              </ds-comcol-page-handle>
+              <!-- Introductory text -->
+              <ds-comcol-page-content
+                [content]="collection.introductoryText"
+                [hasInnerHtml]="true">
+              </ds-comcol-page-content>
+            </div>
+            <div class="col-md-8">
+              <!-- Image vedette de la collection -->
+              <ds-vedette-coll-liste></ds-vedette-coll-liste>
+              <!-- Fin image vedette -->
+            </div>
           </div>
-          <!-- Fin image vedette -->
-          <!-- Collection Name -->
-          <ds-comcol-page-header
-            [name]="dsoNameService.getName(collection)">
-          </ds-comcol-page-header>
           <!-- Collection logo -->
-          @if (logoRD$) {
+          <!--@if (logoRD$) {
           <ds-comcol-page-logo
             [logo]="(logoRD$ | async)?.payload"
             [alternateText]="'collection.logo' | translate">
           </ds-comcol-page-logo>
-          }
-          <!-- Handle -->
-          <ds-comcol-page-handle
-            [content]="collection.handle"
-            [title]="'collection.page.handle'">
-          </ds-comcol-page-handle>
-
-          <!-- Introductory text -->
-          <ds-comcol-page-content
-            [content]="collection.introductoryText"
-            [hasInnerHtml]="true">
-          </ds-comcol-page-content>
+          }-->
           <!-- News -->
           <ds-comcol-page-content
             [content]="collection.sidebarText"
