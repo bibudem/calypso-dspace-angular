@@ -1,5 +1,5 @@
 <ng-container *ngIf="images$ | async as images">
-  <div *ngIf="images[0]" class="hero-banner" [ngStyle]="{ 'background-image': 'url(' + images[0].imageUrl + ')' }">
+  <section *ngIf="images[0]" class="hero-banner" [ngStyle]="{ 'background-image': 'url(' + images[0].imageUrl + ')' }">
     <div class="hero-overlay">
       <div class="hero-content container">
         <a  class="link" href="/items/{{images[0].id }}">
@@ -10,6 +10,6 @@
         </p>-->
       </div>
     </div>
-  </div>
+  </section>
   <ds-loading *ngIf="!(images.length > 0)" message="Loading..."></ds-loading>
 </ng-container>
