@@ -42,8 +42,8 @@ import { ThemedPageNotFoundComponent } from './pagenotfound/themed-pagenotfound.
 import { PROCESS_MODULE_PATH } from './process-page/process-page-routing.paths';
 import { provideSubmissionState } from './submission/provide-submission-state';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
-import {AiSearchComponent} from "../themes/calypso/app/ai-search/ai-search.component";
-import {PagesComponent} from "../themes/calypso/app/pages/pages.component";
+import {AiSearchComponent} from "../themes/collspec/app/ai-search/ai-search.component";
+import {PagesComponent} from "../themes/collspec/app/pages/pages.component";
 import {i18nBreadcrumbResolver} from "./core/breadcrumbs/i18n-breadcrumb.resolver";
 
 export const APP_ROUTES: Route[] = [
@@ -62,7 +62,7 @@ export const APP_ROUTES: Route[] = [
         component: AiSearchComponent,
         pathMatch: 'full',
         resolve: { breadcrumb: i18nBreadcrumbResolver },
-        data: { title: 'calypso.ai-search', breadcrumbKey: 'calypso.ai-search' },
+        data: { title: 'collspec.ai-search', breadcrumbKey: 'collspec.ai-search' },
         canActivate: [endUserAgreementCurrentUserGuard]
       },
       {
@@ -70,7 +70,7 @@ export const APP_ROUTES: Route[] = [
         component: PagesComponent,
         pathMatch: 'full',
         resolve: { breadcrumb: i18nBreadcrumbResolver },
-        data: { title: 'calypso.page-udem', breadcrumbKey: 'calypso.page-udem' },
+        data: { title: 'collspec.page-udem', breadcrumbKey: 'collspec.page-udem' },
         canActivate: [endUserAgreementCurrentUserGuard]
       },
       //fin add UdeM
