@@ -1,3 +1,8 @@
+/* -------------------------------------------------------
+   Variables pour le thème collspec
+------------------------------------------------------- */
+@import 'src/themes/collspec/styles/_variables.scss';
+
 .hero-banner {
   width: 100%;
   margin-bottom: 20px;
@@ -13,7 +18,7 @@
   .hero-overlay {
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 10%, transparent 80%);
+    background: linear-gradient(to top, #607386 5%, transparent 25%);
     position: absolute;
     top: 0;
     left: 0;
@@ -23,19 +28,21 @@
 
   .hero-content {
     position: absolute;
-    bottom: 0;
+    bottom: -5%;
     left: 0;
     padding: 2rem;
     z-index: 2;
     max-width: 600px;
 
     .hero-title {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: 500;
       line-height: 1.2;
       margin-bottom: 0.75rem;
-      color: white;
-      font-family: 'Lora';
+      color: $gray-100!important;
+      &:hover {
+        color: white;
+      }
     }
 
     .hero-text {

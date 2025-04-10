@@ -31,7 +31,11 @@ import { CommonModule } from '@angular/common';
 })
 
 export class TopLevelCommunityListComponent extends BaseComponent  implements OnInit, OnDestroy{
-  collections$: Observable<any[]> = of([]);
+  collections: any[] = [];
+  allCollections: any[] = [];
+  displayedCollections: any[] = [];
+  collectionsPerPage = 4;
+
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -99,9 +103,8 @@ export class TopLevelCommunityListComponent extends BaseComponent  implements On
                     }
                   );
                   // Mettez à jour la variable collections$ avec les nouvelles collections
-                  this.collections$ = this.collections$.pipe(
-                    map(collectionsArray => [...collectionsArray, collections])
-                  );
+                  this.allCollections.push(collections);
+                  this.displayedCollections = this.allCollections.slice(0, this.collectionsPerPage);
                 }
               });
             });
@@ -114,10 +117,14 @@ export class TopLevelCommunityListComponent extends BaseComponent  implements On
   }
 
   ngOnDestroy() {
-    if (hasValue(this.currentPageSubscription)) {
-      this.currentPageSubscription.unsubscribe();
-    }
-    this.paginationServiceCalypso.clearPagination(this.config.id);
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
+
+  loadMore() {
+    const next = this.displayedCollections.length + this.collectionsPerPage;
+    this.displayedCollections = this.allCollections.slice(0, next);
+  }
+
 }
 

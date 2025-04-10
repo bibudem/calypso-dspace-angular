@@ -16,8 +16,8 @@
   --------------------------------------------------- */
   .carousel-title {
     padding: 2rem;
-    color: $gray-800;
-    text-align: center;
+    text-align: left;
+    margin-left: 10px;
 
     i.bi-quote {
       color: rgba(0, 0, 0, 0.1);
@@ -28,12 +28,14 @@
       font-weight: 500;
       font-family: $font-family-serif;
       margin-bottom: 1rem;
-      color: $fondbase;
+      color: $darkblue!important;
       text-align: left;
+      &:hover {
+        color: white;
+      }
     }
 
     p {
-      color: $gray-600;
       font-size: 1rem;
       text-align: left;
       margin-left: 20%;
@@ -132,14 +134,14 @@
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
       filter: none;
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(55, 66, 77, 0.2);
       border-radius: 50%;
       padding: 1.5rem;
       background-size: 1.5rem;
       transition: all 0.3s ease;
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(55, 66, 77, 0.4);
       }
     }
   }
@@ -179,10 +181,9 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+        background: linear-gradient(to top, #607386 15%, transparent 100%);
         color: white;
         padding: 1.5rem 1rem 1rem;
-        text-align: center;
 
         .card-title a {
           color: white;

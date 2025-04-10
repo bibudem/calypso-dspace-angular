@@ -2,8 +2,9 @@
   <div *ngIf="images[0]" class="hero-banner" [ngStyle]="{ 'background-image': 'url(' + images[0].imageUrl + ')' }">
     <div class="hero-overlay">
       <div class="hero-content container">
-        <h2 class="hero-title">{{ images[0].title }}</h2>
-        <a  class="btn btn-bib-white" href="/items/{{images[0].id }}">{{'collspec.voir.plus' | translate}}</a>
+        <a  class="link" href="/items/{{images[0].id }}">
+          <h2 class="hero-title">{{ images[0].title }}</h2>
+        </a>
         <!--<p class="hero-text">
           {{ images[0].description }}
         </p>-->

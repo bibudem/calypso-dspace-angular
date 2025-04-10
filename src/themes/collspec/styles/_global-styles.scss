@@ -85,7 +85,7 @@ nav#admin-sidebar a {
    Styles pour les paragraphes et le texte
 ---------------------------------------------------------- */
 p, span, a {
-  font-family: Figtree;
+  font-family: Figtree!important;
 }
 
 // -------------------------------------------------------
@@ -494,6 +494,10 @@ a.collspec-menu {
 .bib-coll-titre ds-base-comcol-page-handle  p {
   font-size: 13px;
   font-weight: bold;
+}
+
+.bg-info{
+  background: $secondaryblue!important;
 }
 
 // ============================
