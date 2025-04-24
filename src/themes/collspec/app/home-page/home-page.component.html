@@ -33,9 +33,6 @@
       }
     </div>
     <div [ngClass]="appConfig.homePage.showDiscoverFilters ? 'col-sm-9' : 'col-sm-12'">
-      <ng-container *ngIf="(site$ | async) as site">
-        <ds-view-tracker [object]="site"></ds-view-tracker>
-      </ng-container>
       <ds-top-level-community-list></ds-top-level-community-list>
     </div>
   </div>
@@ -43,9 +40,6 @@
 <ds-suggestions-popup></ds-suggestions-popup>
 
 <ng-template #homeContent>
-    @if ((site$ | async); as site) {
-      <ds-view-tracker [object]="site"></ds-view-tracker>
-      }
     @if (recentSubmissionspageSize>0) {
       <ds-recent-item-list></ds-recent-item-list>
     }

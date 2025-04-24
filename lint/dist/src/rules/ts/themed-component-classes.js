@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.tests = exports.rule = exports.info = exports.Message = void 0;
 /**
  * The contents of this file are subject to the license and copyright
  * detailed in the LICENSE and NOTICE files at the root of the source
@@ -8,19 +5,19 @@ exports.tests = exports.rule = exports.info = exports.Message = void 0;
  *
  * http://www.dspace.org/license/
  */
-const utils_1 = require("@typescript-eslint/utils");
-const fixture_1 = require("../../../test/fixture");
-const angular_1 = require("../../util/angular");
-const fix_1 = require("../../util/fix");
-const theme_support_1 = require("../../util/theme-support");
-const typescript_1 = require("../../util/typescript");
-var Message;
+import { ESLintUtils, } from '@typescript-eslint/utils';
+import { fixture } from '../../../test/fixture';
+import { getComponentImportNode, getComponentInitializer, getComponentStandaloneNode, } from '../../util/angular';
+import { appendObjectProperties } from '../../util/fix';
+import { getBaseComponentClassName, inThemedComponentOverrideFile, isThemeableComponent, isThemedComponentWrapper, } from '../../util/theme-support';
+import { getFilename } from '../../util/typescript';
+export var Message;
 (function (Message) {
     Message["NOT_STANDALONE"] = "mustBeStandalone";
     Message["NOT_STANDALONE_IMPORTS_BASE"] = "mustBeStandaloneAndImportBase";
     Message["WRAPPER_IMPORTS_BASE"] = "wrapperShouldImportBase";
-})(Message || (exports.Message = Message = {}));
-exports.info = {
+})(Message || (Message = {}));
+export const info = {
     name: 'themed-component-classes',
     meta: {
         docs: {
@@ -41,15 +38,15 @@ exports.info = {
     },
     defaultOptions: [],
 };
-exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
-    ...exports.info,
+export const rule = ESLintUtils.RuleCreator.withoutDocs({
+    ...info,
     create(context) {
-        const filename = (0, typescript_1.getFilename)(context);
+        const filename = getFilename(context);
         if (filename.endsWith('.spec.ts')) {
             return {};
         }
         function enforceStandalone(decoratorNode, withBaseImport = false) {
-            const standaloneNode = (0, angular_1.getComponentStandaloneNode)(decoratorNode);
+            const standaloneNode = getComponentStandaloneNode(decoratorNode);
             if (standaloneNode === undefined) {
                 // We may need to add these properties in one go
                 if (!withBaseImport) {
@@ -57,8 +54,8 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                         messageId: Message.NOT_STANDALONE,
                         node: decoratorNode,
                         fix(fixer) {
-                            const initializer = (0, angular_1.getComponentInitializer)(decoratorNode);
-                            return (0, fix_1.appendObjectProperties)(context, fixer, initializer, ['standalone: true']);
+                            const initializer = getComponentInitializer(decoratorNode);
+                            return appendObjectProperties(context, fixer, initializer, ['standalone: true']);
                         },
                     });
                 }
@@ -73,19 +70,19 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                 });
             }
             if (withBaseImport) {
-                const baseClass = (0, theme_support_1.getBaseComponentClassName)(decoratorNode);
+                const baseClass = getBaseComponentClassName(decoratorNode);
                 if (baseClass === undefined) {
                     return;
                 }
-                const importsNode = (0, angular_1.getComponentImportNode)(decoratorNode);
+                const importsNode = getComponentImportNode(decoratorNode);
                 if (importsNode === undefined) {
                     if (standaloneNode === undefined) {
                         context.report({
                             messageId: Message.NOT_STANDALONE_IMPORTS_BASE,
                             node: decoratorNode,
                             fix(fixer) {
-                                const initializer = (0, angular_1.getComponentInitializer)(decoratorNode);
-                                return (0, fix_1.appendObjectProperties)(context, fixer, initializer, ['standalone: true', `imports: [${baseClass}]`]);
+                                const initializer = getComponentInitializer(decoratorNode);
+                                return appendObjectProperties(context, fixer, initializer, ['standalone: true', `imports: [${baseClass}]`]);
                             },
                         });
                     }
@@ -94,8 +91,8 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                             messageId: Message.WRAPPER_IMPORTS_BASE,
                             node: decoratorNode,
                             fix(fixer) {
-                                const initializer = (0, angular_1.getComponentInitializer)(decoratorNode);
-                                return (0, fix_1.appendObjectProperties)(context, fixer, initializer, [`imports: [${baseClass}]`]);
+                                const initializer = getComponentInitializer(decoratorNode);
+                                return appendObjectProperties(context, fixer, initializer, [`imports: [${baseClass}]`]);
                             },
                         });
                     }
@@ -124,21 +121,21 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                 if (className === undefined) {
                     return;
                 }
-                if ((0, theme_support_1.isThemedComponentWrapper)(node)) {
+                if (isThemedComponentWrapper(node)) {
                     enforceStandalone(node, true);
                 }
-                else if ((0, theme_support_1.inThemedComponentOverrideFile)(filename)) {
+                else if (inThemedComponentOverrideFile(filename)) {
                     enforceStandalone(node);
                 }
-                else if ((0, theme_support_1.isThemeableComponent)(className)) {
+                else if (isThemeableComponent(className)) {
                     enforceStandalone(node);
                 }
             },
         };
     },
 });
-exports.tests = {
-    plugin: exports.info.name,
+export const tests = {
+    plugin: info.name,
     valid: [
         {
             name: 'Regular non-themeable component',
@@ -164,7 +161,7 @@ class TestThemeableTomponent {
         },
         {
             name: 'Wrapper component',
-            filename: (0, fixture_1.fixture)('src/app/test/themed-test-themeable.component.ts'),
+            filename: fixture('src/app/test/themed-test-themeable.component.ts'),
             code: `
 @Component({
   selector: 'ds-test-themable',
@@ -179,7 +176,7 @@ class ThemedTestThemeableTomponent extends ThemedComponent<TestThemeableComponen
         },
         {
             name: 'Override component',
-            filename: (0, fixture_1.fixture)('src/themes/test/app/test/test-themeable.component.ts'),
+            filename: fixture('src/themes/test/app/test/test-themeable.component.ts'),
             code: `
 @Component({
   selector: 'ds-themed-test-themable',
@@ -216,7 +213,7 @@ class TestThemeableComponent {
         },
         {
             name: 'Wrapper component must be standalone and import base component',
-            filename: (0, fixture_1.fixture)('src/app/test/themed-test-themeable.component.ts'),
+            filename: fixture('src/app/test/themed-test-themeable.component.ts'),
             code: `
 @Component({
   selector: 'ds-test-themable',
@@ -241,7 +238,7 @@ class ThemedTestThemeableComponent extends ThemedComponent<TestThemeableComponen
         },
         {
             name: 'Wrapper component must import base component (array present but empty)',
-            filename: (0, fixture_1.fixture)('src/app/test/themed-test-themeable.component.ts'),
+            filename: fixture('src/app/test/themed-test-themeable.component.ts'),
             code: `
 @Component({
   selector: 'ds-test-themable',
@@ -268,7 +265,7 @@ class ThemedTestThemeableComponent extends ThemedComponent<TestThemeableComponen
         },
         {
             name: 'Wrapper component must import base component (array is wrong)',
-            filename: (0, fixture_1.fixture)('src/app/test/themed-test-themeable.component.ts'),
+            filename: fixture('src/app/test/themed-test-themeable.component.ts'),
             code: `
 import { SomethingElse } from './somewhere-else';
 
@@ -300,7 +297,7 @@ class ThemedTestThemeableComponent extends ThemedComponent<TestThemeableComponen
       `,
         }, {
             name: 'Wrapper component must import base component (array is wrong)',
-            filename: (0, fixture_1.fixture)('src/app/test/themed-test-themeable.component.ts'),
+            filename: fixture('src/app/test/themed-test-themeable.component.ts'),
             code: `
 import { Something, SomethingElse } from './somewhere-else';
 
@@ -333,7 +330,7 @@ class ThemedTestThemeableComponent extends ThemedComponent<TestThemeableComponen
         },
         {
             name: 'Override component must be standalone',
-            filename: (0, fixture_1.fixture)('src/themes/test/app/test/test-themeable.component.ts'),
+            filename: fixture('src/themes/test/app/test/test-themeable.component.ts'),
             code: `
 @Component({
   selector: 'ds-themed-test-themable',

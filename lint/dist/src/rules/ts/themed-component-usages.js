@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.tests = exports.rule = exports.info = exports.Message = void 0;
 /**
  * The contents of this file are subject to the license and copyright
  * detailed in the LICENSE and NOTICE files at the root of the source
@@ -8,19 +5,19 @@ exports.tests = exports.rule = exports.info = exports.Message = void 0;
  *
  * http://www.dspace.org/license/
  */
-const utils_1 = require("@typescript-eslint/utils");
-const fixture_1 = require("../../../test/fixture");
-const fix_1 = require("../../util/fix");
-const theme_support_1 = require("../../util/theme-support");
-const typescript_1 = require("../../util/typescript");
-var Message;
+import { ESLintUtils, TSESTree, } from '@typescript-eslint/utils';
+import { fixture } from '../../../test/fixture';
+import { removeWithCommas, replaceOrRemoveArrayIdentifier, } from '../../util/fix';
+import { allThemeableComponents, DISALLOWED_THEME_SELECTORS, fixSelectors, getThemeableComponentByBaseClass, isAllowedUnthemedUsage, } from '../../util/theme-support';
+import { findImportSpecifier, findUsages, findUsagesByName, getFilename, relativePath, } from '../../util/typescript';
+export var Message;
 (function (Message) {
     Message["WRONG_CLASS"] = "mustUseThemedWrapperClass";
     Message["WRONG_IMPORT"] = "mustImportThemedWrapper";
     Message["WRONG_SELECTOR"] = "mustUseThemedWrapperSelector";
     Message["BASE_IN_MODULE"] = "baseComponentNotNeededInModule";
-})(Message || (exports.Message = Message = {}));
-exports.info = {
+})(Message || (Message = {}));
+export const info = {
     name: 'themed-component-usages',
     meta: {
         docs: {
@@ -46,15 +43,15 @@ There are a few exceptions where the base class can still be used:
     },
     defaultOptions: [],
 };
-exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
-    ...exports.info,
+export const rule = ESLintUtils.RuleCreator.withoutDocs({
+    ...info,
     create(context) {
-        const filename = (0, typescript_1.getFilename)(context);
+        const filename = getFilename(context);
         function handleUnthemedUsagesInTypescript(node) {
-            if ((0, theme_support_1.isAllowedUnthemedUsage)(node)) {
+            if (isAllowedUnthemedUsage(node)) {
                 return;
             }
-            const entry = (0, theme_support_1.getThemeableComponentByBaseClass)(node.name);
+            const entry = getThemeableComponentByBaseClass(node.name);
             if (entry === undefined) {
                 // this should never happen
                 throw new Error(`No such themeable component in registry: '${node.name}'`);
@@ -63,8 +60,8 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                 messageId: Message.WRONG_CLASS,
                 node: node,
                 fix(fixer) {
-                    if (node.parent.type === utils_1.TSESTree.AST_NODE_TYPES.ArrayExpression) {
-                        return (0, fix_1.replaceOrRemoveArrayIdentifier)(context, fixer, node, entry.wrapperClass);
+                    if (node.parent.type === TSESTree.AST_NODE_TYPES.ArrayExpression) {
+                        return replaceOrRemoveArrayIdentifier(context, fixer, node, entry.wrapperClass);
                     }
                     else {
                         return fixer.replaceText(node, entry.wrapperClass);
@@ -77,20 +74,20 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                 node,
                 messageId: Message.WRONG_SELECTOR,
                 fix(fixer) {
-                    const newSelector = (0, theme_support_1.fixSelectors)(node.raw);
+                    const newSelector = fixSelectors(node.raw);
                     return fixer.replaceText(node, newSelector);
                 },
             });
         }
         function handleUnthemedImportsInTypescript(specifierNode) {
-            const allUsages = (0, typescript_1.findUsages)(context, specifierNode.local);
-            const badUsages = allUsages.filter(usage => !(0, theme_support_1.isAllowedUnthemedUsage)(usage));
+            const allUsages = findUsages(context, specifierNode.local);
+            const badUsages = allUsages.filter(usage => !isAllowedUnthemedUsage(usage));
             if (badUsages.length === 0) {
                 return;
             }
             const importedNode = specifierNode.imported;
             const declarationNode = specifierNode.parent;
-            const entry = (0, theme_support_1.getThemeableComponentByBaseClass)(importedNode.name);
+            const entry = getThemeableComponentByBaseClass(importedNode.name);
             if (entry === undefined) {
                 // this should never happen
                 throw new Error(`No such themeable component in registry: '${importedNode.name}'`);
@@ -100,10 +97,10 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                 node: importedNode,
                 fix(fixer) {
                     const ops = [];
-                    const wrapperImport = (0, typescript_1.findImportSpecifier)(context, entry.wrapperClass);
-                    if ((0, typescript_1.findUsagesByName)(context, entry.wrapperClass).length === 0) {
+                    const wrapperImport = findImportSpecifier(context, entry.wrapperClass);
+                    if (findUsagesByName(context, entry.wrapperClass).length === 0) {
                         // Wrapper is not present in this file, safe to add import
-                        const newImportLine = `import { ${entry.wrapperClass} } from '${(0, typescript_1.relativePath)(filename, entry.wrapperPath)}';`;
+                        const newImportLine = `import { ${entry.wrapperClass} } from '${relativePath(filename, entry.wrapperPath)}';`;
                         if (declarationNode.specifiers.length === 1) {
                             if (allUsages.length === badUsages.length) {
                                 ops.push(fixer.replaceText(declarationNode, newImportLine));
@@ -113,7 +110,7 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                             }
                         }
                         else {
-                            ops.push(...(0, fix_1.removeWithCommas)(context, fixer, specifierNode));
+                            ops.push(...removeWithCommas(context, fixer, specifierNode));
                             if (wrapperImport === undefined) {
                                 ops.push(fixer.insertTextAfter(declarationNode, '\n' + newImportLine));
                             }
@@ -127,7 +124,7 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                                 ops.push(fixer.removeRange([declarationNode.range[0], declarationNode.range[1] + 1]));
                             }
                             else {
-                                ops.push(...(0, fix_1.removeWithCommas)(context, fixer, specifierNode));
+                                ops.push(...removeWithCommas(context, fixer, specifierNode));
                             }
                         }
                     }
@@ -138,12 +135,12 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
         // ignore tests and non-routing modules
         if (filename.endsWith('.spec.ts')) {
             return {
-                [`CallExpression[callee.object.name = "By"][callee.property.name = "css"] > Literal:first-child[value = /.*${theme_support_1.DISALLOWED_THEME_SELECTORS}.*/]`]: handleThemedSelectorQueriesInTests,
+                [`CallExpression[callee.object.name = "By"][callee.property.name = "css"] > Literal:first-child[value = /.*${DISALLOWED_THEME_SELECTORS}.*/]`]: handleThemedSelectorQueriesInTests,
             };
         }
         else if (filename.endsWith('.cy.ts')) {
             return {
-                [`CallExpression[callee.object.name = "cy"][callee.property.name = "get"] > Literal:first-child[value = /.*${theme_support_1.DISALLOWED_THEME_SELECTORS}.*/]`]: handleThemedSelectorQueriesInTests,
+                [`CallExpression[callee.object.name = "cy"][callee.property.name = "get"] > Literal:first-child[value = /.*${DISALLOWED_THEME_SELECTORS}.*/]`]: handleThemedSelectorQueriesInTests,
             };
         }
         else if (filename.match(/(?!src\/themes\/).*(?!routing).module.ts$/)
@@ -152,7 +149,7 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
             return {};
         }
         else {
-            return (0, theme_support_1.allThemeableComponents)().reduce((rules, entry) => {
+            return allThemeableComponents().reduce((rules, entry) => {
                 return {
                     ...rules,
                     [`:not(:matches(ClassDeclaration, ImportSpecifier)) > Identifier[name = "${entry.baseClass}"]`]: handleUnthemedUsagesInTypescript,
@@ -162,8 +159,8 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
         }
     },
 });
-exports.tests = {
-    plugin: exports.info.name,
+export const tests = {
+    plugin: info.name,
     valid: [
         {
             name: 'allow wrapper class usages',
@@ -204,7 +201,7 @@ export class Something {
         },
         {
             name: 'allow wrapper selectors in test queries',
-            filename: (0, fixture_1.fixture)('src/app/test/test.component.spec.ts'),
+            filename: fixture('src/app/test/test.component.spec.ts'),
             code: `
 By.css('ds-themeable');
 By.css('#test > ds-themeable > #nest');
@@ -212,7 +209,7 @@ By.css('#test > ds-themeable > #nest');
         },
         {
             name: 'allow wrapper selectors in cypress queries',
-            filename: (0, fixture_1.fixture)('src/app/test/test.component.cy.ts'),
+            filename: fixture('src/app/test/test.component.cy.ts'),
             code: `
 By.css('ds-themeable');
 By.css('#test > ds-themeable > #nest');
@@ -306,7 +303,7 @@ const DECLARATIONS = [
         },
         {
             name: 'disallow override selector in test queries',
-            filename: (0, fixture_1.fixture)('src/app/test/test.component.spec.ts'),
+            filename: fixture('src/app/test/test.component.spec.ts'),
             code: `
 By.css('ds-themed-themeable');
 By.css('#test > ds-themed-themeable > #nest');
@@ -326,7 +323,7 @@ By.css('#test > ds-themeable > #nest');
         },
         {
             name: 'disallow base selector in test queries',
-            filename: (0, fixture_1.fixture)('src/app/test/test.component.spec.ts'),
+            filename: fixture('src/app/test/test.component.spec.ts'),
             code: `
 By.css('ds-base-themeable');
 By.css('#test > ds-base-themeable > #nest');
@@ -346,7 +343,7 @@ By.css('#test > ds-themeable > #nest');
         },
         {
             name: 'disallow override selector in cypress queries',
-            filename: (0, fixture_1.fixture)('src/app/test/test.component.cy.ts'),
+            filename: fixture('src/app/test/test.component.cy.ts'),
             code: `
 cy.get('ds-themed-themeable');
 cy.get('#test > ds-themed-themeable > #nest');
@@ -366,7 +363,7 @@ cy.get('#test > ds-themeable > #nest');
         },
         {
             name: 'disallow base selector in cypress queries',
-            filename: (0, fixture_1.fixture)('src/app/test/test.component.cy.ts'),
+            filename: fixture('src/app/test/test.component.cy.ts'),
             code: `
 cy.get('ds-base-themeable');
 cy.get('#test > ds-base-themeable > #nest');
@@ -386,7 +383,7 @@ cy.get('#test > ds-themeable > #nest');
         },
         {
             name: 'edge case: unable to find usage node through usage token, but import is still flagged and fixed',
-            filename: (0, fixture_1.fixture)('src/themes/test/app/test/other-themeable.component.ts'),
+            filename: fixture('src/themes/test/app/test/other-themeable.component.ts'),
             code: `
 import { Component } from '@angular/core';
 
@@ -424,7 +421,7 @@ export class UsageComponent {
         },
         {
             name: 'edge case edge case: both are imported, only wrapper is retained',
-            filename: (0, fixture_1.fixture)('src/themes/test/app/test/other-themeable.component.ts'),
+            filename: fixture('src/themes/test/app/test/other-themeable.component.ts'),
             code: `
 import { Component } from '@angular/core';
 
@@ -463,5 +460,5 @@ export class UsageComponent {
         },
     ],
 };
-exports.default = exports.rule;
+export default rule;
 //# sourceMappingURL=themed-component-usages.js.map
