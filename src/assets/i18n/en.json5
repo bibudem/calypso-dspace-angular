@@ -2882,7 +2882,7 @@
 
   "item.preview.dc.date.issued": "Published date:",
 
-  "item.preview.dc.description": "Description:",
+  "item.preview.dc.description": "Description",
 
   "item.preview.dc.description.abstract": "Abstract:",
 
@@ -2965,8 +2965,6 @@
   "item.preview.dc.identifier.issn": "ISSN",
 
   "item.preview.dc.identifier.openalex": "OpenAlex Identifier",
-
-  "item.preview.dc.description": "Description",
 
   "item.select.confirm": "Confirm selected",
 
@@ -4463,6 +4461,7 @@
   "search.filters.applied.f.original_bundle_filenames": "File name",
 
   "search.filters.applied.f.original_bundle_descriptions": "File description",
+
   "search.filters.applied.f.has_geospatial_metadata": "Has geographical location",
 
   "search.filters.applied.f.itemtype": "Type",

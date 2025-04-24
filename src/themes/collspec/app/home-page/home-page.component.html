@@ -1,7 +1,7 @@
 <!-- Section home-page avec image de fond -->
 <div class="hero-section">
   <div class="hero-overlay">
-    <h1>Les Collections <br> spéciales</h1>
+    <h1 [innerHTML]="'collspec.accueil.titre' | translate"></h1>
     <!-- Barre de recherche avec filtres -->
     <div class="search-bar">
       <ds-search-form [inPlaceSearch]="false"
