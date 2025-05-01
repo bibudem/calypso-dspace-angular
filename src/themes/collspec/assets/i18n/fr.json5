@@ -21,14 +21,7 @@
   "collspec.voir.plus": "Voir plus",
   "collspec.ai-search.breadcrumbs": "Recherche IA",
 
-  // Contact page
-  "collspec.contact-title": "Contact Us",
-  "collspec.contact-description": "For any questions or additional information regarding this platform, please do not hesitate to contact us.",
-  "collspec.contact-phone": "+123 456 7890",
-  "collspec.contact-email": "contact@example.ca",
-  "collspec.contact-links-title": "Stay in touch",
-  "collspec.contact-libraries": "Libraries",
-  "collspec.contact-udem": "University of Montreal",
+  "collspec.accueil.titre": "Les Collections <br> spéciales",
 
   "collspec.accueil.vedette.titre": "Découvrez nos meilleures publications",
 

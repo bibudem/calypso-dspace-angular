@@ -2,60 +2,17 @@
 .image-column {
   background-image: url('/assets/collspec/images/contact.jpg');
   background-size: cover;
-  background-position: left;
-  height: 500px;
-  position: relative;
-}
-
-.overlay {
-  background-color: rgba(255, 255, 255, 0.7);
-  position: absolute;
-  top: 0;
-  left: 0;
+  background-position: center;
+  height: 450px;
   width: 100%;
-  height: 100%;
-}
-
-.content {
+  max-width: 500px;
   position: relative;
-  margin-left: 10px;
-  margin-top: 10%;
-  height: 100%;
+  border-radius: 12px;
+  padding: 10px 20px;
 }
 
-p {
-  font-size: 16px;
-}
-
-.collspec-fa {
-  font-size: 22px;
-  color: #2b4e72;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.outline-btn {
-  display: inline-block;
-  padding: 10px 35px;
-  margin: 3px;
-  border: 2px solid #2b4e72;
-  background: transparent;
-  border-radius: 3px;
-  -webkit-transition: 0.2s opacity;
-  transition: all 0.3s ease-out;
-  color: #2b4e72;
-  width: 50%;
-}
-.outline-btn:hover {
-  border: 2px solid #0a75b9;
-  color: #0a75b9;
-}
-
-.collspec-btn {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.collspec-btn a:hover {
-  text-decoration: none;
+.form-bib{
+  border: 1px dashed #607386;
+  padding: 10px 20px;
+  border-radius: 12px;
 }

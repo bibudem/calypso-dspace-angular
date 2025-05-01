@@ -1,4 +1,3 @@
-"use strict";
 /**
  * The contents of this file are subject to the license and copyright
  * detailed in the LICENSE and NOTICE files at the root of the source
@@ -6,14 +5,10 @@
  *
  * http://www.dspace.org/license/
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const html_1 = __importDefault(require("../src/rules/html"));
-const ts_1 = __importDefault(require("../src/rules/ts"));
+import { default as html } from '../src/rules/html';
+import { default as ts } from '../src/rules/ts';
 describe('plugin structure', () => {
-    for (const pluginExports of [ts_1.default, html_1.default]) {
+    for (const pluginExports of [ts, html]) {
         const pluginName = pluginExports.name ?? 'UNNAMED PLUGIN';
         describe(pluginName, () => {
             it('should have a name', () => {

@@ -32,12 +32,17 @@ $body-font-family: $font-family-sans-serif;
 
 h1, h2, h3, h5, h6 {
   font-weight: 600;
-  font-family: Figtree;
-  color: $gray-800;
+  font-family: $font-family-sans-serif;
+  color:  $darkblue;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'liga' off, 'clig' off;
 }
 
 h4 {
-  font-family: Lora;
+  color:  $darkblue;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: $font-family-serif;
   font-weight: 600;
 }
 
@@ -86,6 +91,9 @@ nav#admin-sidebar a {
 ---------------------------------------------------------- */
 p, span, a {
   font-family: Figtree!important;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
 }
 
 
@@ -278,6 +286,27 @@ p, span, a {
     bottom: 0;
     background: rgb(255, 255, 255);
   }
+}
+
+.h2-bib-titre {
+  color:  $darkblue;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: $font-family-serif;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.bib-description {
+  color:  $gray!important;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: $font-family-sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
 }
 
 /* Lien associé à la carte Calypso */

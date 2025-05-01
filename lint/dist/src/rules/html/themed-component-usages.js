@@ -1,15 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.tests = exports.rule = exports.info = exports.Message = void 0;
-const utils_1 = require("@typescript-eslint/utils");
-const fixture_1 = require("../../../test/fixture");
-const theme_support_1 = require("../../util/theme-support");
-const typescript_1 = require("../../util/typescript");
-var Message;
+import { ESLintUtils } from '@typescript-eslint/utils';
+import { fixture } from '../../../test/fixture';
+import { DISALLOWED_THEME_SELECTORS, fixSelectors, } from '../../util/theme-support';
+import { getFilename, getSourceCode, } from '../../util/typescript';
+export var Message;
 (function (Message) {
     Message["WRONG_SELECTOR"] = "mustUseThemedWrapperSelector";
-})(Message || (exports.Message = Message = {}));
-exports.info = {
+})(Message || (Message = {}));
+export const info = {
     name: 'themed-component-usages',
     meta: {
         docs: {
@@ -28,16 +25,16 @@ The only exception to this rule are unit tests, where we may want to use the bas
     },
     defaultOptions: [],
 };
-exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
-    ...exports.info,
+export const rule = ESLintUtils.RuleCreator.withoutDocs({
+    ...info,
     create(context) {
-        if ((0, typescript_1.getFilename)(context).includes('.spec.ts')) {
+        if (getFilename(context).includes('.spec.ts')) {
             // skip inline templates in unit tests
             return {};
         }
-        const parserServices = (0, typescript_1.getSourceCode)(context).parserServices;
+        const parserServices = getSourceCode(context).parserServices;
         return {
-            [`Element$1[name = /^${theme_support_1.DISALLOWED_THEME_SELECTORS}/]`](node) {
+            [`Element$1[name = /^${DISALLOWED_THEME_SELECTORS}/]`](node) {
                 const { startSourceSpan, endSourceSpan } = node;
                 const openStart = startSourceSpan.start.offset;
                 context.report({
@@ -45,7 +42,7 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
                     loc: parserServices.convertNodeSourceSpanToLoc(startSourceSpan),
                     fix(fixer) {
                         const oldSelector = node.name;
-                        const newSelector = (0, theme_support_1.fixSelectors)(oldSelector);
+                        const newSelector = fixSelectors(oldSelector);
                         const ops = [
                             fixer.replaceTextRange([openStart + 1, openStart + 1 + oldSelector.length], newSelector),
                         ];
@@ -62,8 +59,8 @@ exports.rule = utils_1.ESLintUtils.RuleCreator.withoutDocs({
         };
     },
 });
-exports.tests = {
-    plugin: exports.info.name,
+export const tests = {
+    plugin: info.name,
     valid: [
         {
             name: 'use no-prefix selectors in HTML templates',
@@ -85,7 +82,7 @@ class Test {
         },
         {
             name: 'use no-prefix selectors in TypeScript test templates',
-            filename: (0, fixture_1.fixture)('src/test.spec.ts'),
+            filename: fixture('src/test.spec.ts'),
             code: `
 @Component({
   template: '<ds-test-themeable></ds-test-themeable>'
@@ -96,7 +93,7 @@ class Test {
         },
         {
             name: 'base selectors are also allowed in TypeScript test templates',
-            filename: (0, fixture_1.fixture)('src/test.spec.ts'),
+            filename: fixture('src/test.spec.ts'),
             code: `
 @Component({
   template: '<ds-base-test-themeable></ds-base-test-themeable>'
@@ -157,5 +154,5 @@ class Test {
         },
     ],
 };
-exports.default = exports.rule;
+export default rule;
 //# sourceMappingURL=themed-component-usages.js.map
