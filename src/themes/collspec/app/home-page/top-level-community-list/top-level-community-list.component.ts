@@ -32,9 +32,9 @@ import { CommonModule } from '@angular/common';
 
 export class TopLevelCommunityListComponent extends BaseComponent  implements OnInit, OnDestroy{
   collections: any[] = [];
-  allCollections: any[] = [];
-  displayedCollections: any[] = [];
-  collectionsPerPage = 4;
+  allSousommunities: any[] = [];
+  displayedSouscommunities: any[] = [];
+  souscommunitiesPerPage = 4;
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -65,37 +65,38 @@ export class TopLevelCommunityListComponent extends BaseComponent  implements On
 // Récupérez les collections en fonction de l'ID d'une communauté
   findCollections(community: any) {
     try {
-      if (community && community._links && community._links.collections) {
+      if (community && community._links && community._links.subcommunities) {
         // Appelez la méthode findByHref de CollectionDataService pour récupérer les données de la collection
-        this.collService.findByHref(community._links.collections.href).pipe(
+        this.collService.findByHref(community._links.subcommunities.href).pipe(
           takeUntil(this.unsubscribe$)
-        ).subscribe((collectionData) => {
-          if(collectionData && collectionData.payload){
-            const collectionsPageLinks = (collectionData.payload._links as any).page;
-            collectionsPageLinks.forEach((collectionLink) => {
-              const collectionUrl = collectionLink.href;
+        ).subscribe((subcommunitieData) => {
+          if(subcommunitieData && subcommunitieData.payload){
+            const subcommunitiesPageLinks = (subcommunitieData.payload._links as any).page;
+            //console.log(subcommunitiesPageLinks);
+            subcommunitiesPageLinks.forEach((subcommunitieLink) => {
+              const subcommunitieUrl = subcommunitieLink.href;
               // Effectuez une requête HTTP pour récupérer les données de la collection individuelle
-              this.collService.findByHref(collectionUrl).pipe(
+              this.collService.findByHref(subcommunitieUrl).pipe(
                 takeUntil(this.unsubscribe$)
-              ).subscribe((individualCollectionData) => {
-                if (individualCollectionData && individualCollectionData.payload && individualCollectionData.payload._links) {
+              ).subscribe((individualSubcommunitieData) => {
+                if (individualSubcommunitieData && individualSubcommunitieData.payload && individualSubcommunitieData.payload._links) {
                   let description = null;
-                  if(individualCollectionData.payload.metadata['dc.description']){
-                    description = individualCollectionData.payload.metadata['dc.description'][0].value;
+                  if(individualSubcommunitieData.payload.metadata['dc.description']){
+                    description = individualSubcommunitieData.payload.metadata['dc.description'][0].value;
                   }
-                  const collections = {
-                    title: individualCollectionData.payload.metadata['dc.title'][0].value,
+                  const subcommunitie = {
+                    title: individualSubcommunitieData.payload.metadata['dc.title'][0].value,
                     description: description,
-                    id: individualCollectionData.payload.id,
+                    id: individualSubcommunitieData.payload.id,
                     vedette: null
                   };
                   // Récupérez les images vedette de la collection
-                  this.vedetteService.getImagesColl(collections.id).pipe(
+                  this.vedetteService.getImagesColl(subcommunitie.id).pipe(
                     takeUntil(this.unsubscribe$)
                   ).subscribe(
                     (images: Vedette[]) => {
                       if (images.length !== 0) {
-                        collections.vedette = images[0].imageUrl;
+                        subcommunitie.vedette = images[0].imageUrl;
                       }
                     },
                     (erreur) => {
@@ -103,8 +104,8 @@ export class TopLevelCommunityListComponent extends BaseComponent  implements On
                     }
                   );
                   // Mettez à jour la variable collections$ avec les nouvelles collections
-                  this.allCollections.push(collections);
-                  this.displayedCollections = this.allCollections.slice(0, this.collectionsPerPage);
+                  this.allSousommunities.push(subcommunitie);
+                  this.displayedSouscommunities = this.allSousommunities.slice(0, this.souscommunitiesPerPage);
                 }
               });
             });
@@ -122,8 +123,9 @@ export class TopLevelCommunityListComponent extends BaseComponent  implements On
   }
 
   loadMore() {
-    const next = this.displayedCollections.length + this.collectionsPerPage;
-    this.displayedCollections = this.allCollections.slice(0, next);
+    alert(this.allSousommunities.length +'-'+ this.souscommunitiesPerPage);
+    const next = this.displayedSouscommunities.length + this.souscommunitiesPerPage;
+    this.displayedSouscommunities = this.allSousommunities.slice(0, next);
   }
 
 }

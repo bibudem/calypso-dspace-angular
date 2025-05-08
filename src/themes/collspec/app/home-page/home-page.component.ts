@@ -14,8 +14,8 @@ import { SuggestionsPopupComponent } from '../../../../app/notifications/suggest
 import { ThemedConfigurationSearchPageComponent } from '../../../../app/search-page/themed-configuration-search-page.component';
 import { ThemedSearchFormComponent } from '../../../../app/shared/search-form/themed-search-form.component';
 import { PageWithSidebarComponent } from '../../../../app/shared/sidebar/page-with-sidebar.component';
-import { VedetteListeComponent } from './vedette-liste/vedette-liste.component';
 import {ConfigurationSearchPageComponent} from "../../../../app/search-page/configuration-search-page.component";
+import { VedetteListeComponent } from '../vedette/vedette-liste/vedette-liste.component';
 
 @Component({
   selector: 'ds-themed-home-page',
