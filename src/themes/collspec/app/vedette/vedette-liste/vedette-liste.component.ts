@@ -3,10 +3,13 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Inject,
+  OnDestroy,
   OnInit,
+  PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { VedetteService } from '../../../service/vedette.service';
 import { map } from 'rxjs/operators';
 import { Vedette } from '../../../models/Vedette';
@@ -28,98 +31,111 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
   ],
 })
-export class VedetteListeComponent implements OnInit, AfterViewInit {
-  @ViewChild('track', { static: false }) track: ElementRef<HTMLUListElement>;
-
+export class VedetteListeComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('track') track: ElementRef<HTMLUListElement>;
   slides: Vedette[] = [];
   currentIndex = 0;
   itemWidth = 0;
   loading = true;
   error = false;
   autoSlideInterval: any;
-  private carouselInitialized = false;
+  isBrowser: boolean;
 
   constructor(
     private vedetteService: VedetteService,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
     this.loadData();
   }
 
   ngAfterViewInit(): void {
-    if (this.slides.length > 0 && !this.carouselInitialized) {
-      this.initCarousel();
-    }
+    // Laisse le DOM se stabiliser, initCarousel sera appelé après le loadData()
   }
 
+  // Appelle le service pour charger les vedettes, puis initialise le carrousel
   private loadData(): void {
     this.vedetteService.getImagesHome().pipe(
-      map((images) => {
-        const shuffled = this.vedetteService.shuffleArray(images);
-        return shuffled.slice(0, 8);
-      })
+      map(images => this.vedetteService.shuffleArray(images).slice(0, 8))
     ).subscribe({
       next: (images) => {
         this.slides = images;
         this.loading = false;
-        this.cdr.detectChanges();
+        this.error = false;
 
-        if (this.track?.nativeElement) {
-          this.initCarousel();
+        // On attend un tick pour que le DOM soit prêt avant d'initialiser
+        if (this.isBrowser) {
+          setTimeout(() => {
+            this.initCarousel();
+            this.cdr.detectChanges();
+          });
         }
       },
       error: (err) => {
+        console.error('Erreur chargement vedettes :', err);
         this.error = true;
         this.loading = false;
         this.cdr.detectChanges();
-        console.error('Error loading featured items:', err);
       }
     });
   }
 
-  initCarousel(): void {
-    if (this.carouselInitialized) return;
+  // Initialise le carrousel (calcul de largeur, position, démarrage auto-slide)
+  private initCarousel(): void {
+    if (!this.isBrowser) return;
 
     this.calculateItemWidth();
+    this.updatePosition();
     this.startAutoSlide();
-    this.carouselInitialized = true;
+
+    window.addEventListener('resize', this.calculateItemWidth.bind(this));
   }
 
+  // Calcule dynamiquement la largeur d'un item en utilisant le DOM
   calculateItemWidth(): void {
-    const firstSlide = this.track?.nativeElement?.querySelector('.slider__slide') as HTMLElement;
-    if (firstSlide) {
-      this.itemWidth = firstSlide.offsetWidth;
-      this.updatePosition();
-    } else {
-      setTimeout(() => this.calculateItemWidth(), 100);
-    }
+    if (!this.isBrowser) return;
+
+    requestAnimationFrame(() => {
+      const firstSlide = this.track?.nativeElement?.querySelector('.slider__slide') as HTMLElement;
+      if (firstSlide) {
+        this.itemWidth = firstSlide.offsetWidth;
+        this.updatePosition();
+      }
+    });
   }
 
+  // Applique une translation horizontale en fonction de l'index courant
   updatePosition(): void {
     if (!this.track?.nativeElement || this.slides.length === 0) return;
     const offset = -this.currentIndex * (this.itemWidth + 20);
     this.track.nativeElement.style.transform = `translateX(${offset}px)`;
   }
 
+  // Passe à la slide suivante avec effet de boucle
   nextSlide(): void {
     if (this.slides.length <= 1) return;
     this.currentIndex = (this.currentIndex + 1) % this.slides.length;
     this.updatePosition();
   }
 
+  // Revient à la slide précédente avec effet de boucle
   prevSlide(): void {
     if (this.slides.length <= 1) return;
     this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
     this.updatePosition();
   }
 
+  // Lance le défilement automatique du carrousel
   startAutoSlide(): void {
     this.stopAutoSlide();
     this.autoSlideInterval = setInterval(() => this.nextSlide(), 3500);
   }
 
+  // Arrête le défilement automatique
   stopAutoSlide(): void {
     if (this.autoSlideInterval) {
       clearInterval(this.autoSlideInterval);
@@ -127,11 +143,16 @@ export class VedetteListeComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // Fonction de tracking Angular pour optimiser les itérations
   trackByFn(index: number, item: Vedette): string {
     return item.id;
   }
 
+  // Nettoyage : arrêt de l’auto-slide et retrait des listeners
   ngOnDestroy(): void {
     this.stopAutoSlide();
+    if (this.isBrowser) {
+      window.removeEventListener('resize', this.calculateItemWidth.bind(this));
+    }
   }
 }
