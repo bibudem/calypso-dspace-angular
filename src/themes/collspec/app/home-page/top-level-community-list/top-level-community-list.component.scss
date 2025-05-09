@@ -33,7 +33,10 @@
 }
 
 .btn-darkblue {
-  width: 30%;
+  width: 25%;
+  @media (max-width: 576px) {
+    width: 50%;
+  }
 }
 
 .vgr-cards {
@@ -65,7 +68,7 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
-
+    border-radius: 12px;
     @media (max-width: 576px) {
       width: auto;
       height: auto;
@@ -74,24 +77,14 @@
   }
 
   .card-img {
-    min-height: 250px;
+    width: 100%;
     height: auto;
-    object-fit: contain;
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
     object-position: center;
 
-    // Donne un effet de hauteur variable artistique
-    &:nth-child(3n) {
-      max-height: 280px;
-    }
-    &:nth-child(3n+1) {
-      max-height: 220px;
-    }
-    &:nth-child(3n+2) {
-      max-height: 250px;
-    }
-
     @media (max-width: 1140px) {
-      width: 100%;
       height: auto;
       max-height: none;
     }

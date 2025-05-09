@@ -11,10 +11,10 @@
       <nav *ngIf="!(isMobile$ | async)" class="navbar navbar-expand p-0 align-items-stretch align-self-stretch" id="desktop-navbar" [attr.aria-label]="'nav.main.description' | translate">
         <ul class="navbar-nav mr-auto menu-collspec">
           <!-- Ajout des liens dans le menu -->
-          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/communities/0a4f23be-457d-49a3-aa47-d06d152e7f9d/subcoms-cols">Catalogues</a></li>
-          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/info/feedback">À propos</a></li>
-          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/info/feedback">Guide collections</a></li>
-          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/info/feedback">Nous joindre</a></li>
+          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/communities/0a4f23be-457d-49a3-aa47-d06d152e7f9d/subcoms-cols">{{'collspec.menu.catalogues'| translate}}</a></li>
+          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/page/guide">{{'collspec.menu.guide'| translate}}</a></li>
+          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/page/a-propos">{{'collspec.menu.a-propos'| translate}}</a></li>
+          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/info/feedback">{{'collspec.menu.contact'| translate}}</a></li>
         </ul>
       </nav>
     </div>
@@ -25,6 +25,7 @@
         <ds-lang-switch></ds-lang-switch>-->
         <!--<ds-context-help-toggle></ds-context-help-toggle>-->
         <!--<ds-impersonate-navbar></ds-impersonate-navbar>-->
+      <ds-lang-switch></ds-lang-switch>
       <ds-auth-nav-menu *ngIf="isAuthenticated | async"></ds-auth-nav-menu>
       <!--</div>-->
       <!--<div *ngIf="(isMobile$ | async)" id="mobile-navbar-toggler" class="d-block d-lg-none ms-3">
@@ -45,10 +46,10 @@
       <nav *ngIf="(isMobile$ | async)" id="collapsible-mobile-navbar" class="collapse" [ngClass]="{'show': !(isNavBarCollapsed$ | async)}">
         <ul class="navbar-nav mr-auto menu-collspec">
           <!-- Ajout des liens dans le menu -->
-          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/communities/0a4f23be-457d-49a3-aa47-d06d152e7f9d/subcoms-cols">Catalogues</a></li>
-          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/info/feedback">À propos</a></li>
-          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/info/feedback">Guide collections</a></li>
-          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/info/feedback">Nous joindre</a></li>
+          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/communities/0a4f23be-457d-49a3-aa47-d06d152e7f9d/subcoms-cols">{{'collspec.menu.catalogues'| translate}}</a></li>
+          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/page/guide">{{'collspec.menu.guide'| translate}}</a></li>
+          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/page/a-propos">{{'collspec.menu.a-propos'| translate}}</a></li>
+          <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/info/feedback">{{'collspec.menu.contact'| translate}}</a></li>
         </ul>
       </nav>
     </div>

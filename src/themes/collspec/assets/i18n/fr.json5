@@ -1,4 +1,9 @@
 {
+  "collspec.menu.a-propos": "À propos",
+  "collspec.menu.guide": "Guide collections",
+  "collspec.menu.contact": "Nous joindre",
+  "collspec.menu.catalogues": "Catalogues",
+
   // "repository.title.prefix": "DSpace Angular :: ",
   "repository.title.prefix": "Calypso :: ",
   "collspec.onglet-fichier": "Fichiers",
@@ -47,5 +52,6 @@
   "collspec.footer.infos.a_propos.description": "Ce portail vous permet d'explorer une sélection d'articles issus des collections spéciales de la Bibliothèque de l’Université de Montréal. Ces documents, conservés pour leur valeur historique, académique ou culturelle, sont accessibles pour consultation et recherche.",
   "collspec.footer.liens.confidentialite": "Confidentialité",
   "collspec.footer.liens.accord_utilisateur": " Condition d’utilisation",
-  "collspec.footer.copyright": "© Université de Montréal, {{year}}. Tous droits réservés"
+  "collspec.footer.copyright": "© Université de Montréal, {{year}}. Tous droits réservés",
+
 }

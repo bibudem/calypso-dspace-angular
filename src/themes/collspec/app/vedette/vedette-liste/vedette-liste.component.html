@@ -2,10 +2,10 @@
   <div class="container-fluid font-blue">
     @if (loading) {
     <!-- Affichage du composant de chargement -->
-    <ds-loading message="Loading..."></ds-loading>
+    <ds-loading message="..."></ds-loading>
     } @else if (error) {
     <!-- Message d'erreur en cas d'échec du chargement -->
-    <div class="error-message">Error loading featured items</div>
+    <div class="error-message">...</div>
     } @else {
     <section class="slider__section">
       @if (slides.length > 0) {
