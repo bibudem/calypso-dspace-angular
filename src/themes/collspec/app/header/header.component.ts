@@ -17,6 +17,13 @@ import { ThemedAuthNavMenuComponent } from '../../../../app/shared/auth-nav-menu
 import { ImpersonateNavbarComponent } from '../../../../app/shared/impersonate-navbar/impersonate-navbar.component';
 import { CommonModule } from '@angular/common';
 
+//add pour l'authentification personalisé
+import { Store, select } from '@ngrx/store';
+import { isAuthenticated } from 'src/app/core/auth/selectors';
+import { AppState } from 'src/app/app.reducer';
+import { MenuService } from 'src/app/shared/menu/menu.service';
+import { HostWindowService } from 'src/app/shared/host-window.service';
+
 /**
  * Represents the header with the logo and simple navigation
  */
@@ -28,10 +35,22 @@ import { CommonModule } from '@angular/common';
   imports: [NgbDropdownModule, ThemedLangSwitchComponent, RouterLink, ThemedSearchNavbarComponent, ContextHelpToggleComponent, ThemedAuthNavMenuComponent, ImpersonateNavbarComponent, ThemedNavbarComponent, TranslateModule, AsyncPipe, CommonModule],
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
+
+  public isAuthenticated: Observable<boolean>;
+
   public isNavBarCollapsed$: Observable<boolean>;
+
+  constructor(protected menuService: MenuService,
+              protected store: Store<AppState>,
+              protected windowService: HostWindowService) {
+    super(menuService, windowService);
+  }
 
   ngOnInit() {
     super.ngOnInit();
+
+    this.isAuthenticated = this.store.pipe(select(isAuthenticated));
+
     this.isNavBarCollapsed$ = this.menuService.isMenuCollapsed(this.menuID);
   }
 }

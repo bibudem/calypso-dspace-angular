@@ -25,9 +25,7 @@
         <ds-lang-switch></ds-lang-switch>-->
         <!--<ds-context-help-toggle></ds-context-help-toggle>-->
         <!--<ds-impersonate-navbar></ds-impersonate-navbar>-->
-      @if ((isAuthenticated | async)) {
-        <ds-auth-nav-menu></ds-auth-nav-menu>
-      }
+      <ds-auth-nav-menu *ngIf="isAuthenticated | async"></ds-auth-nav-menu>
       <!--</div>-->
       <!--<div *ngIf="(isMobile$ | async)" id="mobile-navbar-toggler" class="d-block d-lg-none ms-3">
         <button id="navbar-toggler" class="btn btn-transparent" type="button" (click)="toggleNavbar()"

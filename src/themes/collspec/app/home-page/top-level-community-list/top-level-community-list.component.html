@@ -1,8 +1,12 @@
+<!-- Déclare le template de fallback en haut -->
+<ng-template #loadingContent>
+  <ds-loading message="{{ 'loading.top-level-communities' | translate }}"></ds-loading>
+</ng-template>
+
 <div class="container-bib mt-5">
   <div class="card-group vgr-cards">
     <ng-container *ngIf="communitiesRD$ | async as communitiesRD">
       <ng-container *ngIf="communitiesRD?.hasSucceeded">
-        <!-- Affichage des collections -->
         <ng-container *ngIf="displayedSouscommunities.length > 0; else loadingContent">
           <ng-container *ngFor="let souscommunitie of displayedSouscommunities">
             <div class="card" *ngIf="souscommunitie?.vedette">
@@ -18,18 +22,14 @@
               </div>
             </div>
           </ng-container>
-          <!-- Bouton charger plus (seulement si plus de 4 éléments) -->
-          <div class="text-center mt-3" *ngIf="allSousommunities.length > souscommunitiesPerPage && displayedSouscommunities.length < allSousommunities.length">
+
+          <div class="text-center mt-3" *ngIf="allSouscommunities.length > displayedSouscommunities.length">
             <button class="btn btn-outline-primary" (click)="loadMore()">
               {{ 'item.edit.bitstreams.bundle.load.more' | translate }}
             </button>
           </div>
         </ng-container>
       </ng-container>
-
-      <ng-template #loadingContent>
-        <ds-loading message="{{ 'loading.top-level-communities' | translate }}"></ds-loading>
-      </ng-template>
 
       <ds-error *ngIf="communitiesRD?.hasFailed" message="{{ 'error.top-level-communities' | translate }}"></ds-error>
     </ng-container>

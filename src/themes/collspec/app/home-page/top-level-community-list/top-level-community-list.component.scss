@@ -1,9 +1,39 @@
-// Bootstrap resets
+/* -------------------------------------------------------
+   Variables pour le thème collspec
+------------------------------------------------------- */
+@import 'src/themes/collspec/styles/_variables.scss';
+
 .card {
   border: none;
 }
 .card-img {
-  border-radius: 0;
+  border-radius: 12px!important;
+}
+
+.card-title {
+  font-family: $font-family-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  color: $colltitre;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'liga' off, 'clig' off;
+}
+
+.card-text {
+  color: $colltitre;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: $font-family-sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.btn-darkblue {
+  width: 30%;
 }
 
 .vgr-cards {
@@ -11,7 +41,7 @@
     flex-flow: wrap;
     flex: 100%;
     margin-bottom: 40px;
-    min-height: 50vh;
+    align-items: stretch;
 
     &:nth-child(even) .card-img-body {
       order: 2;
@@ -25,46 +55,56 @@
     @media (max-width: 576px) {
       display: block;
     }
-
   }
 
   .card-img-body {
     flex: 1;
     overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 
     @media (max-width: 576px) {
-      width: 100%;
+      width: auto;
       height: auto;
       margin-bottom: 20px;
     }
-
   }
 
   .card-img {
-    width: 100%;
+    min-height: 250px;
     height: auto;
-    position: absolute;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    border-radius: 16px;
+    object-fit: contain;
+    object-position: center;
 
-    @media (max-width: 1140px) {
-      margin: 0;
-      transform: none;
-      width: 100%;
-      height: auto;
+    // Donne un effet de hauteur variable artistique
+    &:nth-child(3n) {
+      max-height: 280px;
+    }
+    &:nth-child(3n+1) {
+      max-height: 220px;
+    }
+    &:nth-child(3n+2) {
+      max-height: 250px;
     }
 
+    @media (max-width: 1140px) {
+      width: 100%;
+      height: auto;
+      max-height: none;
+    }
   }
 
   .card-body {
     flex: 2;
-    padding: 0 0 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     @media (max-width: 576px) {
       padding: 0;
     }
-
   }
 }
