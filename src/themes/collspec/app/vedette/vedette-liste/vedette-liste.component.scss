@@ -17,7 +17,8 @@
   text-align: left;
   margin-top: 5%;
   width: 40%;
-  margin-left: 10%;
+  margin-left: 8%;
+  padding-left: 15px;
   &:hover {
     color: white;
   }
@@ -58,7 +59,8 @@ p {
   &__track {
     overflow: hidden;
     width: 100%;
-    margin-left: 10%;
+    margin-left: 8%;
+    padding-left: 15px;
   }
 
   &__list {

@@ -35,6 +35,8 @@ export class TopLevelCommunityListComponent extends BaseComponent implements OnI
   allSouscommunities: any[] = [];
   displayedSouscommunities: any[] = [];
   souscommunitiesPerPage = 4;
+  currentPage = 1;
+  hasMore = false;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -89,11 +91,16 @@ export class TopLevelCommunityListComponent extends BaseComponent implements OnI
   }
 
   updateDisplayedSouscommunities() {
-    this.displayedSouscommunities = this.allSouscommunities.slice(0, this.displayedSouscommunities.length + this.souscommunitiesPerPage);
+    const totalItems = this.allSouscommunities.length;
+    const totalDisplayed = this.currentPage * this.souscommunitiesPerPage;
+
+    this.displayedSouscommunities = this.allSouscommunities.slice(0, totalDisplayed);
+    this.hasMore = totalDisplayed < totalItems;
     this.cdr.detectChanges();
   }
 
   loadMore() {
+    this.currentPage++;
     this.updateDisplayedSouscommunities();
   }
 

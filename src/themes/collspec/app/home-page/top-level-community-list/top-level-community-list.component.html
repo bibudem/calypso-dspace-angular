@@ -1,6 +1,6 @@
 <!-- Déclare le template de fallback en haut -->
 <ng-template #loadingContent>
-  <ds-loading message="..."></ds-loading>
+  <ds-loading></ds-loading>
 </ng-template>
 
 <div class="container-bib mt-5">
@@ -23,7 +23,7 @@
             </div>
           </ng-container>
 
-          <div class="text-center mt-3" *ngIf="allSouscommunities.length > displayedSouscommunities.length">
+          <div class="text-center mt-3" *ngIf="hasMore">
             <button class="btn btn-outline-primary" (click)="loadMore()">
               {{ 'item.edit.bitstreams.bundle.load.more' | translate }}
             </button>
