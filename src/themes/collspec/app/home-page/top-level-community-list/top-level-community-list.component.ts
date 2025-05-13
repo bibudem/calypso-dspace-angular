@@ -5,7 +5,7 @@ import { ErrorComponent } from '../../../../../app/shared/error/error.component'
 import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
 import { ObjectCollectionComponent } from '../../../../../app/shared/object-collection/object-collection.component';
 import { VarDirective } from '../../../../../app/shared/utils/var.directive';
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Observable, of, Subject, forkJoin} from 'rxjs';
 import { CommunityDataService } from '../../../../../app/core/data/community-data.service';
 import { CollectionDataService } from '../../../../../app/core/data/collection-data.service';
@@ -30,20 +30,23 @@ import { CommonModule } from '@angular/common';
   imports: [VarDirective, ObjectCollectionComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, RouterModule, CommonModule],
 })
 
-export class TopLevelCommunityListComponent extends BaseComponent  implements OnInit, OnDestroy{
+export class TopLevelCommunityListComponent extends BaseComponent implements OnInit, OnDestroy {
   collections: any[] = [];
-  allCollections: any[] = [];
-  displayedCollections: any[] = [];
-  collectionsPerPage = 4;
+  allSouscommunities: any[] = [];
+  displayedSouscommunities: any[] = [];
+  souscommunitiesPerPage = 4;
+  currentPage = 1;
+  hasMore = false;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private cdsCalypso: CommunityDataService,
     private collService: CollectionDataService,
     @Inject(APP_CONFIG) public appConfig: AppConfig,
     private paginationServiceCalypso: PaginationService,
-    private vedetteService: VedetteService
+    private vedetteService: VedetteService,
+    private cdr: ChangeDetectorRef
   ) {
     super(appConfig, cdsCalypso, paginationServiceCalypso);
   }
@@ -51,80 +54,60 @@ export class TopLevelCommunityListComponent extends BaseComponent  implements On
   ngOnInit() {
     super.ngOnInit();
 
-    this.communitiesRD$.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe((data: RemoteData<PaginatedList<any>>) => {
+    this.communitiesRD$.pipe(takeUntil(this.unsubscribe$)).subscribe((data) => {
       if (data.hasSucceeded) {
-        data.payload?.page?.forEach((community) => {
-          this.findCollections(community);
-        });
+        data.payload?.page?.forEach((community) => this.loadSubcommunities(community));
       }
     });
   }
 
-// Récupérez les collections en fonction de l'ID d'une communauté
-  findCollections(community: any) {
-    try {
-      if (community && community._links && community._links.collections) {
-        // Appelez la méthode findByHref de CollectionDataService pour récupérer les données de la collection
-        this.collService.findByHref(community._links.collections.href).pipe(
-          takeUntil(this.unsubscribe$)
-        ).subscribe((collectionData) => {
-          if(collectionData && collectionData.payload){
-            const collectionsPageLinks = (collectionData.payload._links as any).page;
-            collectionsPageLinks.forEach((collectionLink) => {
-              const collectionUrl = collectionLink.href;
-              // Effectuez une requête HTTP pour récupérer les données de la collection individuelle
-              this.collService.findByHref(collectionUrl).pipe(
-                takeUntil(this.unsubscribe$)
-              ).subscribe((individualCollectionData) => {
-                if (individualCollectionData && individualCollectionData.payload && individualCollectionData.payload._links) {
-                  let description = null;
-                  if(individualCollectionData.payload.metadata['dc.description']){
-                    description = individualCollectionData.payload.metadata['dc.description'][0].value;
-                  }
-                  const collections = {
-                    title: individualCollectionData.payload.metadata['dc.title'][0].value,
-                    description: description,
-                    id: individualCollectionData.payload.id,
-                    vedette: null
-                  };
-                  // Récupérez les images vedette de la collection
-                  this.vedetteService.getImagesColl(collections.id).pipe(
-                    takeUntil(this.unsubscribe$)
-                  ).subscribe(
-                    (images: Vedette[]) => {
-                      if (images.length !== 0) {
-                        collections.vedette = images[0].imageUrl;
-                      }
-                    },
-                    (erreur) => {
-                      console.error('Une erreur s\'est produite lors de la récupération des images vedette', erreur);
-                    }
-                  );
-                  // Mettez à jour la variable collections$ avec les nouvelles collections
-                  this.allCollections.push(collections);
-                  this.displayedCollections = this.allCollections.slice(0, this.collectionsPerPage);
-                }
-              });
-            });
-          }
+  loadSubcommunities(community: any) {
+    const link = community?._links?.subcommunities?.href;
+    if (!link) return;
+
+    this.collService.findByHref(link).pipe(takeUntil(this.unsubscribe$)).subscribe((res) => {
+      const links = (res.payload?._links as any)?.page || [];
+      links.forEach((subLink) => {
+        this.collService.findByHref(subLink.href).pipe(takeUntil(this.unsubscribe$)).subscribe((subData) => {
+          const payload = subData.payload;
+          if (!payload || !payload.metadata) return;
+
+          const title = payload.metadata['dc.title']?.[0]?.value;
+          const description = payload.metadata['dc.description']?.[0]?.value || null;
+          const id = payload.id;
+
+          const subcommunity = { title, description, id, vedette: null };
+
+          this.vedetteService.getImagesColl(id).pipe(takeUntil(this.unsubscribe$)).subscribe((images: Vedette[]) => {
+            if (images?.length) {
+              subcommunity.vedette = images[0].imageUrl;
+              this.allSouscommunities.push(subcommunity);
+              this.updateDisplayedSouscommunities();
+            }
+          });
         });
-      }
-    } catch (error) {
-      console.error('Une erreur s\'est produite :', error);
-    }
+      });
+    });
+  }
+
+  updateDisplayedSouscommunities() {
+    const totalItems = this.allSouscommunities.length;
+    const totalDisplayed = this.currentPage * this.souscommunitiesPerPage;
+
+    this.displayedSouscommunities = this.allSouscommunities.slice(0, totalDisplayed);
+    this.hasMore = totalDisplayed < totalItems;
+    this.cdr.detectChanges();
+  }
+
+  loadMore() {
+    this.currentPage++;
+    this.updateDisplayedSouscommunities();
   }
 
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
-  loadMore() {
-    const next = this.displayedCollections.length + this.collectionsPerPage;
-    this.displayedCollections = this.allCollections.slice(0, next);
-  }
-
 }
+
 

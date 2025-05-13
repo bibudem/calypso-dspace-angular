@@ -16,6 +16,7 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { RootModule } from '../../app/root.module';
 import { SearchResultsSkeletonComponent } from '../../app/shared/search/search-results/search-results-skeleton/search-results-skeleton.component';
 import { CollectionPageComponent } from './app/collection-page/collection-page.component';
+import { CommunityPageComponent } from './app/community-page/community-page.component';
 import { EditItemTemplatePageComponent } from './app/collection-page/edit-item-template-page/edit-item-template-page.component';
 import { DsoEditMetadataComponent } from './app/dso-shared/dso-edit-metadata/dso-edit-metadata.component';
 import { HomePageComponent } from './app/home-page/home-page.component';
@@ -26,16 +27,18 @@ import { RootComponent } from './app/root/root.component';
 import { BrowseByComponent } from './app/shared/browse-by/browse-by.component';
 import { SearchResultsComponent } from './app/shared/search/search-results/search-results.component';
 // collspec modules
-import {VedetteCollListeComponent} from "./app/collection-page/vedette-coll-liste/vedette-coll-liste.component";
+
 import {AiSearchComponent} from "./app/ai-search/ai-search.component";
+import { VedetteUUIDComponent } from './app/vedette/vedette-uuid/vedette-uuid.component';
 
 
 const DECLARATIONS = [
   HomePageComponent,
-  VedetteCollListeComponent,
+  VedetteUUIDComponent,
   AiSearchComponent,
   RootComponent,
   CollectionPageComponent,
+  CommunityPageComponent,
   ItemPageComponent,
   FeedbackComponent,
   FeedbackFormComponent,

@@ -58,15 +58,6 @@ a:hover {
   text-decoration: none !important;
 }
 
-a.lead {
-  font-weight: 450 !important;
-  color:$blue;
-}
-
-a.lead:hover {
-  color: $autreblue;
-}
-
 /* Styles pour les badges */
 .badge-secondary {
   background-color: var(--bs-primary);
@@ -85,6 +76,24 @@ nav#admin-sidebar a {
     font-size: 1rem;
   }
 }
+
+/* Styles pour les listes */
+a.lead {
+  display: flex;
+  width: 100%;
+  padding: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 0px 0px 12px 12px;
+  border-top: 1px solid #C3CCD5;
+  background: #eef4f76b!important;
+  position: relative;
+
+    &:hover {
+      background: #EEF4F7!important;
+    }
+}
+
 
 /* -------------------------------------------------------
    Styles pour les paragraphes et le texte
@@ -389,6 +398,10 @@ p, span, a {
   z-index: 10 !important;
 }
 
+#header-logo{
+  width: 75%!important;
+}
+
 /* Lien du menu Calypso */
 a.collspec-menu {
   color: $autreblue !important;
@@ -636,6 +649,10 @@ a.collspec-menu {
   content: "\f0c9";
 }
 
+.font-blue {
+  background: #f8f9fa!important;
+}
+
 
 
 // ============================
@@ -716,5 +733,9 @@ a.collspec-menu {
 
   .hero-banner .hero-overlay{
     top: 22vh;
+  }
+
+  .font-blue {
+    background: #f8f9fa!important;
   }
 }

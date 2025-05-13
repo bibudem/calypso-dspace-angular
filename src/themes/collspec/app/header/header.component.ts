@@ -15,6 +15,14 @@ import { ThemedNavbarComponent } from '../../../../app/navbar/themed-navbar.comp
 import { ThemedSearchNavbarComponent } from '../../../../app/search-navbar/themed-search-navbar.component';
 import { ThemedAuthNavMenuComponent } from '../../../../app/shared/auth-nav-menu/themed-auth-nav-menu.component';
 import { ImpersonateNavbarComponent } from '../../../../app/shared/impersonate-navbar/impersonate-navbar.component';
+import { CommonModule } from '@angular/common';
+
+//add pour l'authentification personalisé
+import { Store, select } from '@ngrx/store';
+import { isAuthenticated } from 'src/app/core/auth/selectors';
+import { AppState } from 'src/app/app.reducer';
+import { MenuService } from 'src/app/shared/menu/menu.service';
+import { HostWindowService } from 'src/app/shared/host-window.service';
 
 /**
  * Represents the header with the logo and simple navigation
@@ -24,13 +32,25 @@ import { ImpersonateNavbarComponent } from '../../../../app/shared/impersonate-n
   styleUrls: ['header.component.scss'],
   templateUrl: 'header.component.html',
   standalone: true,
-  imports: [NgbDropdownModule, ThemedLangSwitchComponent, RouterLink, ThemedSearchNavbarComponent, ContextHelpToggleComponent, ThemedAuthNavMenuComponent, ImpersonateNavbarComponent, ThemedNavbarComponent, TranslateModule, AsyncPipe],
+  imports: [NgbDropdownModule, ThemedLangSwitchComponent, RouterLink, ThemedSearchNavbarComponent, ContextHelpToggleComponent, ThemedAuthNavMenuComponent, ImpersonateNavbarComponent, ThemedNavbarComponent, TranslateModule, AsyncPipe, CommonModule],
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
+
+  public isAuthenticated: Observable<boolean>;
+
   public isNavBarCollapsed$: Observable<boolean>;
+
+  constructor(protected menuService: MenuService,
+              protected store: Store<AppState>,
+              protected windowService: HostWindowService) {
+    super(menuService, windowService);
+  }
 
   ngOnInit() {
     super.ngOnInit();
+
+    this.isAuthenticated = this.store.pipe(select(isAuthenticated));
+
     this.isNavBarCollapsed$ = this.menuService.isMenuCollapsed(this.menuID);
   }
 }

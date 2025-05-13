@@ -1,34 +1,35 @@
+<!-- Déclare le template de fallback en haut -->
+<ng-template #loadingContent>
+  <ds-loading></ds-loading>
+</ng-template>
+
 <div class="container-bib mt-5">
   <div class="card-group vgr-cards">
     <ng-container *ngIf="communitiesRD$ | async as communitiesRD">
       <ng-container *ngIf="communitiesRD?.hasSucceeded">
-        <!-- Affichage des collections -->
-        <ng-container *ngIf="displayedCollections.length > 0; else loadingContent">
-          <ng-container *ngFor="let collection of displayedCollections">
-            <div class="card" *ngIf="collection?.vedette">
+        <ng-container *ngIf="displayedSouscommunities.length > 0; else loadingContent">
+          <ng-container *ngFor="let souscommunitie of displayedSouscommunities">
+            <div class="card" *ngIf="souscommunitie?.vedette">
               <div class="card-img-body">
-                <img class="card-img" [src]="collection.vedette" alt="Item {{ collection.title }}">
+                <img class="card-img" [src]="souscommunitie.vedette" alt="Item {{ souscommunitie.title }}">
               </div>
               <div class="card-body">
-                <h4 class="card-title mt-5 text-start">{{ collection.title }}</h4>
-                <p class="card-text ml-2">{{ collection.description }}</p>
-                <a [routerLink]="['/collections/', collection.id]" class="btn btn-darkblue ml-2">
+                <h4 class="card-title mt-5 text-start">{{ souscommunitie.title }}</h4>
+                <p class="card-text ml-2">{{ souscommunitie.description }}</p>
+                <a [routerLink]="['/communities/', souscommunitie.id]" class="btn btn-darkblue ml-2">
                   {{ 'collspec.collection.decouvrir' | translate }}
                 </a>
               </div>
             </div>
           </ng-container>
 
-          <!-- Bouton charger plus -->
-          <div class="text-center mt-3" *ngIf="displayedCollections.length < allCollections.length">
-            <button class="btn btn-outline-primary" (click)="loadMore()">{{'item.edit.bitstreams.bundle.load.more' | translate}}</button>
+          <div class="text-center mt-3" *ngIf="hasMore">
+            <button class="btn btn-outline-primary" (click)="loadMore()">
+              {{ 'item.edit.bitstreams.bundle.load.more' | translate }}
+            </button>
           </div>
         </ng-container>
       </ng-container>
-
-      <ng-template #loadingContent>
-        <ds-loading message="{{ 'loading.top-level-communities' | translate }}"></ds-loading>
-      </ng-template>
 
       <ds-error *ngIf="communitiesRD?.hasFailed" message="{{ 'error.top-level-communities' | translate }}"></ds-error>
     </ng-container>

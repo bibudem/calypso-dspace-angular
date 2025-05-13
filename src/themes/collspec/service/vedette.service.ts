@@ -26,7 +26,7 @@ export class VedetteService {
 
   // Méthode pour récupérer les images d'une collection par ID
   getImagesColl(id: string): Observable<Vedette[]> {
-    const limit = 1;
+    const limit = 10;
     // Si les images de la collection ne sont pas en cache, effectuer la requête et mettre en cache les résultats
     if (!this.imageCollCache$[id]) {
       this.imageCollCache$[id] = this.fetchImages(`${this.urlApiVedette}/${limit}/${id}`).pipe(shareReplay(1));
