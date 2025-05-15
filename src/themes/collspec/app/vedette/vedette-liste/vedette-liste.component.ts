@@ -132,7 +132,7 @@ export class VedetteListeComponent implements OnInit, AfterViewInit, OnDestroy {
   // Lance le défilement automatique du carrousel
   startAutoSlide(): void {
     this.stopAutoSlide();
-    this.autoSlideInterval = setInterval(() => this.nextSlide(), 3500);
+    this.autoSlideInterval = setInterval(() => this.nextSlide(), 4000);
   }
 
   // Arrête le défilement automatique
