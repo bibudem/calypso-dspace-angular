@@ -1,15 +1,107 @@
-.nav-item{
-  margin: 10px 10px 10px 15px!important;
+.nav-item {
+  margin: 10px 10px 10px 15px !important;
 }
-.nav-item:hover{
+
+.nav-item:hover {
   color: #0059ab;
 }
 
-.collapse {
-  display: none;
+/* Animation du menu mobile */
+#collapsible-mobile-navbar {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 1rem;
 }
 
-.collapse.show {
-  display: block;
+#collapsible-mobile-navbar.show {
+  max-height: 500px; /* Ajustez selon votre contenu */
+  padding: 1rem;
+  border-radius: 0 0 16px 16px;
 }
 
+/* Empêche le décalage des autres éléments */
+#main-site-header {
+  position: relative;
+}
+
+/* Bouton toggle */
+#navbar-toggler {
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#navbar-toggler[aria-expanded="true"] {
+  transform: rotate(90deg);
+}
+
+.toggler-icon {
+  color: #0059ab;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+#navbar-toggler:hover .toggler-icon {
+  color: #004080;
+}
+
+/* Styles pour le bouton "Je donne" */
+.btn-donate {
+  background-color: #0059ab;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.btn-donate:hover {
+  background-color: #004080;
+  color: white;
+  text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  #header-right {
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+
+  #header-logo {
+    max-height: 40px;
+  }
+
+  .btn-donate {
+    margin-left: 8px;
+  }
+
+  #mobile-navbar-wrapper{
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  #collapsible-mobile-navbar {
+    display: none !important;
+  }
+
+  #mobile-navbar-wrapper{
+    display: none !important;
+  }
+
+  #mobile-navbar-toggler {
+    display: none;
+  }
+}

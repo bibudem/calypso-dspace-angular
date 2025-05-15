@@ -156,6 +156,11 @@ p {
   .slider {
     &__section {
       padding-block: 1rem;
+      margin-left: -1% !important;
+    }
+
+    &__track {
+      margin-left: 0;
     }
 
     &__column {
@@ -164,6 +169,9 @@ p {
 
     &__slide {
       flex: 0 0 100%;
+      img {
+        height: 360px;
+      }
     }
 
     &__caption {
@@ -180,18 +188,18 @@ p {
 
   .slider {
     &__section {
-      margin-left: 0!important;
+      margin-left: -1% !important;
     }
     &__slide {
-      flex: 0 0 calc(100% / 1);
+      flex: 0 0 100%;
       margin-left: 0;
 
       img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.3s ease;
+        height: 300px;
+      }
+      .bib-title {
+        font-size: 1.5rem;
+        margin: 1.5rem auto 1rem 8%;
       }
     }
   }
@@ -246,7 +254,11 @@ p {
 @media (max-width: 576px) {
   .slider {
     &__slide {
-      flex: 0 0 85%;
+      flex: 0 0 100%;
+
+      img {
+        height: 250px;
+      }
     }
 
     &__list {

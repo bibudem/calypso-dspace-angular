@@ -94,6 +94,10 @@ a.lead {
     }
 }
 
+.login-logo{
+  height: auto!important;
+  width: 250px!important;
+}
 
 /* -------------------------------------------------------
    Styles pour les paragraphes et le texte
@@ -109,6 +113,13 @@ p, span, a {
 .loginLink{
   font-size: 14px;
 }
+
+//mettre le bouton Se déconnecter plus petite en langeur
+.form-login  .w-100{
+  width: 35%!important;
+  margin: 20px!important;
+}
+
 
 
 // -------------------------------------------------------
@@ -653,25 +664,31 @@ a.collspec-menu {
   background: #f8f9fa!important;
 }
 
-
+#mobile-navbar-wrapper{
+  display: none !important;
+}
 
 // ============================
 // Ajustements responsifs
 // ============================
 @media (max-width: 768px) {
   .hero-section {
-    height: 45vh;
+    height: 60vh;
+    margin-top: -50% !important;
+    margin-bottom: 1.5rem;
   }
 
   .hero-overlay {
-    height: 70vh;
-    margin-top: -50%;
+    height: 60vh;
+    margin-top: 0;
     border-radius: 0;
   }
 
   .search-bar {
     flex-direction: column;
     gap: 0.5rem;
+    padding: 0;
+    margin-left: -5%;
   }
 
   .filter, .search-btn {
@@ -680,8 +697,10 @@ a.collspec-menu {
 
   .hero-section h1 {
     font-size: 56px;
-    margin-top: 70%;
+    margin-top: 50%;
     margin-left: 0;
+    padding: 0;
+    margin-bottom: 2rem;
   }
 
   .carousel-control-prev{
@@ -710,11 +729,6 @@ a.collspec-menu {
     width: 40% !important;
   }
 
-  // Correction pour afficher le menu sur les petites ecrans
-  #mobile-navbar-wrapper{
-    overflow: visible!important;
-  }
-
   .navbar.open{
     width: 90vw!important;
     min-height: 60vh!important;
@@ -738,4 +752,9 @@ a.collspec-menu {
   .font-blue {
     background: #f8f9fa!important;
   }
+  
+  .footer .link-footer {
+    font-size: 12px;
+  }
+
 }

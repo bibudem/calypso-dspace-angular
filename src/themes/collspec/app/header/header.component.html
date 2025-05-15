@@ -10,7 +10,6 @@
       </a>
       <nav *ngIf="!(isMobile$ | async)" class="navbar navbar-expand p-0 align-items-stretch align-self-stretch" id="desktop-navbar" [attr.aria-label]="'nav.main.description' | translate">
         <ul class="navbar-nav mr-auto menu-collspec">
-          <!-- Ajout des liens dans le menu -->
           <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/communities/0a4f23be-457d-49a3-aa47-d06d152e7f9d/subcoms-cols">{{'collspec.menu.catalogues'| translate}}</a></li>
           <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/page/guide">{{'collspec.menu.guide'| translate}}</a></li>
           <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/page/a-propos">{{'collspec.menu.a-propos'| translate}}</a></li>
@@ -18,34 +17,36 @@
         </ul>
       </nav>
     </div>
+
     <!-- Search bar and other menus -->
     <div id="header-right" class="h-100 d-flex flex-row flex-nowrap justify-content-end align-items-center gapx-1 ms-auto">
       <ds-search-navbar></ds-search-navbar>
-      <!--<div role="menubar" class="h-100 d-flex flex-row flex-nowrap align-items-center gapx-1">
-        <ds-lang-switch></ds-lang-switch>-->
-        <!--<ds-context-help-toggle></ds-context-help-toggle>-->
-        <!--<ds-impersonate-navbar></ds-impersonate-navbar>-->
       <ds-lang-switch></ds-lang-switch>
       <ds-auth-nav-menu *ngIf="isAuthenticated | async"></ds-auth-nav-menu>
-      <!--</div>-->
-      <!--<div *ngIf="(isMobile$ | async)" id="mobile-navbar-toggler" class="d-block d-lg-none ms-3">
-        <button id="navbar-toggler" class="btn btn-transparent" type="button" (click)="toggleNavbar()"
-                [attr.aria-label]="'nav.toggle' | translate" aria-controls="collapsible-mobile-navbar" [attr.aria-expanded]="(isNavBarCollapsed$ | async) !== true">
-          <span class="fas fa-bars fa-fw fa-xl toggler-icon" aria-hidden="true"></span>
-        </button>
-      </div>-->
+
+      <!-- Bouton "Je donne" -->
+      <a [href]="'collspec.donate.link' | translate"
+         class="btn btn-donate ms-2"
+         target="_blank"
+         rel="noopener noreferrer"
+         [attr.aria-label]="'collspec.donate.aria-label' | translate">
+        {{ 'collspec.donate.text' | translate }}
+      </a>
+
       <!-- Bouton de menu mobile -->
-      <div *ngIf="(isMobile$ | async)" id="mobile-navbar-toggler" class="d-block d-lg-none ms-3">
+      <div *ngIf="(isMobile$ | async)" id="mobile-navbar-toggler" class="d-block d-lg-none ms-2">
         <button id="navbar-toggler" class="btn btn-transparent" type="button" (click)="toggleNavbar()"
                 [attr.aria-label]="'nav.toggle' | translate" aria-controls="collapsible-mobile-navbar"
                 [attr.aria-expanded]="(isNavBarCollapsed$ | async) !== true">
           <span class="fas fa-bars fa-fw fa-xl toggler-icon" aria-hidden="true"></span>
         </button>
       </div>
-      <!-- Mobile Navbar -->
-      <nav *ngIf="(isMobile$ | async)" id="collapsible-mobile-navbar" class="collapse" [ngClass]="{'show': !(isNavBarCollapsed$ | async)}">
-        <ul class="navbar-nav mr-auto menu-collspec">
-          <!-- Ajout des liens dans le menu -->
+    </div>
+
+    <!-- Mobile Navbar - affiché en bas -->
+    <div *ngIf="(isMobile$ | async)" class="w-100 order-last">
+      <nav id="collapsible-mobile-navbar" class="collapse" [ngClass]="{'show': !(isNavBarCollapsed$ | async)}">
+        <ul class="navbar-nav mr-auto menu-collspec text-start">
           <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/communities/0a4f23be-457d-49a3-aa47-d06d152e7f9d/subcoms-cols">{{'collspec.menu.catalogues'| translate}}</a></li>
           <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/page/guide">{{'collspec.menu.guide'| translate}}</a></li>
           <li class="nav-item"><a role="menuitem" class="ds-menu-item" href="/page/a-propos">{{'collspec.menu.a-propos'| translate}}</a></li>
@@ -54,5 +55,4 @@
       </nav>
     </div>
   </div>
-
 </header>

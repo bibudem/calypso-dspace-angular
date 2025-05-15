@@ -7236,5 +7236,11 @@
 
   "collspec.menu.contact": "Nous joindre",
 
-  "collspec.menu.catalogues": "Catalogues"
+  "collspec.menu.catalogues": "Catalogues",
+
+  "collspec.donate.text": "Je donne",
+
+  "collspec.donate.link": "https://secureca.reseau.umontreal.ca/s/1857/bp18/interior.aspx?sid=1857&gid=2&pgid=418&cid=1063&dids=587.618.619.864&bledit=1&sort=1",
+
+  "collspec.donate.aria-label": "Faire un don"
 }

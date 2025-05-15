@@ -8,6 +8,9 @@ import { TopLevelCommunityListComponent } from './app/home-page/top-level-commun
 import { UntypedItemComponent } from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import {NavbarComponent} from "./app/navbar/navbar.component";
 import {HeaderComponent} from "./app/header/header.component";
+import { AdminSidebarComponent } from './app/admin/admin-sidebar/admin-sidebar.component';
+import { LoginPageComponent } from './app/login-page/login-page.component';
+import { LogoutPageComponent } from './app/logout-page/logout-page.component';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -24,7 +27,10 @@ const DECLARATIONS = [
   HomeNewsComponent,
   FooterComponent,
   NavbarComponent,
-  HeaderComponent
+  HeaderComponent,
+  AdminSidebarComponent,
+  LoginPageComponent,
+  LogoutPageComponent
 ];
 
 @NgModule({
