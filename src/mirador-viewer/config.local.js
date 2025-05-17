@@ -38,8 +38,8 @@ let windowSettings = {};
 let sidbarPanel = 'info';
 let defaultView = 'single';
 let multipleItems = false;
-let thumbNavigation = 'off';
-// let lang = 'fr' // Default to english, but should not happen
+let thumbNavigation = 'far-right';
+let lang = 'fr' // Default to english, but should not happen
 
 
 windowSettings.manifestId = manifest;
@@ -175,7 +175,7 @@ windowSettings.manifestId = manifest;
         imageToolsEnabled: true,
         imageToolsOpen: false,
     		textOverlay: {
-          enabled: false,
+          enabled: true,
           visible: true,
           skipEmptyLines: true,
     		  opacity: 0.3,
